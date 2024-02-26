@@ -7,101 +7,100 @@ import rmtdevImg from "@/public/rmtdev.png";
 import wordanalyticsImg from "@/public/wordanalytics.png";
 
 export const links = [
-  {
-    name: "Home",
-    hash: "#home",
-  },
-  {
-    name: "About",
-    hash: "#about",
-  },
-  {
-    name: "Projects",
-    hash: "#projects",
-  },
-  {
-    name: "Skills",
-    hash: "#skills",
-  },
-  {
-    name: "Experience",
-    hash: "#experience",
-  },
-  {
-    name: "Contact",
-    hash: "#contact",
-  },
+    {
+        name: "Home",
+        hash: "#home",
+    },
+    {
+        name: "About",
+        hash: "#about",
+    },
+    {
+        name: "Projects",
+        hash: "#projects",
+    },
+    {
+        name: "Skills",
+        hash: "#skills",
+    },
+    {
+        name: "Experience",
+        hash: "#experience",
+    },
+    {
+        name: "Contact",
+        hash: "#contact",
+    },
 ] as const;
 
 export const experiencesData = [
-  {
-    title: "Graduated bootcamp",
-    location: "Miami, FL",
-    description:
-      "I graduated after 6 months of studying. I immediately found a job as a front-end developer.",
-    icon: React.createElement(LuGraduationCap),
-    date: "2019",
-  },
-  {
-    title: "Front-End Developer",
-    location: "Orlando, FL",
-    description:
-      "I worked as a front-end developer for 2 years in 1 job and 1 year in another job. I also upskilled to the full stack.",
-    icon: React.createElement(CgWorkAlt),
-    date: "2019 - 2021",
-  },
-  {
-    title: "Full-Stack Developer",
-    location: "Houston, TX",
-    description:
-      "I'm now a full-stack developer working as a freelancer. My stack includes React, Next.js, TypeScript, Tailwind, Prisma and MongoDB. I'm open to full-time opportunities.",
-    icon: React.createElement(FaReact),
-    date: "2021 - present",
-  },
+    {
+        title: "UX Designer",
+        location: "Santo Domingo, DR",
+        company: "Berry Whale Dominicana",
+        description:
+            "I worked as an UX Designer for 2 years. I designed websites and mobile apps for clients in the Financial and Health industries.",
+        icon: React.createElement(LuGraduationCap),
+        date: "2010",
+    },
+    {
+        title: "UX Designer",
+        location: "Santo Domingo, DR",
+        company: "Grupo Universal",
+        description:
+            "One of the biggest holding companies in Dominican Republic with business in the Financial, Health and Fiduciary industries. I conducted user research and UX Design to improve the company's digital products, from websites to mobile apps.",
+        icon: React.createElement(CgWorkAlt),
+        date: "2012 - 2015",
+    },
+    {
+        title: "UX Developer",
+        location: "West Palm Beach, FL",
+        company: "PMP Marketing Group",
+        description:
+            "I'm currently working as a UX Developer at PMP Marketing Group, an agency that specializes in marketing for law firms. I conduct user research, design and develop custom Wordpress themes for our clients in the legal industry.",
+        icon: React.createElement(FaReact),
+        date: "2016 - present",
+    },
 ] as const;
 
 export const projectsData = [
-  {
-    title: "CorpComment",
-    description:
-      "I worked as a full-stack developer on this startup project for 2 years. Users can give public feedback to companies.",
-    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
-    imageUrl: corpcommentImg,
-  },
-  {
-    title: "rmtDev",
-    description:
-      "Job board for remote developer jobs. I was the front-end developer. It has features like filtering, sorting and pagination.",
-    tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
-    imageUrl: rmtdevImg,
-  },
-  {
-    title: "Word Analytics",
-    description:
-      "A public web app for quick analytics on text. It shows word count, character count and social media post limits.",
-    tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
-    imageUrl: wordanalyticsImg,
-  },
+    {
+        title: "Project 1",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, nunc id aliquet ultricies, nisl nunc lacinia nunc",
+        tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
+        imageUrl: corpcommentImg,
+    },
+    {
+        title: "Project 2",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, nunc id aliquet ultricies, nisl nunc lacinia nunc",
+        tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
+        imageUrl: rmtdevImg,
+    },
+    {
+        title: "Project 3",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, nunc id aliquet ultricies, nisl nunc lacinia nunc",
+        tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
+        imageUrl: wordanalyticsImg,
+    },
 ] as const;
 
 export const skillsData = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Node.js",
-  "Git",
-  "Tailwind",
-  "Prisma",
-  "MongoDB",
-  "Redux",
-  "GraphQL",
-  "Apollo",
-  "Express",
-  "PostgreSQL",
-  "Python",
-  "Django",
-  "Framer Motion",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Git",
+    "Tailwind",
+    "Bootstrap",
+    "Framer Motion",
+    "Figma",
+    "Adobe XD",
+    "Photoshop",
+    "Illustrator",
 ] as const;
