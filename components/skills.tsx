@@ -35,7 +35,10 @@ export default function Skills() {
                             px-5 py-3 text-sm bg-white border border-black/[0.1] 
                             rounded-xl 
                             sm:px-6 sm:py-3 
-                        sm:text-base"
+                            sm:text-base
+                            dark:bg-white/10 
+                            dark:text-white/80
+                        "
                         variants={fadeInAnimationVariants}
                         initial="initial"
                         whileInView="animate"
