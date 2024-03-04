@@ -72,7 +72,7 @@ export default function Intro() {
             >
                 <Link
                     href="#contact"
-                    className="group bg-gray-800 text-white shadow-md px-7 py-3 flex items-center gap-2 rounded-full outline-none hover:bg-gray-950 transition duration-[0.3s]"
+                    className="group bg-gray-800 text-white shadow-md px-7 py-3 flex items-center justify-center gap-2 rounded-full outline-none hover:bg-gray-950 transition duration-[0.3s]"
                     onClick={() => (setActiveSection("Contact"), setTimeOfLastClick(Date.now()))}
                 >
                     Contact Me
@@ -81,25 +81,27 @@ export default function Intro() {
                 <a
                     href="/resume.pdf"
                     download
-                    className="group bg-white shadow-md px-7 py-3 flex items-center gap-2 rounded-full outline-none hover:shadow-none transition duration-[0.3s] dark:bg-white/10"
+                    className="group bg-white shadow-md px-7 py-3 flex items-center justify-center gap-2 rounded-full outline-none hover:shadow-none transition duration-[0.3s] dark:bg-white/10"
                 >
                     Download CV
                     <HiDownload className="opacity-70 group-hover:translate-y-1 group-hover:opacity-1 transition duration-[0.3s]" />
                 </a>
-                <a
-                    href="https://www.linkedin.com/in/wilbert-caba/"
-                    target="_blank"
-                    className="bg-white shadow-md px-4 py-3 flex items-center gap-2 rounded-full outline-none hover:shadow-none transition duration-[0.3s] dark:bg-white/10 dark:text-white/60"
-                >
-                    <BsLinkedin />
-                </a>
-                <a
-                    href="https://github.com/wilbertcaba"
-                    target="_blank"
-                    className="bg-white shadow-md px-4 py-3 flex items-center gap-2 rounded-full text-[1.25rem] outline-none hover:shadow-none transition duration-[0.3s] dark:bg-white/10 dark:text-white/60"
-                >
-                    <FaGithubSquare />
-                </a>
+                <div className="flex items-center gap-2 justify-center mt-12 sm:mt-0">
+                    <a
+                        href="https://www.linkedin.com/in/wilbert-caba/"
+                        target="_blank"
+                        className="bg-white shadow-md w-12 h-12 flex items-center justify-center gap-2 rounded-full outline-none hover:shadow-none transition duration-[0.3s] dark:bg-white/10 dark:text-white/60"
+                    >
+                        <BsLinkedin />
+                    </a>
+                    <a
+                        href="https://github.com/wilbertcaba"
+                        target="_blank"
+                        className="bg-white shadow-md w-12 h-12 flex items-center justify-center gap-2 rounded-full text-[1.25rem] outline-none hover:shadow-none transition duration-[0.3s] dark:bg-white/10 dark:text-white/60"
+                    >
+                        <FaGithubSquare />
+                    </a>
+                </div>
             </motion.div>
         </section>
     );
