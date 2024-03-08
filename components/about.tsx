@@ -18,11 +18,13 @@ export default function About() {
         >
             <SectionHeading>About</SectionHeading>
             <p className="mb-3">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, nunc id aliquet ultricies, nisl
-                nunc lacinia nunc, vitae lacinia nunc nunc at lectus. Sed id risus auctor, aliquet nunc id, tincidunt
-                nunc. Nulla facilisi. Sed euismod, nunc id aliquam aliquet, nunc nunc tincidunt nunc, vitae nunc nunc
-                nunc. Sed id risus auctor, aliquet nunc id, tincidunt nunc. Nulla facilisi. Sed euismod, nunc id aliquam
-                aliquet, nunc nunc tincidunt nunc, vitae nunc nunc nunc.
+                As a cross-functional User Experience Designer and Front-End Developer based in West Palm Beach,
+                Florida, I bring over 17 years of experience in design and 7+ years in front-end development. My focus
+                is on creating intuitive, user-centered digital experiences that not only meet but exceed user
+                expectations and help organizations achieve their business goals. My design philosophy emphasizes
+                simplicity and ethical responsibility, leveraging proven design patterns to transform complex data into
+                accessible and engaging interfaces. This approach ensures that every solution I deliver is crafted with
+                the user's needs at the forefront, making technology intuitive and straightforward for all.
             </p>
         </motion.section>
     );
