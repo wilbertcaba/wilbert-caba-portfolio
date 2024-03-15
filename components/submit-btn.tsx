@@ -1,6 +1,5 @@
 import React from "react";
-// @ts-expect-error
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormStatus as useFormStatus } from "react-dom";
 import { FaPaperPlane } from "react-icons/fa";
 
 export default function SubmitButton() {
