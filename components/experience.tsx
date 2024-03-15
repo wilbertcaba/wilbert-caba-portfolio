@@ -6,14 +6,10 @@ import { experiencesData } from "@/lib/data";
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { useSectionInView } from "@/lib/hooks";
-import { useInView } from "react-intersection-observer";
 import { useTheme } from "@/context/theme-context";
 
 export default function Experience() {
-    const { ref } = useSectionInView("Experience", 0.3);
-    const { inView } = useInView({
-        triggerOnce: true,
-    });
+    const { ref, inView } = useSectionInView("Experience", 0.3, true);
 
     const { theme } = useTheme();
 
@@ -22,7 +18,6 @@ export default function Experience() {
             <SectionHeading>My Experience</SectionHeading>
             <VerticalTimeline lineColor="">
                 {experiencesData.map((item, index) => (
-                    // A React Fragment is a way to group a list of children without adding extra nodes to the DOM.
                     <React.Fragment key={index}>
                         <VerticalTimelineElement
                             contentStyle={{
@@ -42,6 +37,7 @@ export default function Experience() {
                                 background: theme === "light" ? "white" : "rgba(255, 255, 255, 0.15)",
                                 fontSize: "1.5rem",
                             }}
+                            visible={inView}
                         >
                             <h3 className="font-semibold capitalize">{item.company}</h3>
                             <h4>{item.title}</h4>
