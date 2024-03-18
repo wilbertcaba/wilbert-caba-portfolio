@@ -66,24 +66,37 @@ export const experiencesData = [
 export const projectsData = [
     {
         title: "Project 1",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, nunc id aliquet ultricies, nisl nunc lacinia nunc",
+        excerpt:
+            "This is the project's excerpt. It is a brief description of the project to be displayed on the homepage and projects page.",
+        projectLink: "https://www.google.com",
+        role: "Front-End Developer",
         tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
         imageUrl: corpcommentImg,
+        slug: "project1",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, nunc id aliquet ultricies, nisl nunc lacinia nunc",
     },
     {
         title: "Project 2",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, nunc id aliquet ultricies, nisl nunc lacinia nunc",
+        excerpt: "This is the project's excerpt. It is a brief description of the project.",
+        projectLink: "https://www.google.com",
+        role: "Front-End Developer",
         tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
         imageUrl: rmtdevImg,
+        slug: "project2",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, nunc id aliquet ultricies, nisl nunc lacinia nunc",
     },
     {
         title: "Project 3",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, nunc id aliquet ultricies, nisl nunc lacinia nunc",
+        excerpt: "This is the project's excerpt. It is a brief description of the project.",
+        projectLink: "https://www.google.com",
+        role: "Front-End Developer",
         tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
         imageUrl: wordanalyticsImg,
+        slug: "project3",
+        description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam, nunc id aliquet ultricies, nisl nunc lacinia nunc",
     },
 ] as const;
 
