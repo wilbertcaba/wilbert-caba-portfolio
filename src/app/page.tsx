@@ -11,6 +11,7 @@ import Header from "@/components/header";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
+import ProjectTest from "@/components/project-test";
 
 export default function Home() {
     return (
@@ -24,6 +25,7 @@ export default function Home() {
                     <Projects />
                     <Skills />
                     <Experience />
+                    <ProjectTest />
                     <Contact />
                     <Toaster position="top-center" />
                     <Footer />
