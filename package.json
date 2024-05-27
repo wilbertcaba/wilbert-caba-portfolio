@@ -20,6 +20,7 @@
     "@payloadcms/richtext-lexical": "beta",
     "@react-email/components": "^0.0.7",
     "@react-email/tailwind": "^0.0.8",
+    "@vercel/postgres": "^0.8.0",
     "autoprefixer": "10.4.17",
     "clsx": "^2.1.0",
     "cross-env": "^7.0.3",
