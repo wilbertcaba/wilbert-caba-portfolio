@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ProjectProps } from "@/lib/types";
 import Tags from "./tags";
 
-export default function Project({ title, description, tags, imageUrl, slug }: ProjectProps) {
+export default function Project({ title, excerpt, description_html, tags, imageUrl, slug }: ProjectProps) {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -30,8 +30,10 @@ export default function Project({ title, description, tags, imageUrl, slug }: Pr
                 <div className="bg-gray-100 max-w-[42rem] border border-black/5 overflow-hidden relative sm:h-[20rem] hover:bg-gray-200 transition rounded-lg dark:text-white dark:bg-white/10 dark:hover:bg-white/5">
                     <div className="py-4 px-5 sm:px-10 sm:py-10 sm:max-w-[60%] flex flex-col gap-2 h-full sm:group-even:ml-[18rem] sm:group-odd:mr-[18rem]">
                         <h3 className="text-2xl font-semibold">{title}</h3>
-                        <p className="leading-relaxed text-gray-700 dark:text-white/70">{description}</p>
-                        <Tags tags={tags} />
+                        <p>{excerpt}</p>
+                        {/* <p className="leading-relaxed text-gray-700 dark:text-white/70">{description_html}</p> */}
+                        <div dangerouslySetInnerHTML={{ __html: description_html || "No HTML" }} />
+                        {/* <Tags tags={tags} /> */}
                     </div>
                     <Image
                         src={imageUrl}
