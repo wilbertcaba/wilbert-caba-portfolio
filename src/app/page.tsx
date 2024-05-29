@@ -13,7 +13,7 @@ import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
 import ProjectTest from "@/components/project-test";
 
-export default function Home() {
+export default function Home({ id }: { id: number }) {
     return (
         <main className="flex flex-col items-center px-4 relative pt-28 sm:pt-36">
             <ThemeContextProvider>
@@ -22,7 +22,7 @@ export default function Home() {
                     <Intro />
                     <SectionDivider />
                     <About />
-                    <Projects />
+                    <Projects id={id} />
                     <Skills />
                     <Experience />
                     <ProjectTest />
