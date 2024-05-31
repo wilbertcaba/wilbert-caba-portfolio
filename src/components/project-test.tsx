@@ -8,7 +8,7 @@ export default async function ProjectTest() {
         collection: "projects",
     });
 
-    console.log(projects.docs);
+    // console.log(projects.docs);
 
     return (
         <div>
@@ -18,7 +18,7 @@ export default async function ProjectTest() {
                     return (
                         <div key={project.id}>
                             <h3>{project.title as string}</h3>
-                            <div dangerouslySetInnerHTML={{ __html: project.description_html || "No HTML" }} />
+                            {/* <div dangerouslySetInnerHTML={{ __html: project.description_html || "No HTML" }} /> */}
                             <a href={project.url as string}>Visit</a>
                         </div>
                     );
