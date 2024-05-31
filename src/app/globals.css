@@ -17,3 +17,7 @@ html.dark {
 .formFieldStyle {
     @apply border borderBlack;
 }
+
+html[data-theme="dark"] body {
+    background-color: inherit !important;
+}
