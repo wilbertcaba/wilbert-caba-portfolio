@@ -6,8 +6,20 @@ export const Projects: CollectionConfig = {
 
     fields: [
         {
+            name: "featuredImage",
+            label: "Featured Image",
+            type: "upload",
+            relationTo: "media",
+            required: true,
+        },
+        {
             name: "title",
             label: "Title",
+            type: "text",
+        },
+        {
+            name: "slug",
+            label: "Slug",
             type: "text",
         },
         {
@@ -35,16 +47,6 @@ export const Projects: CollectionConfig = {
                     type: "text",
                 },
             ],
-        },
-        {
-            name: "imageUrl",
-            label: "Image URL",
-            type: "text",
-        },
-        {
-            name: "slug",
-            label: "Slug",
-            type: "text",
         },
         {
             name: "description",
