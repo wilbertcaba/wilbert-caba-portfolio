@@ -11,7 +11,7 @@ import Header from "@/components/header";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
-import ProjectTest from "@/components/project-test";
+// import ProjectTest from "@/components/project-test";
 
 export default function Home({ id }: { id: number }) {
     return (
@@ -25,7 +25,7 @@ export default function Home({ id }: { id: number }) {
                     <Projects id={id} />
                     <Skills />
                     <Experience />
-                    <ProjectTest />
+                    {/* <ProjectTest /> */}
                     <Contact />
                     <Toaster position="top-center" />
                     <Footer />
