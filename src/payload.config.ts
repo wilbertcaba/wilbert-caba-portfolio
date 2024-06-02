@@ -5,10 +5,12 @@ import path from "path";
 import { buildConfig } from "payload/config";
 // import sharp from 'sharp'
 import { fileURLToPath } from "url";
-
 import { Users } from "./collections/Users";
 import { Projects } from "./collections/Projects";
 import { Media } from "./collections/Media";
+import { Experience } from "./collections/Experience";
+import { Homepage } from "./globals/Homepage";
+import { MainNav } from "./globals/MainNav";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -17,7 +19,8 @@ export default buildConfig({
     admin: {
         user: Users.slug,
     },
-    collections: [Users, Projects, Media],
+    collections: [Users, Projects, Experience, Media],
+    globals: [MainNav, Homepage],
     editor: lexicalEditor({}),
     // plugins: [payloadCloud()], // TODO: Re-enable when cloud supports 3.0
     secret: process.env.PAYLOAD_SECRET || "",
@@ -28,6 +31,7 @@ export default buildConfig({
         pool: {
             connectionString: process.env.DATABASE_URI || "",
         },
+        // push: false,
     }),
 
     // Sharp is now an optional dependency -
