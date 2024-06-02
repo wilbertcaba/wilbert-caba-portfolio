@@ -25,13 +25,19 @@ export const Media: CollectionConfig = {
             },
         ],
         adminThumbnail: "thumbnail",
-        mimeTypes: ["image/*"],
+        mimeTypes: [
+            "image/*",
+            "application/pdf",
+            "application/rtf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "application/vnd.google-apps.document",
+        ],
     },
     fields: [
         {
             name: "alt",
             type: "text",
-            required: true,
         },
     ],
 };
