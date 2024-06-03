@@ -11,6 +11,7 @@ import { Media } from "./collections/Media";
 import { Experience } from "./collections/Experience";
 import { Homepage } from "./globals/Homepage";
 import { MainNav } from "./globals/MainNav";
+import { s3Storage } from "@payloadcms/storage-s3";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -33,6 +34,26 @@ export default buildConfig({
         },
         // push: false,
     }),
+
+    plugins: [
+        s3Storage({
+            collections: {
+                media: {
+                    prefix: "media",
+                },
+            },
+            bucket: process.env.S3_BUCKET || "",
+            config: {
+                forcePathStyle: true,
+                credentials: {
+                    accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
+                    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
+                },
+                region: process.env.S3_REGION,
+                endpoint: process.env.S3_ENDPOINT,
+            },
+        }),
+    ],
 
     // Sharp is now an optional dependency -
     // if you want to resize images, crop, set focal point, etc.
