@@ -4,6 +4,13 @@ import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from "@payloadcms/ri
 export const Projects: CollectionConfig = {
     slug: "Projects",
 
+    access: {
+        read: () => true, // Allow read access publicly
+        // create: () => false, // Only logged-in users can create
+        // update: () => false, // Only logged-in users can update
+        // delete: () => false, // Only logged-in users can delete
+    },
+
     fields: [
         {
             name: "featuredImage",
@@ -68,11 +75,5 @@ export const Projects: CollectionConfig = {
             required: true,
         },
         lexicalHTML("description", { name: "description_html" }),
-        // {
-        //   name: 'image',
-        //   label: 'Image',
-        //   type: 'upload',
-        //   relationTo: 'uploads',
-        // },
     ],
 };
