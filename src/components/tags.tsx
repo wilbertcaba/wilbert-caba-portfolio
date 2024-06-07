@@ -8,7 +8,7 @@ export default function Tags({ tags, className }: { tags: ProjectProps["tags"]; 
                     className="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
                     key={index}
                 >
-                    {tag}
+                    {tag.tag}
                 </li>
             ))}
         </ul>

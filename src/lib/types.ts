@@ -10,9 +10,11 @@ export type ProjectProps = {
     excerpt: string;
     projectLink: string;
     role: string;
-    tags: string[];
-    // tags: string[];
-    imageUrl: string;
+    tags: [{ tag: string }];
+    featuredImage: {
+        url: string;
+        alt: string;
+    };
     slug: string;
     description_html: string;
 };
