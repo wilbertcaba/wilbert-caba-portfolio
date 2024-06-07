@@ -31,7 +31,6 @@ export default function Project({ title, excerpt, description_html, tags, featur
                     <div className="py-4 px-5 sm:px-10 sm:py-10 sm:max-w-[60%] flex flex-col gap-2 h-full sm:group-even:ml-[18rem] sm:group-odd:mr-[18rem]">
                         <h3 className="text-2xl font-semibold">{title}</h3>
                         <p>{excerpt}</p>
-                        {/* <div dangerouslySetInnerHTML={{ __html: description_html || "No HTML" }} /> */}
                         <Tags tags={tags} />
                     </div>
                     <Image
