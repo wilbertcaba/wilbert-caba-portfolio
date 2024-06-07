@@ -1,6 +1,6 @@
 import { ProjectProps } from "@/lib/types";
 
-export default function Tags({ tags }: { tags: ProjectProps["tags"] }) {
+export default function Tags({ tags, className }: { tags: ProjectProps["tags"]; className?: string }) {
     return (
         <ul className="flex flex-wrap mt-4 gap-2 sm:mt-auto">
             {tags.map((tag, index) => (
