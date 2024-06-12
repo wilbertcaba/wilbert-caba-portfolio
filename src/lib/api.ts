@@ -5,7 +5,7 @@ import { ProjectProps, ProjectsApiResponse } from "@/lib/types";
 // }
 
 export async function fetchProjects(): Promise<ProjectProps[]> {
-    const baseUrl = process.env.BASE_URL;
+    const baseUrl = process.env.VERCEL_URL || process.env.BASE_URL;
     try {
         // await delay(5000);
         const response = await fetch(`${baseUrl}/api/Projects`);
