@@ -11,8 +11,12 @@ import Header from "@/components/header";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
+import { fetchProjects } from "@/lib/api";
+import { Suspense } from "react";
 
-export default function Home() {
+export default async function Home() {
+    const projects = await fetchProjects();
+
     return (
         <main className="flex flex-col items-center px-4 relative pt-28 sm:pt-36">
             <ThemeContextProvider>
@@ -21,7 +25,11 @@ export default function Home() {
                     <Intro />
                     <SectionDivider />
                     <About />
-                    <Projects />
+
+                    <Suspense fallback={<div>Loading from Suspense...</div>}>
+                        <Projects data={projects} />
+                    </Suspense>
+
                     <Skills />
                     <Experience />
                     <Contact />
