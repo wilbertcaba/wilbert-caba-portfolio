@@ -18,3 +18,7 @@ export type ProjectProps = {
     slug: string;
     description_html: string;
 };
+
+export type ProjectsApiResponse = {
+    docs: ProjectProps[];
+};
