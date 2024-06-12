@@ -25,11 +25,7 @@ export default async function Home() {
                     <Intro />
                     <SectionDivider />
                     <About />
-
-                    <Suspense fallback={<div>Loading from Suspense...</div>}>
-                        <Projects data={projects} />
-                    </Suspense>
-
+                    <Projects data={projects} />
                     <Skills />
                     <Experience />
                     <Contact />
