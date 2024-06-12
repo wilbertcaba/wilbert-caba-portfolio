@@ -9,7 +9,10 @@ export async function fetchProjects(): Promise<ProjectProps[]> {
     try {
         // await delay(5000);
         const response = await fetch(`${baseUrl}/api/Projects`);
+
         if (!response.ok) {
+            console.log(`Base URL: ${baseUrl}`);
+            console.log(`Response status: ${response.status}`);
             throw new Error("Failed to fetch projects");
         }
         const data: ProjectsApiResponse = await response.json();
