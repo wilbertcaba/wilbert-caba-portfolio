@@ -1,25 +1,38 @@
-import { ProjectProps, ProjectsApiResponse } from "@/lib/types";
+import { createClient } from "./supabase/server";
 
-// function delay(ms) {
-//     return new Promise((resolve) => setTimeout(resolve, ms));
-// }
+export async function fetchProjects() {
+    const supabase = createClient();
+    const { data: projects, error } = await supabase.from("projects").select(`
+            *, 
+            featured_image:media(url, alt)
+        `);
 
-export async function fetchProjects(): Promise<ProjectProps[]> {
-    const baseUrl = process.env.VERCEL_URL || process.env.BASE_URL;
-    try {
-        // await delay(5000);
-        const response = await fetch(`https://${baseUrl}/api/Projects`);
-
-        if (!response.ok) {
-            console.log(`Base URL: ${baseUrl}`);
-            console.log(`Response status: ${response.status}`);
-            throw new Error("Failed to fetch projects");
-        }
-        const data: ProjectsApiResponse = await response.json();
-
-        return data.docs;
-    } catch (error) {
-        console.error("Error fetching projects: ", error);
-        throw error;
+    if (error) {
+        console.log("Error fetching projects", error);
+        return [];
     }
+
+    const { data: tags, error: tagsError } = await supabase.from("projects_tags").select();
+
+    if (tagsError) {
+        console.log("Error fetching tags", tagsError);
+        return [];
+    }
+
+    // Map tags by parent_id
+    const tagsMap = tags.reduce((acc, tag) => {
+        if (!acc[tag._parent_id]) {
+            acc[tag._parent_id] = [];
+        }
+
+        acc[tag._parent_id].push(tag.tag);
+        return acc;
+    }, {});
+
+    const projectsData = projects.map((project) => ({
+        ...project,
+        tags: tagsMap[project.id] || [],
+    }));
+
+    return projectsData;
 }
