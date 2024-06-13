@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ProjectProps } from "@/lib/types";
 import Tags from "./tags";
 
-export default function Project({ title, excerpt, description_html, tags, featuredImage, slug }: ProjectProps) {
+export default function Project({ title, excerpt, tags, featured_image, slug }: ProjectProps) {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -34,7 +34,7 @@ export default function Project({ title, excerpt, description_html, tags, featur
                         <Tags tags={tags} />
                     </div>
                     <Image
-                        src={featuredImage.url}
+                        src={featured_image.url}
                         alt={title}
                         quality={90}
                         width={600}

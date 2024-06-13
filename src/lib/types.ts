@@ -10,8 +10,8 @@ export type ProjectProps = {
     excerpt: string;
     projectLink: string;
     role: string;
-    tags: [{ tag: string }];
-    featuredImage: {
+    tags: string[];
+    featured_image: {
         url: string;
         alt: string;
     };
