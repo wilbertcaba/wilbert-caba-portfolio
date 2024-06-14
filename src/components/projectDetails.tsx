@@ -51,8 +51,8 @@ export default function ProjectDetails({ params }: { params: { slug: ProjectProp
             </header>
             {error && <p>{error}</p>}
             <Image
-                src={project.featuredImage.url}
-                alt={project.featuredImage.alt}
+                src={project.featured_image.url}
+                alt={project.featured_image.alt}
                 layout="responsive"
                 width={16}
                 height={9}
