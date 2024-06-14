@@ -24,13 +24,13 @@ export default buildConfig({
     globals: [MainNav, Homepage],
     editor: lexicalEditor({}),
     // plugins: [payloadCloud()], // TODO: Re-enable when cloud supports 3.0
-    secret: process.env.PAYLOAD_SECRET || "",
+    secret: process.env.PAYLOAD_SECRET!,
     typescript: {
         outputFile: path.resolve(dirname, "payload-types.ts"),
     },
     db: postgresAdapter({
         pool: {
-            connectionString: process.env.DATABASE_URI || "",
+            connectionString: process.env.DATABASE_URI!,
         },
         // push: false,
     }),
@@ -42,12 +42,12 @@ export default buildConfig({
                     prefix: "media",
                 },
             },
-            bucket: process.env.S3_BUCKET || "",
+            bucket: process.env.S3_BUCKET!,
             config: {
                 forcePathStyle: true,
                 credentials: {
-                    accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
-                    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
+                    accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+                    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
                 },
                 region: process.env.S3_REGION,
                 endpoint: process.env.S3_ENDPOINT,
