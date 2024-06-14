@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ProjectProps } from "@/lib/types";
 import Image from "next/image";
@@ -8,35 +7,8 @@ import { RiLinkM } from "react-icons/ri";
 import { FiBriefcase, FiArrowLeft } from "react-icons/fi";
 import Tags from "@/components/tags";
 
-export default function ProjectDetails({ params }: { params: { slug: ProjectProps["slug"] } }) {
-    const [project, setProject] = useState<ProjectProps | null>(null);
-    const [error, setError] = useState<string | null>(null);
+export default function ProjectDetails({ project }: { project: ProjectProps }) {
     const router = useRouter();
-    const slug = params.slug;
-
-    useEffect(() => {
-        const fetchProject = async () => {
-            try {
-                // We have to make this query more efficient to avoid fetching all projects
-                // const res = await fetch(`/api/Projects/${id}`);
-                const res = await fetch(`/api/Projects`);
-                const data = await res.json();
-                const projectData = data?.docs.find((project: ProjectProps) => project.slug === slug);
-
-                setProject(projectData);
-                setError(null);
-                console.log("This is the project data: ", data);
-            } catch (error) {
-                console.error("Couldn't fetch project: ", error);
-                setError("Failed to fetch project.");
-                setProject(null);
-            }
-        };
-
-        fetchProject();
-    }, [slug]);
-
-    if (!project) return <p>Loading...</p>;
 
     return (
         <section className="max-w-[68rem] m-auto pb-12">
@@ -49,7 +21,7 @@ export default function ProjectDetails({ params }: { params: { slug: ProjectProp
                     Back
                 </button>
             </header>
-            {error && <p>{error}</p>}
+
             <Image
                 src={project.featured_image.url}
                 alt={project.featured_image.alt}
