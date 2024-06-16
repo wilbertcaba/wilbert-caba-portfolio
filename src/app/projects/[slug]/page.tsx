@@ -1,5 +1,5 @@
 import ProjectDetails from "@/components/projectDetails";
-import { fetchSingleProject } from "@/lib/api";
+import { fetchSingleProject } from "@/lib/supabase/data";
 import { ProjectProps } from "@/lib/types";
 
 export default async function ProjectPage({ params }: { params: { slug: ProjectProps["slug"] } }) {
