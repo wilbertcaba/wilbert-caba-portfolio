@@ -1,8 +1,6 @@
 import { links } from "./data";
-// import { projectsData } from "@/lib/data";
 
 export type SectionName = (typeof links)[number]["name"];
-// export type ProjectProps = (typeof projectsData)[number];
 
 export type ProjectProps = {
     id: number;
@@ -19,6 +17,13 @@ export type ProjectProps = {
     description_html: string;
 };
 
-export type ProjectsApiResponse = {
-    docs: ProjectProps[];
+export type ExperienceProps = {
+    id: number;
+    company: string;
+    title: string;
+    date: string;
+    location: string;
+    description: string;
+    description_html: "string";
+    icon: React.ReactNode;
 };
