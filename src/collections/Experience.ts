@@ -45,6 +45,6 @@ export const Experience: CollectionConfig = {
             }),
             required: true,
         },
-        lexicalHTML("description", { name: "descriptionHTML" }),
+        lexicalHTML("description", { name: "description_html" }),
     ],
 };
