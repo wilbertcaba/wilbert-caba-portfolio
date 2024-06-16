@@ -5,7 +5,7 @@ export function createClientComponentClient() {
     return createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLICK_SUPABASE_ANON_KEY!);
 }
 
-export function createServerComponentClient() {
+export function createServerComponentClient(cookieStore: any) {
     return createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
         cookies: {
             // return cookies with the name 'name' from the request headers

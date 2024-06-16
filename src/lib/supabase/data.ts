@@ -1,7 +1,9 @@
 import { createClientComponentClient, createServerComponentClient } from "@/lib/supabase/supabase";
+import { cookies } from "next/headers";
 
 export async function fetchProjects() {
-    const supabase = createServerComponentClient();
+    const cookieStore = cookies();
+    const supabase = createServerComponentClient(cookieStore);
     const { data: projects, error } = await supabase.from("projects").select(`
             *, 
             featured_image:media(url, alt)
@@ -38,7 +40,8 @@ export async function fetchProjects() {
 }
 
 export async function fetchSingleProject(slug: string) {
-    const supabase = createServerComponentClient();
+    const cookieStore = cookies();
+    const supabase = createServerComponentClient(cookieStore);
     const { data: project, error } = await supabase
         .from("projects")
         .select("*, featured_image:media(url, alt)")
@@ -73,7 +76,8 @@ export async function fetchSingleProject(slug: string) {
 }
 
 export async function fetchExperiences() {
-    const supabase = createServerComponentClient();
+    const cookieStore = cookies();
+    const supabase = createServerComponentClient(cookieStore);
     const { data: experiences, error } = await supabase.from("experience").select();
 
     if (error) {
