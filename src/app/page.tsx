@@ -11,11 +11,12 @@ import Header from "@/components/header";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
-import { fetchProjects } from "@/lib/api";
+import { fetchExperiences, fetchProjects } from "@/lib/supabase/data";
 import { Suspense } from "react";
 
 export default async function Home() {
     const projects = await fetchProjects();
+    const experiences = await fetchExperiences();
 
     return (
         <main className="flex flex-col items-center px-4 relative pt-28 sm:pt-36">
@@ -27,7 +28,7 @@ export default async function Home() {
                     <About />
                     <Projects data={projects} />
                     <Skills />
-                    <Experience />
+                    <Experience data={experiences} />
                     <Contact />
                     <Toaster position="top-center" />
                     <Footer />
