@@ -27,3 +27,12 @@ export type ExperienceProps = {
     description_html: "string";
     icon: React.ReactNode;
 };
+
+export type HomepageProps = {
+    main_value_proposition: string;
+    about_html: string;
+};
+
+export type SkillProps = {
+    skill: string;
+};
