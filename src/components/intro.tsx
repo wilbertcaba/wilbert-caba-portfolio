@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -8,8 +9,13 @@ import { HiDownload } from "react-icons/hi";
 import { FaGithubSquare } from "react-icons/fa";
 import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
+import { HomepageProps } from "@/lib/types";
 
-export default function Intro() {
+// type MainValuePropositionProps = {
+//     main_value_proposition: [];
+// };
+
+export default function Intro({ data }: { data: HomepageProps[] }) {
     const { ref } = useSectionInView("Home", 0.99);
     const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
@@ -58,8 +64,7 @@ export default function Intro() {
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
             >
-                <b>Hi, I'm Wilbert.</b> I'm a <b>UX Developer</b> with <b>17 years</b> of combined experience on UX
-                Design and Front-End Development.
+                {data[0].main_value_proposition}
             </motion.h1>
 
             <motion.div
