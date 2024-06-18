@@ -85,7 +85,31 @@ export async function fetchExperiences() {
         return [];
     }
 
-    console.log(experiences);
-
     return experiences;
+}
+
+export async function fetcHomepageData() {
+    const cookieStore = cookies();
+    const supabase = createServerComponentClient(cookieStore);
+    const { data: homepageData, error } = await supabase.from("homepage").select();
+
+    if (error) {
+        console.log("Error fetching main homepage data", error);
+        return [];
+    }
+
+    return homepageData;
+}
+
+export async function fetchSkills() {
+    const cookieStore = cookies();
+    const supabase = createServerComponentClient(cookieStore);
+    const { data: skills, error } = await supabase.from("homepage_skills").select();
+
+    if (error) {
+        console.log("Error fetching skills", error);
+        return [];
+    }
+
+    return skills;
 }
