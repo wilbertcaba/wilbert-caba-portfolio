@@ -6,7 +6,7 @@ export const Homepage: GlobalConfig = {
 
     fields: [
         {
-            name: "main_value_propostiion",
+            name: "main_value_proposition",
             label: "Main Value Proposition",
             type: "text",
             required: true,
