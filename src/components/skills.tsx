@@ -5,6 +5,7 @@ import SectionHeading from "./section-heading";
 import { skillsData } from "@/lib/data";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
+import { SkillProps } from "@/lib/types";
 
 const fadeInAnimationVariants = {
     initial: {
@@ -20,7 +21,7 @@ const fadeInAnimationVariants = {
     }),
 };
 
-export default function Skills() {
+export default function Skills({ data }: { data: SkillProps[] }) {
     const { ref } = useSectionInView("Skills");
 
     return (
@@ -28,7 +29,7 @@ export default function Skills() {
             <SectionHeading>My Skills</SectionHeading>
 
             <ul className="flex flex-wrap justify-center gap-2 text-lg text-gray-800">
-                {skillsData.map((skill, index) => (
+                {data.map((skill, index) => (
                     <motion.li
                         key={index}
                         className="
@@ -45,7 +46,7 @@ export default function Skills() {
                         viewport={{ once: true }}
                         custom={index}
                     >
-                        {skill}
+                        {skill.skill}
                     </motion.li>
                 ))}
             </ul>
