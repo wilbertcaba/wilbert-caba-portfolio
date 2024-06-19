@@ -6,6 +6,13 @@ export const Homepage: GlobalConfig = {
 
     fields: [
         {
+            name: "logo",
+            label: "Logo",
+            type: "upload",
+            relationTo: "media",
+            required: true,
+        },
+        {
             name: "main_value_proposition",
             label: "Main Value Proposition",
             type: "text",
