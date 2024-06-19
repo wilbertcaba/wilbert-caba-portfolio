@@ -11,11 +11,7 @@ import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
 import { HomepageProps } from "@/lib/types";
 
-// type MainValuePropositionProps = {
-//     main_value_proposition: [];
-// };
-
-export default function Intro({ data }: { data: HomepageProps[] }) {
+export default function Intro({ h1 }: { h1: HomepageProps["main_value_proposition"] }) {
     const { ref } = useSectionInView("Home", 0.99);
     const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
@@ -64,7 +60,7 @@ export default function Intro({ data }: { data: HomepageProps[] }) {
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
             >
-                {data[0].main_value_proposition}
+                {h1}
             </motion.h1>
 
             <motion.div

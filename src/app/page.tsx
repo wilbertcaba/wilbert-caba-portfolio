@@ -11,23 +11,23 @@ import Header from "@/components/header";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
-import { fetchExperiences, fetchProjects, fetcHomepageData, fetchSkills } from "@/lib/supabase/data";
+import { fetchExperiences, fetchProjects, fetchHomepageData, fetchSkills } from "@/lib/supabase/data";
 import { Suspense } from "react";
 
 export default async function Home() {
     const projects = await fetchProjects();
     const experiences = await fetchExperiences();
-    const homepageData = await fetcHomepageData();
+    const homepageData = await fetchHomepageData();
     const skills = await fetchSkills();
 
     return (
         <main className="flex flex-col items-center px-4 relative pt-28 sm:pt-36">
             <ThemeContextProvider>
                 <ActiveSectionContextProvider>
-                    <Header />
-                    <Intro data={homepageData} />
+                    <Header logo={homepageData[0].logo as any} /> {/* Resolve type as any */}
+                    <Intro h1={homepageData[0].main_value_proposition as any} /> {/* Resolve type as any */}
                     <SectionDivider />
-                    <About data={homepageData} />
+                    <About about={homepageData[0].about_html as any} /> {/* Resolve type as any */}
                     <Projects data={projects} />
                     <Skills data={skills} />
                     <Experience data={experiences} />

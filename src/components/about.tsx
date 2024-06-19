@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
 import { HomepageProps } from "@/lib/types";
 
-export default function About({ data }: { data: HomepageProps[] }) {
+export default function About({ about }: { about: HomepageProps["about_html"] }) {
     const { ref } = useSectionInView("About");
 
     return (
@@ -18,7 +18,7 @@ export default function About({ data }: { data: HomepageProps[] }) {
             id="about"
         >
             <SectionHeading>About</SectionHeading>
-            <div className="mb-3" dangerouslySetInnerHTML={{ __html: data[0].about_html }} />
+            <div className="mb-3" dangerouslySetInnerHTML={{ __html: about }} />
         </motion.section>
     );
 }
