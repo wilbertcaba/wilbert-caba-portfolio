@@ -31,6 +31,14 @@ export type ExperienceProps = {
 export type HomepageProps = {
     main_value_proposition: string;
     about_html: string;
+    logo: {
+        url: string;
+        alt: string;
+    };
+    resume: {
+        url: string;
+        alt: string;
+    };
 };
 
 export type SkillProps = {
