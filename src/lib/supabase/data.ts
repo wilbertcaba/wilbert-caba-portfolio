@@ -88,10 +88,15 @@ export async function fetchExperiences() {
     return experiences;
 }
 
-export async function fetcHomepageData() {
+export async function fetchHomepageData() {
     const cookieStore = cookies();
     const supabase = createServerComponentClient(cookieStore);
-    const { data: homepageData, error } = await supabase.from("homepage").select();
+    const { data: homepageData, error } = await supabase.from("homepage").select(`
+        main_value_proposition,
+        about_html, 
+        logo:media!homepage_logo_id_media_id_fk(url, alt),
+        resume:media!homepage_resume_id_media_id_fk(url, alt)
+    `);
 
     if (error) {
         console.log("Error fetching main homepage data", error);
