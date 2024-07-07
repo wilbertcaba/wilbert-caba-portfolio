@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
 import { fetchExperiences, fetchProjects, fetchHomepageData, fetchSkills } from "@/lib/supabase/data";
+import MobileNav from "@/components/mobile-nav";
 import { Suspense } from "react";
 
 export default async function Home() {
@@ -35,6 +36,7 @@ export default async function Home() {
                     <Contact />
                     <Toaster position="top-center" />
                     <Footer />
+                    <MobileNav logo={homepageData[0].logo as any} /> {/* Resolve type as any */}
                 </ActiveSectionContextProvider>
                 <ThemeSwitch />
             </ThemeContextProvider>
