@@ -5,31 +5,57 @@ import { LuGraduationCap } from "react-icons/lu";
 import corpcommentImg from "@/public/corpcomment.png";
 import rmtdevImg from "@/public/rmtdev.png";
 import wordanalyticsImg from "@/public/wordanalytics.png";
+import { FiHome, FiUser, FiBriefcase, FiBox, FiMail } from "react-icons/fi";
+import { HiOutlineBolt } from "react-icons/hi2";
 
 export const links = [
     {
         name: "Home",
         hash: "#home",
+        icon: {
+            src: React.createElement(FiHome),
+            alt: "Home icon",
+        },
     },
     {
         name: "About",
         hash: "#about",
+        icon: {
+            src: React.createElement(FiUser),
+            alt: "User icon",
+        },
     },
     {
         name: "Projects",
         hash: "#projects",
+        icon: {
+            src: React.createElement(FiBox),
+            alt: "Box icon",
+        },
     },
     {
         name: "Skills",
         hash: "#skills",
+        icon: {
+            src: React.createElement(HiOutlineBolt),
+            alt: "Bolt icon",
+        },
     },
     {
         name: "Experience",
         hash: "#experience",
+        icon: {
+            src: React.createElement(FiBriefcase),
+            alt: "Briefcase icon",
+        },
     },
     {
         name: "Contact",
         hash: "#contact",
+        icon: {
+            src: React.createElement(FiMail),
+            alt: "Mail icon",
+        },
     },
 ] as const;
 
