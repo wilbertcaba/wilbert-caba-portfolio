@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { links } from "@/lib/data";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
@@ -6,17 +9,33 @@ import Link from "next/link";
 import { FiMenu, FiBox, FiBriefcase, FiMail } from "react-icons/fi";
 
 export default function MobileNav({ logo }: { logo: HomepageProps["logo"] }) {
+    const [isSheetOpen, setSheetOpen] = useState(false);
+
+    function toggleSheet() {
+        setSheetOpen(!isSheetOpen);
+    }
+
+    function closeSheet() {
+        setSheetOpen(false);
+    }
+
     return (
         <nav className="fixed bottom-0 dark:bg-gray-950 sm:hidden p-4 w-full text-gray-400">
             <ul className="flex items-center justify-between">
                 <li>
-                    <Sheet>
-                        <SheetTrigger className="flex flex-col items-center gap-2">
+                    <Sheet open={isSheetOpen}>
+                        <SheetTrigger onClick={toggleSheet} className="flex flex-col items-center gap-2">
                             <FiMenu />
                             <span className="text-xs">Menu</span>
                         </SheetTrigger>
                         <SheetContent side="left" className="z-[200] dark:bg-gray-950 p-0 border-none w-[300px]">
                             <SheetHeader>
+                                <SheetTitle>
+                                    <span aria-hidden className="sr-only">
+                                        Site Menu
+                                    </span>
+                                </SheetTitle>
+                                <SheetDescription></SheetDescription>
                                 <div className="px-4 py-[2.6rem] border-b border-b-gray-900">
                                     <Image src={logo.url} alt={logo.alt} width={200} height={20} />
                                 </div>
@@ -27,6 +46,7 @@ export default function MobileNav({ logo }: { logo: HomepageProps["logo"] }) {
                                         <Link
                                             href={link.hash}
                                             className="text-gray-400 flex gap-4 items-center p-4 border-b border-b-gray-900"
+                                            onClick={closeSheet}
                                         >
                                             {link.icon.src}
                                             {link.name}
