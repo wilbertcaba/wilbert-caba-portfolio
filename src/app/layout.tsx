@@ -1,5 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
+import Image from "next/image";
+import trianglePatterns from "public/pattern-triangles.png";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,14 +11,23 @@ export const metadata = {
         "Wilbert Caba is a UX Developer with 17 years of combined experience on UX Design and Front-End Development",
 };
 
+console.log(trianglePatterns);
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" className="!scroll-smooth">
             <body
-                className={`${inter.className} bg-gray-50 text-gray-950 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90 sm:pt-28`}
+                className={`${inter.className} bg-gray-50 text-gray-950 dark:bg-neutral-800 dark:text-gray-50 dark:text-opacity-90 sm:pt-28 relative`}
             >
-                <div className="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#946263]"></div>
-                <div className="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#676394]"></div>
+                <div className="h-2 w-full bg-primary fixed top-0 z-10"></div>
+                <div className="absolute top-0 w-full -z-10 bg-radial-gradient -translate-y-[5%] sm:h-[1080px]"></div>
+                <Image
+                    className="w-full absolute top-0 left-0 right-0 opacity-10 -z-20"
+                    src="/pattern-triangles.png"
+                    alt="triangle pattern"
+                    width={2560}
+                    height={900}
+                />
                 {children}
             </body>
         </html>
