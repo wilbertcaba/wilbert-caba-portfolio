@@ -1,7 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Image from "next/image";
-import trianglePatterns from "public/pattern-triangles.png";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,8 +10,6 @@ export const metadata = {
         "Wilbert Caba is a UX Developer with 17 years of combined experience on UX Design and Front-End Development",
 };
 
-console.log(trianglePatterns);
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" className="!scroll-smooth">
@@ -20,9 +17,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 className={`${inter.className} bg-gray-50 text-gray-950 dark:bg-neutral-800 dark:text-gray-50 dark:text-opacity-90 sm:pt-28 relative`}
             >
                 <div className="h-2 w-full bg-primary fixed top-0 z-10"></div>
-                <div className="absolute top-0 w-full -z-10 bg-radial-gradient -translate-y-[5%] sm:h-[1080px]"></div>
+                <div className="absolute top-0 w-full -z-10 bg-radial-gradient-light dark:bg-radial-gradient-dark -translate-y-[12%] sm:h-[1080px]"></div>
                 <Image
-                    className="w-full absolute top-0 left-0 right-0 opacity-10 -z-20"
+                    className="w-full absolute top-0 left-0 right-0 opacity-35 dark:opacity-10 -z-20"
                     src="/pattern-triangles.png"
                     alt="triangle pattern"
                     width={2560}
