@@ -16,9 +16,13 @@ module.exports = {
             },
         },
         extend: {
+            colors: {
+                primary: "#2FD38E",
+            },
             backgroundImage: {
-                "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-                "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+                "pattern-triangles": "url('/pattern-triangles.png')",
+                "radial-gradient": "radial-gradient(ellipse 80% 40%, hsl(0 0% 10% / 1) 30%, hsl(0deg 0% 0% / 0%) 130%)",
+                "pattern-logo-left": "url('/pattern-logo-left.svg')",
             },
             keyframes: {
                 "accordion-down": {
