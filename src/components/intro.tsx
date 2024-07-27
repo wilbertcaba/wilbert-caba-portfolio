@@ -48,9 +48,13 @@ export default function Intro({ h1 }: { h1: HomepageProps["main_value_propositio
                 after:content after:bg-pattern-logo-left after:absolute after:top-16 after:left-0 after:w-[58px] after:h-[423px]
             "
             >
-                <motion.div>
-                    <p className="uppercase tracking-[0.5rem] text-primary">Hello World!</p>
-                </motion.div>
+                <motion.p
+                    className="uppercase tracking-[0.5rem] text-primary"
+                    initial={{ y: 100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                >
+                    Hello World!
+                </motion.p>
                 <motion.h1
                     className="-mb-[10px] mt-4 px-4 text-2xl font-medium sm:text-6xl !leading-[1.5]"
                     initial={{ y: 100, opacity: 0 }}
