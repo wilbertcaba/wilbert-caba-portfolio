@@ -18,11 +18,12 @@ module.exports = {
         extend: {
             colors: {
                 primary: "#2FD38E",
+                "primary-300": "#42ecab",
             },
             backgroundImage: {
                 "pattern-triangles": "url('/pattern-triangles.png')",
                 "radial-gradient-dark":
-                    "radial-gradient(ellipse 80% 40%, hsl(0 0% 10% / 1) 30%, hsl(0deg 0% 0% / 10%) 130%)",
+                    "radial-gradient(ellipse 80% 40%, hsl(0 0% 10% / 1) 30%, hsl(0deg 0% 0% / 0%) 130%)",
                 "radial-gradient-light":
                     "radial-gradient(ellipse 80% 40%, hsl(0 0% 100% / 1) 30%, hsl(0deg 0% 100% / 0%) 130%)",
                 "pattern-logo-left": "url('/pattern-logo-left.svg')",
