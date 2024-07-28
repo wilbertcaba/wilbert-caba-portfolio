@@ -49,7 +49,7 @@ export default function Intro({ h1 }: { h1: HomepageProps["main_value_propositio
             "
             >
                 <motion.p
-                    className="uppercase tracking-[0.5rem] text-primary"
+                    className="uppercase tracking-[0.5rem] text-sm md:text-xl text-primary"
                     initial={{ y: 100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                 >
