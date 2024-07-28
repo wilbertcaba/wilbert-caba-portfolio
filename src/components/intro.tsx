@@ -56,7 +56,7 @@ export default function Intro({ h1 }: { h1: HomepageProps["main_value_propositio
                     Hello World!
                 </motion.p>
                 <motion.h1
-                    className="-mb-[10px] mt-4 px-4 text-2xl font-medium sm:text-6xl !leading-[1.5]"
+                    className="-mb-[10px] mt-4 sm:px-20 text-2xl font-medium md:text-4xl lg:text-5xl 2xl:text-6xl !leading-[1.5]"
                     initial={{ y: 100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                 >
