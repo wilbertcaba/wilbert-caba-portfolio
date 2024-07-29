@@ -41,7 +41,23 @@ export default function Intro({ h1 }: { h1: HomepageProps["main_value_propositio
     const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
     return (
-        <section ref={ref} className="py-10 sm:py-24 text-center scroll-mt-[10rem] w-full" id="home">
+        <section
+            ref={ref}
+            className="
+                py-10 sm:pb-16 sm:pt-40 text-center scroll-mt-[10rem] w-full overflow-x-hidden sm:-top-[104px] relative
+                before:content
+                before:bg-pattern-triangles
+                before:absolute
+                before:top-0
+                before:left-0
+                before:-z-20
+                before:opacity-35
+                dark:before:opacity-15
+                before:w-full
+                before:h-full
+            "
+            id="home"
+        >
             <div
                 className="
                 relative 
@@ -62,7 +78,7 @@ export default function Intro({ h1 }: { h1: HomepageProps["main_value_propositio
                 2xl:after:h-[423px]
             "
             >
-                <div className="containe px-0 sm:px-8 flex flex-col items-center relative">
+                <div className="container px-0 sm:px-8 flex flex-col items-center relative">
                     <motion.p
                         className="uppercase tracking-[0.5rem] text-sm md:text-xl text-primary"
                         initial={{ y: 100, opacity: 0 }}
