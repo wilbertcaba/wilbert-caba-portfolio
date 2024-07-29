@@ -14,11 +14,7 @@ export default function Header({ logo }: { logo: HomepageProps["logo"] }) {
     const { activeSection, setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
     return (
-        // <header className="z-[999] relative">
-        <motion.header
-            // className="z-[999] fixed top-0 right-0 left-0 p-8 w-full before:content-[''] before:absolute before:inset-0 dark:before:bg-gray-800 dark:before:opacity-10 flex items-center justify-between"
-            className="z-[99] sm:fixed top-0 right-0 left-0 py-4 sm:p-8 w-full sm:flex items-center justify-between"
-        >
+        <motion.header className="z-10 sm:fixed mt-2 top-0 right-0 left-0 py-4 sm:p-8 w-full sm:flex items-center justify-between">
             <Image
                 src={logo.url}
                 alt={logo.alt}
@@ -26,10 +22,7 @@ export default function Header({ logo }: { logo: HomepageProps["logo"] }) {
                 height={20}
                 className="logo-image some-other-class w-40 sm:w-auto"
             />
-            <nav
-                // className="flex fixed top-[0.15rem] left-1/2 h-12 -translate-x-1/2 py-2 sm:top-[1.7rem] sm:h-[initial] sm:py-0"
-                className="hidden sm:flex py-2 sm:top-[1.7rem] sm:h-[initial] sm:py-0"
-            >
+            <nav className="hidden sm:flex py-2 sm:top-[1.7rem] sm:h-[initial] sm:py-0">
                 <ul className="flex w-[22rem] flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap">
                     {links.map((link) => (
                         <motion.li
@@ -56,7 +49,6 @@ export default function Header({ logo }: { logo: HomepageProps["logo"] }) {
                                 {link.name == activeSection && (
                                     <motion.span
                                         className="bg-gray-100 rounded-md absolute inset-0 -z-10 dark:bg-gray-800"
-                                        // className="bg-gray-100 rounded-full absolute top-full h-2 left-0 right-0 -z-10 dark:bg-gray-800"
                                         layoutId="activeSection"
                                         transition={{
                                             type: "spring",
