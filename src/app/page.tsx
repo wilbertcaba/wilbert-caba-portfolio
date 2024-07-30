@@ -21,7 +21,7 @@ export default async function Home() {
     const skills = await fetchSkills();
 
     return (
-        <main className="flex flex-col items-center px-4 relative">
+        <main className="flex flex-col items-center relative">
             <ThemeContextProvider>
                 <ActiveSectionContextProvider>
                     <Header logo={homepageData[0].logo as any} /> {/* Resolve type as any */}
