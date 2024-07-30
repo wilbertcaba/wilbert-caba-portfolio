@@ -14,14 +14,30 @@ export default function Projects({ data }: { data: ProjectProps[] }) {
     }
 
     return (
-        <section ref={ref} className="scroll-mt-28 mb-28" id="projects">
-            <SectionHeading>My Projects</SectionHeading>
-            <div>
-                {data.map((project, index) => (
-                    <React.Fragment key={index}>
-                        <Project {...project} />
-                    </React.Fragment>
-                ))}
+        <section
+            ref={ref}
+            className="
+                scroll-mt-28 pt-24 mb-28 w-full overflow-x-hidden relative
+                before:content-[url('/bg-text-projects.svg')]
+                before:absolute
+                before:top-10
+                before:block
+                before:w-full
+                before:text-center
+                before:-z-40
+                before:opacity-15
+            "
+            id="projects"
+        >
+            <div className="container">
+                <SectionHeading>Explore Projects</SectionHeading>
+                <div>
+                    {data.map((project, index) => (
+                        <React.Fragment key={index}>
+                            <Project {...project} />
+                        </React.Fragment>
+                    ))}
+                </div>
             </div>
         </section>
     );

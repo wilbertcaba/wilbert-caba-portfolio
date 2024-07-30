@@ -44,7 +44,7 @@ export default function Intro({ h1 }: { h1: HomepageProps["main_value_propositio
         <section
             ref={ref}
             className="
-                py-10 sm:pb-16 sm:pt-40 text-center scroll-mt-[10rem] w-full overflow-x-hidden sm:-top-[104px] relative
+                py-10 sm:pb-16 sm:pt-40 text-center scroll-mt-[10rem] w-full overflow-x-hidden sm:-mt-[104px] relative
                 before:content
                 before:bg-pattern-triangles
                 before:absolute
