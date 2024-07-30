@@ -21,9 +21,10 @@ export default function Projects({ data }: { data: ProjectProps[] }) {
                 before:content-[url('/bg-text-projects.svg')]
                 before:absolute
                 before:top-10
-                before:block
-                before:w-full
-                before:text-center
+                before:inline-block
+                before:w-auto
+                before:left-1/2
+                before:-translate-x-1/2
                 before:-z-40
                 before:opacity-15
             "
