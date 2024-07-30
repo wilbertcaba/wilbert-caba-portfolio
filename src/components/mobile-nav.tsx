@@ -22,7 +22,7 @@ export default function MobileNav({ logo }: { logo: HomepageProps["logo"] }) {
     }
 
     return (
-        <nav className="fixed bottom-0 dark:bg-gray-950 sm:hidden p-4 w-full text-gray-400">
+        <nav className="fixed bottom-0 dark:bg-neutral-950 sm:hidden p-4 w-full text-gray-400">
             <ul className="flex items-center justify-between">
                 <li>
                     <Sheet open={isSheetOpen}>
