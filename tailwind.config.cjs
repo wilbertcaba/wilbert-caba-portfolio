@@ -22,6 +22,8 @@ module.exports = {
             },
             backgroundImage: {
                 "pattern-triangles": "url('/pattern-triangles.png')",
+                "text-projects": "url('/bg-text-projects.svg')",
+                "text-about": "url('/bg-text-about.svg')",
                 "radial-gradient-dark":
                     "radial-gradient(ellipse 80% 40%, hsl(0 0% 10% / 1) 30%, hsl(0deg 0% 0% / 0%) 130%)",
                 "radial-gradient-light":
