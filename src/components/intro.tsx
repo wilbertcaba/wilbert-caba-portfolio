@@ -78,7 +78,7 @@ export default function Intro({ h1 }: { h1: HomepageProps["main_value_propositio
                 2xl:after:h-[423px]
             "
             >
-                <div className="container px-0 sm:px-8 flex flex-col items-center relative">
+                <div className="container sm:px-8 flex flex-col items-center relative">
                     <motion.p
                         className="uppercase tracking-[0.5rem] text-sm md:text-xl text-primary"
                         initial={{ y: 100, opacity: 0 }}
