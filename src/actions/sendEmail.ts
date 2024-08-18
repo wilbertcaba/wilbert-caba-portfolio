@@ -17,7 +17,7 @@ export const sendEmail = async (formData: FormData) => {
         };
     }
 
-    if (!validateString(message, 5000)) {
+    if (!validateString(message, 500)) {
         return {
             error: "Invalid message",
         };
@@ -29,7 +29,7 @@ export const sendEmail = async (formData: FormData) => {
             from: "Contact Form <onboarding@resend.dev>",
             to: "wilbertcaba@gmail.com",
             subject: "New message from your website",
-            reply_to: senderEmail as string,
+            replyTo: senderEmail as string,
             react: React.createElement(ContactFormEmail, {
                 message: message as string,
                 senderEmail: senderEmail as string,
