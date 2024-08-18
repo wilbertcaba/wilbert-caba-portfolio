@@ -1,5 +1,5 @@
 import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from "@payloadcms/richtext-lexical";
-import { CollectionConfig } from "payload/types";
+import { CollectionConfig } from "payload";
 
 export const Experience: CollectionConfig = {
     slug: "experience",

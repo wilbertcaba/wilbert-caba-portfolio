@@ -1,4 +1,4 @@
-import type { CollectionConfig } from "payload/types";
+import type { CollectionConfig } from "payload";
 import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from "@payloadcms/richtext-lexical";
 
 export const Projects: CollectionConfig = {
