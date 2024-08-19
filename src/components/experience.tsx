@@ -12,14 +12,19 @@ export default function Experience({ data }: { data: ExperienceProps[] }) {
     const { ref, inView } = useSectionInView("Experience", 0.3, true);
     const { theme } = useTheme();
 
+    // This is a workaround to fix the issue with the timeline not showing up properly
+    // by removing type checking for the VerticalTimeline and VerticalTimelineElement components
+    const VerticalTimelineComponent = VerticalTimeline as any;
+    const VerticalTimelineComponentElement = VerticalTimelineElement as any;
+
     return (
         <section ref={ref} id="experience" className="scroll-m-28 mb-28 w-full">
             <SectionHeading>My Experience</SectionHeading>
-            <VerticalTimeline lineColor="">
+            <VerticalTimelineComponent lineColor="">
                 {data
                     ? data.map((experience, index) => (
                           <React.Fragment key={index}>
-                              <VerticalTimelineElement
+                              <VerticalTimelineComponentElement
                                   contentStyle={{
                                       background: theme === "light" ? "#f3f4f6" : "rgba(255,255,255,0.05)",
                                       boxShadow: "none",
@@ -48,11 +53,11 @@ export default function Experience({ data }: { data: ExperienceProps[] }) {
                                       className="!font-normal text-gray-700 !text-sm dark:text-white/75"
                                       dangerouslySetInnerHTML={{ __html: experience.description_html }}
                                   />
-                              </VerticalTimelineElement>
+                              </VerticalTimelineComponentElement>
                           </React.Fragment>
                       ))
                     : "No experiences found"}
-            </VerticalTimeline>
+            </VerticalTimelineComponent>
         </section>
     );
 }
