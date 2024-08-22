@@ -18,7 +18,7 @@ export default async function Home() {
     const projects = await fetchProjects();
     const experiences = await fetchExperiences();
     const homepageData = await fetchHomepageData();
-    const skills = await fetchSkills();
+    // const skills = await fetchSkills();
 
     return (
         <main className="flex flex-col items-center relative">
@@ -28,7 +28,6 @@ export default async function Home() {
                     <Intro h1={homepageData[0].main_value_proposition as any} /> {/* Resolve type as any */}
                     <Projects data={projects} />
                     <About about={homepageData[0].about_html as any} /> {/* Resolve type as any */}
-                    <Skills data={skills} />
                     <Experience data={experiences} />
                     <Contact />
                     <Toaster position="top-center" />
