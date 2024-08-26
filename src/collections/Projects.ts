@@ -74,6 +74,6 @@ export const Projects: CollectionConfig = {
             }),
             required: true,
         },
-        lexicalHTML("description", { name: "description_html" }),
+        lexicalHTML("description", { name: "description_html", storeInDB: true }),
     ],
 };

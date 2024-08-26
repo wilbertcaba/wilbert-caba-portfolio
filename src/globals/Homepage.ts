@@ -27,7 +27,7 @@ export const Homepage: GlobalConfig = {
                 features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
             }),
         },
-        lexicalHTML("about", { name: "about_html" }),
+        lexicalHTML("about", { name: "about_html", storeInDB: true }),
         {
             name: "resume",
             label: "Resume",
