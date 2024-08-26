@@ -19,7 +19,7 @@ export default function Experience({ data }: { data: ExperienceProps[] }) {
 
     return (
         <section ref={ref} id="experience" className="scroll-m-28 mb-28 w-full">
-            <SectionHeading>My Experience</SectionHeading>
+            <SectionHeading alignment="center">My Experience</SectionHeading>
             <VerticalTimelineComponent lineColor="">
                 {data
                     ? data.map((experience, index) => (

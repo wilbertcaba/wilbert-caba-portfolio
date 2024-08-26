@@ -57,9 +57,9 @@ export default function About({ about }: { about: HomepageProps["about_html"] })
                 before:opacity-15
             "
             >
-                <div className="grid lg:grid-cols-12 gap-20">
+                <div className="grid lg:grid-cols-12 lg:gap-20">
                     <div className="mb-3 col-span-8">
-                        <h2 className="text-5xl font-medium capitalize mb-16">About Me</h2>
+                        <h2 className="text-5xl sm:text-left font-medium capitalize mb-16">About Me</h2>
                         <div dangerouslySetInnerHTML={{ __html: about }} />
                     </div>
                     <div className="col-span-4">
@@ -68,7 +68,7 @@ export default function About({ about }: { about: HomepageProps["about_html"] })
                             alt="Wilbert Caba image"
                             width="408"
                             height="408"
-                            className="w-full rounded-lg"
+                            className="w-full rounded-lg lg:mt-28 xl:mt-0"
                         />
                     </div>
                 </div>

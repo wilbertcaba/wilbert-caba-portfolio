@@ -31,7 +31,7 @@ export default function Projects({ data }: { data: ProjectProps[] }) {
             id="projects"
         >
             <div className="container">
-                <SectionHeading>Explore Projects</SectionHeading>
+                <SectionHeading alignment="center">Explore Projects</SectionHeading>
                 <div>
                     {data.map((project, index) => (
                         <React.Fragment key={index}>
