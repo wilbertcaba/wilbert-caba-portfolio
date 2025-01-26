@@ -32,7 +32,7 @@ export default function About({ about }: { about: HomepageProps["about_html"] })
         <motion.section
             ref={ref}
             className="
-                w-full mb-28 pt-36 leading-8 sm:mb-40 scroll-mt-28 relative
+                w-full mb-28 pt-8 xl:pt-36 leading-8 sm:mb-40 scroll-mt-28 overflow-hidden relative
                 after:content-[url('/pattern-triangles-2.svg')]
                 after:absolute
                 after:top-0
@@ -57,22 +57,22 @@ export default function About({ about }: { about: HomepageProps["about_html"] })
                 before:opacity-15
             "
             >
-                <div className="grid lg:grid-cols-12 lg:gap-20">
-                    <div className="mb-3 col-span-8">
-                        <h2 className="text-5xl sm:text-left font-medium capitalize mb-16">About Me</h2>
+                <SectionHeading alignment="left">About Me</SectionHeading>
+                <div className="grid md:grid-cols-12 md:gap-8 lg:gap-20">
+                    <div className="mb-3 col-span-8 order-2 lg:order-1">
                         <div dangerouslySetInnerHTML={{ __html: about }} />
                     </div>
-                    <div className="col-span-4">
+                    <div className="col-span-12 md:col-span-4 order-1 lg:order-2">
                         <Image
                             src="/img-wilbert-caba-profile-image.jpeg"
                             alt="Wilbert Caba image"
                             width="408"
                             height="408"
-                            className="w-full rounded-lg lg:mt-28 xl:mt-0"
+                            className="w-full rounded-lg xl:-mt-32 mb-8 md:mb-0"
                         />
                     </div>
                 </div>
-                <div className="grid grid-cols-[repeat(auto-fill,128px)] justify-between gap-8 py-24">
+                <div className="grid grid-cols-[repeat(auto-fill,128px)] justify-center md:justify-between gap-8 md:pt-24">
                     {skills.map((skill, index) => (
                         <div
                             key={index}
