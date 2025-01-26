@@ -1,0 +1,13 @@
+name: Keep Supabase Active
+
+on:
+    schedule:
+        - cron: "0 0 * * *" # Runs once every day at midnight UTC
+
+jobs:
+    keep-alive:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Send request to Supabase
+              run: |
+                  curl -X GET "$SUPABASE_API_URL" -H "apikey: ${{ secrets.SUPABASE_API_KEY }}" -H "Authorization: Bearer ${{ secrets.SUPABASE_API_KEY }}"
