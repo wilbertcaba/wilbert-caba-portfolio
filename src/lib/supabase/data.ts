@@ -2,7 +2,7 @@ import { createClientComponentClient, createServerComponentClient } from "@/lib/
 import { cookies } from "next/headers";
 
 export async function fetchProjects() {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const supabase = createServerComponentClient(cookieStore);
     const { data: projects, error } = await supabase.from("projects").select(`
             *, 
@@ -40,7 +40,7 @@ export async function fetchProjects() {
 }
 
 export async function fetchSingleProject(slug: string) {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const supabase = createServerComponentClient(cookieStore);
     const { data: project, error } = await supabase
         .from("projects")
@@ -76,7 +76,7 @@ export async function fetchSingleProject(slug: string) {
 }
 
 export async function fetchExperiences() {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const supabase = createServerComponentClient(cookieStore);
     const { data: experiences, error } = await supabase.from("experience").select();
 
@@ -89,7 +89,7 @@ export async function fetchExperiences() {
 }
 
 export async function fetchHomepageData() {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const supabase = createServerComponentClient(cookieStore);
     const { data: homepageData, error } = await supabase.from("homepage").select(`
         main_value_proposition,
@@ -107,7 +107,7 @@ export async function fetchHomepageData() {
 }
 
 export async function fetchSkills() {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const supabase = createServerComponentClient(cookieStore);
     const { data: skills, error } = await supabase.from("homepage_skills").select();
 
