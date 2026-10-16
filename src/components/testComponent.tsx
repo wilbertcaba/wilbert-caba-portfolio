@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { getPayloadHMR } from "@payloadcms/next/utilities";
+import React from "react";
 import config from "@payload-config";
+import { getPayload } from "payload";
 
 export default async function TestComponent() {
-    const payload = await getPayloadHMR({ config });
+    const payload = await getPayload({ config });
 
     const users = await payload.find({
         collection: "users",
