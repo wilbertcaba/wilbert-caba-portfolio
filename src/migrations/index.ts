@@ -1,5 +1,6 @@
 import * as migration_20240817_172121 from './20240817_172121';
 import * as migration_20240817_175630_relationships_v2_v3 from './20240817_175630_relationships_v2_v3';
+import * as migration_20261016_231346_payload_3_91 from './20261016_231346_payload_3_91';
 
 export const migrations = [
   {
@@ -10,6 +11,11 @@ export const migrations = [
   {
     up: migration_20240817_175630_relationships_v2_v3.up,
     down: migration_20240817_175630_relationships_v2_v3.down,
-    name: '20240817_175630_relationships_v2_v3'
+    name: '20240817_175630_relationships_v2_v3',
+  },
+  {
+    up: migration_20261016_231346_payload_3_91.up,
+    down: migration_20261016_231346_payload_3_91.down,
+    name: '20261016_231346_payload_3_91'
   },
 ];
