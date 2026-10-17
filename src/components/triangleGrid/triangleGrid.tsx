@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import "./TriangleGrid.css";
+import "./triangleGrid.css";
 
 // Grid dimensions
 const WIDTH = 1440;
