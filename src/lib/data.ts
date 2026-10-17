@@ -18,19 +18,19 @@ export const links = [
         },
     },
     {
-        name: "About",
-        hash: "#about",
-        icon: {
-            src: React.createElement(FiUser),
-            alt: "User icon",
-        },
-    },
-    {
         name: "Projects",
         hash: "#projects",
         icon: {
             src: React.createElement(FiBox),
             alt: "Box icon",
+        },
+    },
+    {
+        name: "About",
+        hash: "#about",
+        icon: {
+            src: React.createElement(FiUser),
+            alt: "User icon",
         },
     },
     {

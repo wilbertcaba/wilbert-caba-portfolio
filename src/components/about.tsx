@@ -53,7 +53,7 @@ export default function About({ about, skills }: { about: string; skills: Homepa
                         />
                     </div>
                 </div>
-                <div className="grid grid-cols-[repeat(auto-fill,128px)] justify-center md:justify-between gap-8 md:pt-24">
+                <div className="grid grid-cols-[repeat(auto-fill,128px)] justify-center md:justify-between gap-8 md:pt-24" id="skills">
                     {skills.map((skill) => (
                         <div
                             key={skill.id ?? skill.skill}
