@@ -543,7 +543,8 @@ export interface Homepage {
   about_html?: string | null;
   resume?: (number | null) | Media;
   skills: {
-    skill?: string | null;
+    skill: string;
+    icon: number | Media;
     id?: string | null;
   }[];
   updatedAt?: string | null;
@@ -579,6 +580,7 @@ export interface HomepageSelect<T extends boolean = true> {
     | T
     | {
         skill?: T;
+        icon?: T;
         id?: T;
       };
   updatedAt?: T;

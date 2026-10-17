@@ -7,6 +7,7 @@ import "react-vertical-timeline-component/style.min.css";
 import { useSectionInView } from "@/lib/hooks";
 import { useTheme } from "@/context/theme-context";
 import type { Experience as ExperienceDoc } from "@/payload-types";
+import { WorkflowIcon } from "lucide-react";
 
 export default function Experience({ data }: { data: ExperienceDoc[] }) {
     const { ref, inView } = useSectionInView("Experience", 0.3, true);
