@@ -11,6 +11,7 @@ import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
 import SectionDivider from "./section-divider";
 import { Button } from "@/components/ui/button";
+import TriangleGrid from "./triangleGrid/triangleGrid";
 
 const social = [
     {
@@ -45,7 +46,6 @@ export default function Intro({ h1 }: { h1: string }) {
             className="
                 py-10 sm:pb-16 sm:pt-40 text-center scroll-mt-[10rem] w-full overflow-x-hidden sm:-mt-[104px] relative
                 before:content
-                before:bg-pattern-triangles
                 before:absolute
                 before:top-0
                 before:left-0
@@ -57,6 +57,7 @@ export default function Intro({ h1 }: { h1: string }) {
             "
             id="home"
         >
+            <TriangleGrid />
             <div
                 className="
                 relative 
