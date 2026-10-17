@@ -10,6 +10,10 @@ export type ProjectWithMedia = Omit<Project, "featuredImage"> & {
     featuredImage: Media;
 };
 
+export type ExperienceWithMedia = Omit<Experience, "logo"> & {
+    logo: Media | null;
+};
+
 export type HomepageSkill = {
     id?: string | null;
     skill: string;
@@ -61,15 +65,18 @@ export async function fetchSingleProject(slug: string): Promise<ProjectWithMedia
     return { ...project, featuredImage: project.featuredImage };
 }
 
-export async function fetchExperiences(): Promise<Experience[]> {
+export async function fetchExperiences(): Promise<ExperienceWithMedia[]> {
     const payload = await getCms();
     const { docs } = await payload.find({
         collection: "experience",
-        depth: 0,
+        depth: 1,
         pagination: false,
     });
 
-    return docs;
+    return docs.map((experience) => ({
+        ...experience,
+        logo: isMedia(experience.logo) ? experience.logo : null,
+    }));
 }
 
 export async function fetchHomepage(): Promise<HomepageWithMedia> {
