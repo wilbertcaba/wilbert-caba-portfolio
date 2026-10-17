@@ -4,10 +4,10 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { ProjectProps } from "@/lib/types";
+import type { ProjectWithMedia } from "@/lib/cms";
 import Tags from "./tags";
 
-export default function Project({ title, excerpt, tags, featured_image, slug }: ProjectProps) {
+export default function Project({ title, excerpt, tags, featuredImage, slug }: ProjectWithMedia) {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -35,8 +35,8 @@ export default function Project({ title, excerpt, tags, featured_image, slug }: 
                     </div>
                     <div className="w-full h-48 overflow-hidden relative md:static md:h-auto">
                         <Image
-                            src={featured_image.url}
-                            alt={title}
+                            src={featuredImage.url || ""}
+                            alt={featuredImage.alt || title}
                             quality={90}
                             width={600}
                             height={600}

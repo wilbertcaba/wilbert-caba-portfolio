@@ -3,7 +3,6 @@
 import SectionHeading from "./section-heading";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
-import { HomepageProps } from "@/lib/types";
 import Image from "next/image";
 
 const skills = [
@@ -25,7 +24,7 @@ const skills = [
     { name: "Wordpress", icon: "/icons/icon-wordpress.svg" },
 ];
 
-export default function About({ about }: { about: HomepageProps["about_html"] }) {
+export default function About({ about }: { about: string }) {
     const { ref } = useSectionInView("About");
 
     return (

@@ -7,17 +7,17 @@ import Link from "next/link";
 import clsx from "clsx";
 import { ActiveSectionContext, useActiveSectionContext } from "@/context/active-section-context";
 import Image from "next/image";
-import { HomepageProps } from "@/lib/types";
+import type { Media } from "@/payload-types";
 
-export default function Header({ logo }: { logo: HomepageProps["logo"] }) {
+export default function Header({ logo }: { logo: Media }) {
     // we need to keep track of the time of the last click to to disable the observer from setting the active section
     const { activeSection, setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
     return (
         <motion.header className="z-10 sm:fixed mt-2 top-0 right-0 left-0 py-4 sm:p-8 w-full sm:flex items-center justify-between">
             <Image
-                src={logo.url}
-                alt={logo.alt}
+                src={logo.url || ""}
+                alt={logo.alt || "Wilbert Caba"}
                 width={200}
                 height={20}
                 className="logo-image some-other-class w-40 sm:w-auto"

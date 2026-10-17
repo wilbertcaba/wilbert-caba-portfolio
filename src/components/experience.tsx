@@ -6,9 +6,9 @@ import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeli
 import "react-vertical-timeline-component/style.min.css";
 import { useSectionInView } from "@/lib/hooks";
 import { useTheme } from "@/context/theme-context";
-import { ExperienceProps } from "@/lib/types";
+import type { Experience as ExperienceDoc } from "@/payload-types";
 
-export default function Experience({ data }: { data: ExperienceProps[] }) {
+export default function Experience({ data }: { data: ExperienceDoc[] }) {
     const { ref, inView } = useSectionInView("Experience", 0.3, true);
     const { theme } = useTheme();
 
@@ -39,7 +39,6 @@ export default function Experience({ data }: { data: ExperienceProps[] }) {
                                               : "0.4rem solid rgba(255,255,255,0.5)",
                                   }}
                                   date={experience.date}
-                                  icon={experience.icon}
                                   iconStyle={{
                                       background: theme === "light" ? "white" : "rgba(255, 255, 255, 0.15)",
                                       fontSize: "1.5rem",
@@ -51,7 +50,7 @@ export default function Experience({ data }: { data: ExperienceProps[] }) {
                                   <h5 className="text-sm">{experience.location}</h5>
                                   <div
                                       className="!font-normal text-gray-700 !text-sm dark:text-white/75"
-                                      dangerouslySetInnerHTML={{ __html: experience.description_html }}
+                                      dangerouslySetInnerHTML={{ __html: experience.description_html ?? "" }}
                                   />
                               </VerticalTimelineComponentElement>
                           </React.Fragment>

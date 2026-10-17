@@ -5,7 +5,7 @@ import SectionHeading from "./section-heading";
 import { skillsData } from "@/lib/data";
 import { motion } from "framer-motion";
 import { useSectionInView } from "@/lib/hooks";
-import { SkillProps } from "@/lib/types";
+import type { Homepage } from "@/payload-types";
 
 const fadeInAnimationVariants = {
     initial: {
@@ -21,7 +21,7 @@ const fadeInAnimationVariants = {
     }),
 };
 
-export default function Skills({ data }: { data: SkillProps[] }) {
+export default function Skills({ data }: { data: Homepage["skills"] }) {
     const { ref } = useSectionInView("Skills");
 
     return (

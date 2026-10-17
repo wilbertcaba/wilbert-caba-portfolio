@@ -1,13 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ProjectProps } from "@/lib/types";
+import type { ProjectWithMedia } from "@/lib/cms";
 import Image from "next/image";
 import { RiLinkM } from "react-icons/ri";
 import { FiBriefcase, FiArrowLeft } from "react-icons/fi";
 import Tags from "@/components/tags";
 
-export default function ProjectDetails({ project }: { project: ProjectProps }) {
+export default function ProjectDetails({ project }: { project: ProjectWithMedia }) {
     const router = useRouter();
 
     return (
@@ -23,8 +23,8 @@ export default function ProjectDetails({ project }: { project: ProjectProps }) {
             </header>
 
             <Image
-                src={project.featured_image.url}
-                alt={project.featured_image.alt}
+                src={project.featuredImage.url || ""}
+                alt={project.featuredImage.alt || project.title}
                 layout="responsive"
                 width={16}
                 height={9}
@@ -34,9 +34,11 @@ export default function ProjectDetails({ project }: { project: ProjectProps }) {
                 <h1 className="text-3xl font-medium capitalize mb-2">{project.title}</h1>
                 <p className="mb-2 dark:text-white/75">{project.excerpt}</p>
                 <div className="flex gap-8 mb-3">
-                    <p className="flex gap-2 items-center text-gray-700 dark:text-white/75">
-                        <RiLinkM /> <a href={project.projectLink}>{project.projectLink}</a>
-                    </p>
+                    {project.projectLink ? (
+                        <p className="flex gap-2 items-center text-gray-700 dark:text-white/75">
+                            <RiLinkM /> <a href={project.projectLink}>{project.projectLink}</a>
+                        </p>
+                    ) : null}
                     <p className="flex gap-2 items-center text-gray-700 dark:text-white/75">
                         <FiBriefcase /> {project.role}
                     </p>
@@ -45,7 +47,7 @@ export default function ProjectDetails({ project }: { project: ProjectProps }) {
             </div>
             <div
                 className="text-dark-700 dark:text-white/75"
-                dangerouslySetInnerHTML={{ __html: project.description_html }}
+                dangerouslySetInnerHTML={{ __html: project.description_html ?? "" }}
             />
         </section>
     );
