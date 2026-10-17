@@ -3,7 +3,7 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import path from "path";
 import { buildConfig } from "payload";
-// import sharp from 'sharp'
+import sharp from "sharp";
 import { fileURLToPath } from "url";
 import { Users } from "./collections/Users";
 import { Projects } from "./collections/Projects";
@@ -19,6 +19,10 @@ const dirname = path.dirname(filename);
 export default buildConfig({
     admin: {
         user: Users.slug,
+        importMap: {
+            // Component paths such as `/components/...` resolve from this directory.
+            baseDir: path.resolve(dirname),
+        },
     },
     collections: [Users, Projects, Experience, Media],
     globals: [MainNav, Homepage],
@@ -32,7 +36,8 @@ export default buildConfig({
         pool: {
             connectionString: process.env.DATABASE_URI!,
         },
-        // push: false,
+        // Dev push would fight this migration history. Apply schema changes with `yarn payload migrate`.
+        push: false,
     }),
 
     plugins: [
@@ -55,12 +60,6 @@ export default buildConfig({
         }),
     ],
 
-    // Sharp is now an optional dependency -
-    // if you want to resize images, crop, set focal point, etc.
-    // make sure to install it and pass it to the config.
-
-    // This is temporary - we may make an adapter pattern
-    // for this before reaching 3.0 stable
-
-    // sharp,
+    // Required for image sizes, cropping, and focal point on the Media collection.
+    sharp,
 });
