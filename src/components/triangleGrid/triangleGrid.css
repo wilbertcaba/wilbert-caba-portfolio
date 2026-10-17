@@ -1,0 +1,44 @@
+.triangle-grid {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+  user-select: none;
+
+  z-index: 0;
+}
+
+/* Animated glowing vertices */
+.triangle-glow {
+  opacity: 0;
+
+  animation-name: triangle-glow-pulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+
+  /* Default values */
+  animation-duration: 2.5s;
+}
+
+/* Illuminate and fade */
+@keyframes triangle-glow-pulse {
+  0% {
+    opacity: 0.08;
+  }
+
+  100% {
+    opacity: var(--peak, 0.9);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .triangle-glow {
+    animation: none;
+    opacity: 0.25;
+  }
+}
