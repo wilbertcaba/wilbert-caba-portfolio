@@ -25,7 +25,7 @@ export default async function Home() {
                     <Header logo={homepage.logo} />
                     <Intro h1={homepage.main_value_proposition} />
                     <Projects data={projects} />
-                    <About about={homepage.about_html ?? ""} />
+                    <About about={homepage.about_html ?? ""} skills={homepage.skills} />
                     <Experience data={experiences} />
                     <Contact />
                     <Toaster position="top-center" />

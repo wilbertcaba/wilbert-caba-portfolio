@@ -10,9 +10,16 @@ export type ProjectWithMedia = Omit<Project, "featuredImage"> & {
     featuredImage: Media;
 };
 
-export type HomepageWithMedia = Omit<Homepage, "logo" | "resume"> & {
+export type HomepageSkill = {
+    id?: string | null;
+    skill: string;
+    icon: Media;
+};
+
+export type HomepageWithMedia = Omit<Homepage, "logo" | "resume" | "skills"> & {
     logo: Media;
     resume: Media | null;
+    skills: HomepageSkill[];
 };
 
 async function getCms() {
@@ -80,5 +87,8 @@ export async function fetchHomepage(): Promise<HomepageWithMedia> {
         ...homepage,
         logo: homepage.logo,
         resume: isMedia(homepage.resume) ? homepage.resume : null,
+        skills: homepage.skills.flatMap((skill) =>
+            isMedia(skill.icon) && skill.icon.url ? [{ id: skill.id, skill: skill.skill, icon: skill.icon }] : [],
+        ),
     };
 }

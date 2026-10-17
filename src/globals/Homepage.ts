@@ -44,7 +44,16 @@ export const Homepage: GlobalConfig = {
             fields: [
                 {
                     name: "skill",
+                    label: "Skill",
                     type: "text",
+                    required: true,
+                },
+                {
+                    name: "icon",
+                    label: "Icon",
+                    type: "upload",
+                    relationTo: "media",
+                    required: true,
                 },
             ],
             required: true,
