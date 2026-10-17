@@ -39,7 +39,7 @@ export default function Contact() {
                 }}
             >
                 <input
-                    className="h-14 rounded-lg formFieldStyle p-4 dark:bg-gray-700"
+                    className="h-14 rounded-lg formFieldStyle p-4 dark:bg-zinc-900"
                     name="senderEmail"
                     type="email"
                     placeholder="Your email"
@@ -47,7 +47,7 @@ export default function Contact() {
                     maxLength={500}
                 />
                 <textarea
-                    className="h-52 formFieldStyle p-4 dark:bg-gray-700"
+                    className="h-52 formFieldStyle p-4 dark:bg-zinc-900"
                     name="message"
                     placeholder="How can I help you today?"
                     required
