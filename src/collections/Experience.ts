@@ -3,6 +3,13 @@ import { CollectionConfig } from "payload";
 
 export const Experience: CollectionConfig = {
     slug: "experience",
+    labels: {
+        singular: "Experience",
+        plural: "Experience",
+    },
+    admin: {
+        useAsTitle: "company",
+    },
 
     fields: [
         {
