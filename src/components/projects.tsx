@@ -4,9 +4,9 @@ import React, { useState, useEffect } from "react";
 import SectionHeading from "./section-heading";
 import Project from "./project";
 import { useSectionInView } from "@/lib/hooks";
-import { ProjectProps } from "@/lib/types";
+import type { ProjectWithMedia } from "@/lib/cms";
 
-export default function Projects({ data }: { data: ProjectProps[] }) {
+export default function Projects({ data }: { data: ProjectWithMedia[] }) {
     const { ref } = useSectionInView("Projects", 0.3);
 
     if (!data) {

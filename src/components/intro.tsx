@@ -9,7 +9,6 @@ import { FaBehance, FaDribbble, FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiDownload } from "react-icons/hi";
 import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
-import { HomepageProps } from "@/lib/types";
 import SectionDivider from "./section-divider";
 import { Button } from "@/components/ui/button";
 
@@ -36,7 +35,7 @@ const social = [
     },
 ];
 
-export default function Intro({ h1 }: { h1: HomepageProps["main_value_proposition"] }) {
+export default function Intro({ h1 }: { h1: string }) {
     const { ref } = useSectionInView("Home", 0.99);
     const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 

@@ -1,11 +1,14 @@
+import { notFound } from "next/navigation";
 import ProjectDetails from "@/components/projectDetails";
-import { fetchSingleProject } from "@/lib/supabase/data";
-import { ProjectProps } from "@/lib/types";
+import { fetchSingleProject } from "@/lib/cms";
 
-export default async function ProjectPage(props: { params: Promise<{ slug: ProjectProps["slug"] }> }) {
-    const params = await props.params;
-    const { slug } = params;
+export default async function ProjectPage(props: { params: Promise<{ slug: string }> }) {
+    const { slug } = await props.params;
     const project = await fetchSingleProject(slug);
+
+    if (!project) {
+        notFound();
+    }
 
     return <ProjectDetails project={project} />;
 }

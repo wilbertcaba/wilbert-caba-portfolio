@@ -5,12 +5,12 @@ import { links } from "@/lib/data";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import Image from "next/image";
-import { HomepageProps } from "@/lib/types";
+import type { Media } from "@/payload-types";
 import Link from "next/link";
 import { FiMenu, FiBox, FiBriefcase, FiMail } from "react-icons/fi";
 import { X } from "lucide-react";
 
-export default function MobileNav({ logo }: { logo: HomepageProps["logo"] }) {
+export default function MobileNav({ logo }: { logo: Media }) {
     const [isSheetOpen, setSheetOpen] = useState(false);
 
     function toggleSheet() {
@@ -39,7 +39,7 @@ export default function MobileNav({ logo }: { logo: HomepageProps["logo"] }) {
                                 </SheetTitle>
                                 <SheetDescription></SheetDescription>
                                 <div className="px-4 py-[2.6rem] border-b border-b-gray-900">
-                                    <Image src={logo.url} alt={logo.alt} width={200} height={20} />
+                                    <Image src={logo.url || ""} alt={logo.alt || "Wilbert Caba"} width={200} height={20} />
                                 </div>
                                 <SheetPrimitive.Close
                                     onClick={closeSheet}
