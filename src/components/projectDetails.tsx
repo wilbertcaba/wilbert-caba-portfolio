@@ -15,9 +15,9 @@ export default function ProjectDetails({ project }: { project: ProjectProps }) {
             <header className="py-8">
                 <button
                     onClick={() => router.back()}
-                    className="group bg-white shadow-md px-7 py-3 flex items-center justify-center gap-2 rounded-full outline-none hover:shadow-none transition duration-[0.3s] dark:bg-white/10"
+                    className="group bg-white shadow-md px-7 py-3 flex items-center justify-center gap-2 rounded-full outline-none hover:shadow-none transition duration-300 dark:bg-white/10"
                 >
-                    <FiArrowLeft className="opacity-70 group-hover:-translate-x-1 group-hover:opacity-1 transition duration-[0.3s]" />
+                    <FiArrowLeft className="opacity-70 group-hover:-translate-x-1 group-hover:opacity-1 transition duration-300" />
                     Back
                 </button>
             </header>
