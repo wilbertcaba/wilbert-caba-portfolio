@@ -11,6 +11,10 @@ export const Projects: CollectionConfig = {
         // delete: () => false, // Only logged-in users can delete
     },
 
+    admin: {
+        useAsTitle: "title",
+    },
+
     fields: [
         {
             name: "featuredImage",
@@ -22,6 +26,12 @@ export const Projects: CollectionConfig = {
         {
             name: "title",
             label: "Title",
+            type: "text",
+            required: true,
+        },
+        {
+            name: "eyebrow",
+            label: "Eyebrow",
             type: "text",
             required: true,
         },

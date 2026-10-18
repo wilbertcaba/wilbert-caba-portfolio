@@ -11,7 +11,6 @@ import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
 import SectionDivider from "./section-divider";
 import { Button } from "@/components/ui/button";
-import TriangleGrid from "./triangleGrid/triangleGrid";
 
 const social = [
     {
@@ -41,53 +40,18 @@ export default function Intro({ h1 }: { h1: string }) {
     const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
     return (
-        <section
-            ref={ref}
-            className="
-                py-10 sm:pb-16 sm:pt-40 text-center scroll-mt-[10rem] w-full overflow-x-hidden sm:-mt-[104px] relative
-                before:content
-                before:absolute
-                before:top-0
-                before:left-0
-                before:-z-20
-                before:opacity-35
-                dark:before:opacity-15
-                before:w-full
-                before:h-full
-            "
-            id="home"
-        >
-            <TriangleGrid />
-            <div
-                className="
-                relative 
-                after:content 
-                after:bg-pattern-logo-left 
-                after:absolute 
-                after:top-44
-                after:-left-6 
-                after:bg-[length:32px]
-                after:w-8
-                after:h-[200px]
-                sm:after:top-0
-                sm:after:left-0 
-                md:after:h-[283px]
-                lg:after:h-[317px]
-                2xl:after:bg-[length:58px]
-                2xl:after:w-[58px] 
-                2xl:after:h-[423px]
-            "
-            >
-                <div className="container sm:px-8 flex flex-col items-center relative">
+        <section ref={ref} className="relative w-full scroll-mt-[10rem] py-10 text-center" id="home">
+            <div className="relative">
+                <div className="container relative flex flex-col items-center sm:px-8">
                     <motion.p
-                        className="uppercase tracking-[0.5rem] text-sm md:text-xl text-primary"
+                        className="text-sm uppercase tracking-[0.5rem] text-primary md:text-xl"
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                     >
                         Hello World!
                     </motion.p>
                     <motion.h1
-                        className="-mb-[10px] mt-4 sm:px-20 text-xl font-medium md:text-4xl lg:text-5xl 2xl:text-6xl !leading-[1.5]"
+                        className="-mb-[10px] mt-4 text-xl font-medium !leading-[1.5] sm:px-20 md:text-4xl lg:text-5xl 2xl:text-6xl"
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                     >
@@ -97,7 +61,7 @@ export default function Intro({ h1 }: { h1: string }) {
                     <SectionDivider />
 
                     <motion.div
-                        className="flex flex-col gap-4 sm:gap-12 align-center text-lg font-medium"
+                        className="align-center flex flex-col gap-4 text-lg font-medium sm:gap-12"
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{
@@ -108,7 +72,7 @@ export default function Intro({ h1 }: { h1: string }) {
                             <Button asChild>
                                 <Link
                                     href="#contact"
-                                    className="group gap-2 hover:bg-gray-950 min-w-44"
+                                    className="group min-w-44 gap-2 hover:bg-gray-950"
                                     onClick={() => (setActiveSection("Projects"), setTimeOfLastClick(Date.now()))}
                                 >
                                     Contact Me
@@ -117,16 +81,16 @@ export default function Intro({ h1 }: { h1: string }) {
                             </Button>
 
                             <Button asChild variant="outline">
-                                <a href="/resume.pdf" download className="group gap-2 min-w-44">
+                                <a href="/resume.pdf" download className="group min-w-44 gap-2">
                                     Download CV
                                     <HiDownload className="group-hover:translate-y-1" />
                                 </a>
                             </Button>
                         </div>
-                        <div className="flex gap-4 sm:gap-8 justify-center">
+                        <div className="flex justify-center gap-4 sm:gap-8">
                             {social.map((item, i) => (
                                 <Button asChild variant="secondary" key={i}>
-                                    <a href={item.url} target="_blank" className="w-12 h-12">
+                                    <a href={item.url} target="_blank" className="h-12 w-12 dark:bg-neutral-800">
                                         {item.icon}
                                     </a>
                                 </Button>

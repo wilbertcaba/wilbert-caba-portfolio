@@ -12,6 +12,7 @@ import Footer from "@/components/footer";
 import ThemeSwitch from "@/components/theme-switch";
 import { fetchExperiences, fetchHomepage, fetchProjects } from "@/lib/cms";
 import MobileNav from "@/components/mobile-nav";
+import TriangleGrid from "@/components/triangleGrid/triangleGrid";
 
 export default async function Home() {
     const projects = await fetchProjects();
@@ -19,10 +20,11 @@ export default async function Home() {
     const homepage = await fetchHomepage();
 
     return (
-        <main className="flex flex-col items-center relative">
+        <main className="relative flex flex-col items-center">
             <ThemeContextProvider>
                 <ActiveSectionContextProvider>
                     <Header logo={homepage.logo} />
+                    <TriangleGrid />
                     <Intro h1={homepage.main_value_proposition} />
                     <Projects data={projects} />
                     <About about={homepage.about_html ?? ""} skills={homepage.skills} />

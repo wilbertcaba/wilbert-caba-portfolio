@@ -161,6 +161,7 @@ export interface Project {
   id: number;
   featuredImage: number | Media;
   title: string;
+  eyebrow: string;
   slug: string;
   excerpt: string;
   projectLink?: string | null;
@@ -377,6 +378,7 @@ export interface UsersSelect<T extends boolean = true> {
 export interface ProjectsSelect<T extends boolean = true> {
   featuredImage?: T;
   title?: T;
+  eyebrow?: T;
   slug?: T;
   excerpt?: T;
   projectLink?: T;
