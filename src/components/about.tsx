@@ -12,52 +12,36 @@ export default function About({ about, skills }: { about: string; skills: Homepa
     return (
         <motion.section
             ref={ref}
-            className="
-                w-full mb-28 pt-8 xl:pt-36 leading-8 sm:mb-40 scroll-mt-28 overflow-hidden relative
-                after:content-[url('/pattern-triangles-2.svg')]
-                after:absolute
-                after:top-0
-                after:left-0
-                after:-z-40
-            "
+            className="relative mb-28 w-full scroll-mt-28 overflow-hidden pt-8 leading-8 after:absolute after:left-0 after:top-0 after:-z-40 after:content-[url('/pattern-triangles-2.svg')] sm:mb-40 xl:pt-36"
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.175 }}
             id="about"
         >
-            <div
-                className="
-                container relative
-                before:content-[url('/bg-text-about.svg')]
-                before:absolute
-                before:-top-36
-                before:inline-block
-                before:w-auto
-                before:right-0
-                before:-z-40
-                before:opacity-15
-            "
-            >
+            <div className="container relative before:absolute before:-top-36 before:right-0 before:-z-40 before:inline-block before:w-auto before:opacity-15 before:content-[url('/bg-text-about.svg')]">
                 <SectionHeading alignment="left">About Me</SectionHeading>
                 <div className="grid md:grid-cols-12 md:gap-8 lg:gap-20">
-                    <div className="mb-3 col-span-8 order-2 lg:order-1">
+                    <div className="order-2 col-span-8 mb-3 lg:order-1">
                         <div dangerouslySetInnerHTML={{ __html: about }} />
                     </div>
-                    <div className="col-span-12 md:col-span-4 order-1 lg:order-2">
+                    <div className="order-1 col-span-12 md:col-span-4 lg:order-2">
                         <Image
                             src="/img-wilbert-caba-profile-image.jpeg"
                             alt="Wilbert Caba image"
                             width="408"
                             height="408"
-                            className="w-full rounded-lg xl:-mt-32 mb-8 md:mb-0"
+                            className="mb-8 w-full rounded-lg md:mb-0 xl:-mt-32"
                         />
                     </div>
                 </div>
-                <div className="grid grid-cols-[repeat(auto-fill,128px)] justify-center md:justify-between gap-8 md:pt-24" id="skills">
+                <div
+                    className="grid grid-cols-[repeat(auto-fill,128px)] justify-center gap-8 md:justify-between md:pt-24"
+                    id="skills"
+                >
                     {skills.map((skill) => (
                         <div
                             key={skill.id ?? skill.skill}
-                            className="border border-zinc-700 rounded-md p-6 flex flex-col justify-center items-center basis-32"
+                            className="flex basis-32 flex-col items-center justify-center rounded-md border border-zinc-700 p-6"
                         >
                             <Image
                                 className="mb-2"
