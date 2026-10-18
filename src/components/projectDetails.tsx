@@ -31,6 +31,9 @@ export default function ProjectDetails({ project }: { project: ProjectWithMedia 
                 className="mb-8"
             />
             <div className="border-b mb-8 pb-4">
+                {project.eyebrow ? (
+                    <p className="mb-2 text-sm uppercase tracking-widest text-neutral-500">{project.eyebrow}</p>
+                ) : null}
                 <h1 className="text-3xl font-medium capitalize mb-2">{project.title}</h1>
                 <p className="mb-2 dark:text-white/75">{project.excerpt}</p>
                 <div className="flex gap-8 mb-3">

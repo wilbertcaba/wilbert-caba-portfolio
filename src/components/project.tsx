@@ -1,13 +1,23 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import type { ProjectWithMedia } from "@/lib/cms";
 import Tags from "./tags";
+import { ArrowRightIcon } from "lucide-react";
 
-export default function Project({ title, excerpt, tags, featuredImage, slug }: ProjectWithMedia) {
+export default function Project({
+    title,
+    eyebrow,
+    excerpt,
+    tags,
+    featuredImage,
+    slug,
+    projectIndex,
+}: ProjectWithMedia) {
+    const [isVisible, setIsVisible] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -24,34 +34,37 @@ export default function Project({ title, excerpt, tags, featuredImage, slug }: P
                 scale: scaleProgress,
                 opacity: opacityProgress,
             }}
-            className="group mb-3 sm:mb-8 last:mb-0 w-full max-w-[48rem] mx-auto"
+            className="group mx-auto mb-3 w-full last:mb-0 sm:mb-8"
         >
-            <Link href={`/projects/${slug}`}>
-                <div className="flex flex-col-reverse bg-gray-100 border border-black/5 overflow-hidden relative sm:h-[18rem] hover:bg-gray-200 transition rounded-lg dark:text-white dark:border dark:border-neutral-600 dark:bg-neutral-800 dark:hover:bg-neutral-900">
-                    <div className="py-4 px-5 sm:px-10 sm:py-10 sm:max-w-[60%] flex flex-col gap-2 h-full sm:group-even:ml-[18rem] sm:group-odd:mr-[18rem]">
-                        <h3 className="text-2xl text-primary font-semibold">{title}</h3>
-                        <p>{excerpt}</p>
-                        <Tags tags={tags} />
+            <Link
+                href={`/projects/${slug}`}
+                className="block dark:bg-gradient-to-tr dark:from-primary dark:to-neutral-800 dark:to-[40%] dark:pb-px dark:pt-px"
+            >
+                <div className="relative flex flex-col-reverse border border-black/5 bg-gray-100 transition hover:bg-gray-200 dark:border-0 dark:bg-neutral-950 dark:text-white dark:hover:bg-neutral-900 sm:min-h-[18rem] lg:flex-row lg:items-center lg:justify-between">
+                    <div className="flex flex-col gap-4 px-5 py-8 sm:flex-row sm:divide-x sm:divide-neutral-800 sm:p-10 lg:max-w-screen-sm lg:pr-6">
+                        <div className="pr-8 text-primary underline underline-offset-8">{projectIndex}</div>
+                        <div className="sm:pl-8">
+                            {eyebrow ? (
+                                <p className="mb-2 text-sm uppercase tracking-widest text-neutral-500">{eyebrow}</p>
+                            ) : null}
+                            <h3 className="mb-4 text-2xl font-semibold">{title}</h3>
+                            <p className="text-neutral-500">{excerpt}</p>
+                            <Tags tags={tags} />
+                            <p className="mb-0 mt-8 flex items-center gap-2 text-primary">
+                                View Case Study{" "}
+                                <ArrowRightIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                            </p>
+                        </div>
                     </div>
-                    <div className="w-full h-48 overflow-hidden relative md:static md:h-auto">
+                    <div className="w-full lg:w-[540px] lg:shrink-0">
                         <Image
                             src={featuredImage.url || ""}
                             alt={featuredImage.alt || title}
                             quality={90}
-                            width={600}
-                            height={600}
-                            className="md:absolute md:top-5 md:-right-44 md:w-[28.25rem] rounded-t-lg shadow-2xl min-h-full object-cover
-                            transition
-                            group-even:right-[initial]
-                            group-even:-left-44 
-                            md:group-hover:-translate-x-3 
-                            md:group-hover:translate-y-3 
-                            md:group-hover:-rotate-2 
-                            md:group-even:group-hover:translate-x-3 
-                            md:group-even:group-hover:rotate-2 
-                            md:group-hover:scale-[1.04]
-                            
-                            "
+                            width={1600}
+                            height={900}
+                            sizes="(min-width: 1024px) 540px, 100vw"
+                            className="aspect-video h-auto w-full object-contain shadow-2xl"
                         />
                     </div>
                 </div>

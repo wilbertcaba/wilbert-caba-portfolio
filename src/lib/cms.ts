@@ -8,6 +8,7 @@ function isMedia(value: number | Media | null | undefined): value is Media {
 
 export type ProjectWithMedia = Omit<Project, "featuredImage"> & {
     featuredImage: Media;
+    projectIndex: string;
 };
 
 export type ExperienceWithMedia = Omit<Experience, "logo"> & {
@@ -40,29 +41,16 @@ export async function fetchProjects(): Promise<ProjectWithMedia[]> {
 
     return docs.flatMap((project) =>
         isMedia(project.featuredImage) ? [{ ...project, featuredImage: project.featuredImage }] : [],
-    );
+    ).map((project, index) => ({
+        ...project,
+        projectIndex: String(index + 1).padStart(2, "0"),
+    }));
 }
 
 export async function fetchSingleProject(slug: string): Promise<ProjectWithMedia | null> {
-    const payload = await getCms();
-    const { docs } = await payload.find({
-        collection: "Projects",
-        depth: 1,
-        limit: 1,
-        where: {
-            slug: {
-                equals: slug,
-            },
-        },
-    });
+    const projects = await fetchProjects();
 
-    const project = docs[0];
-
-    if (!project || !isMedia(project.featuredImage)) {
-        return null;
-    }
-
-    return { ...project, featuredImage: project.featuredImage };
+    return projects.find((project) => project.slug === slug) ?? null;
 }
 
 export async function fetchExperiences(): Promise<ExperienceWithMedia[]> {
