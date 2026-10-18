@@ -20,7 +20,7 @@ module.exports = {
         },
         extend: {
             colors: {
-                primary: "#2FD38E",
+                primary: "var(--primary-color)",
                 "primary-300": "#42ecab",
             },
             backgroundImage: {

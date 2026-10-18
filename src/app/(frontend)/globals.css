@@ -8,7 +8,19 @@
     }
 }
 
+@layer utilities {
+    .text-stroke-primary {
+        -webkit-text-stroke: 1px var(--primary-color);
+        color: transparent;
+    }
+    .text-stroke-primary-md {
+        -webkit-text-stroke: 2px var(--primary-color);
+        color: transparent;
+    }
+}
+
 html {
+    --primary-color: #2fd38e;
     --line-color: #e5e7eb;
 }
 
@@ -17,11 +29,11 @@ html.dark {
 }
 
 .borderBlack {
-    @apply border border-black/10 rounded-lg;
+    @apply rounded-lg border border-black/10;
 }
 
 .formFieldStyle {
-    @apply border borderBlack;
+    @apply borderBlack border;
 }
 
 html[data-theme="dark"] body {
