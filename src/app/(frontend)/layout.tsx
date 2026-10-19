@@ -17,10 +17,10 @@ export default function RootLayout({ children, modal }: { children: React.ReactN
     return (
         <html lang="en" className={`!scroll-smooth ${ibmPlexMono.variable}`}>
             <body
-                className={`${inter.className} relative bg-gray-50 text-gray-950 dark:bg-neutral-950 dark:text-gray-50 dark:text-opacity-90`}
+                className={`${inter.className} relative bg-neutral-950 text-gray-50 text-opacity-90`}
             >
                 <div className="fixed top-0 z-30 h-2 w-full bg-primary"></div>
-                <div className="absolute top-0 -z-30 w-full -translate-y-[12%] bg-radial-gradient-light dark:bg-radial-gradient-dark sm:-top-24 sm:h-[1080px]"></div>
+                <div className="absolute top-0 -z-30 w-full -translate-y-[12%] bg-radial-gradient sm:-top-24 sm:h-[1080px]"></div>
                 {children}
                 {modal}
             </body>

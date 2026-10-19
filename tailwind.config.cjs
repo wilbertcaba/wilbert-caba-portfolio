@@ -34,10 +34,8 @@ module.exports = {
                 "pattern-triangles-small": "url('/pattern-triangles-2.svg')",
                 "text-projects": "url('/bg-text-projects.svg')",
                 "text-about": "url('/bg-text-about.svg')",
-                "radial-gradient-dark":
+                "radial-gradient":
                     "radial-gradient(ellipse 80% 40%, hsl(0 0% 10% / 1) 30%, hsl(0deg 0% 0% / 0%) 130%)",
-                "radial-gradient-light":
-                    "radial-gradient(ellipse 80% 40%, hsl(0 0% 100% / 1) 30%, hsl(0deg 0% 100% / 0%) 130%)",
                 "pattern-logo-left": "url('/pattern-logo-left.svg')",
             },
             keyframes: {
@@ -57,5 +55,4 @@ module.exports = {
         },
     },
     plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
-    darkMode: "class",
 };

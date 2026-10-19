@@ -21,11 +21,8 @@
 
 html {
     --primary-color: #2fd38e;
-    --line-color: #e5e7eb;
-}
-
-html.dark {
     --line-color: rgba(255, 255, 255, 0.2);
+    color-scheme: dark;
 }
 
 .borderBlack {
@@ -34,10 +31,6 @@ html.dark {
 
 .formFieldStyle {
     @apply borderBlack border;
-}
-
-html[data-theme="dark"] body {
-    background-color: inherit !important;
 }
 
 .scrollbar-none {
