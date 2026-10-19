@@ -1,6 +1,6 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
 // import { payloadCloud } from '@payloadcms/plugin-cloud'
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { contentRichTextEditor } from "./lib/lexical";
 import path from "path";
 import { buildConfig } from "payload";
 import sharp from "sharp";
@@ -11,7 +11,9 @@ import { Media } from "./collections/Media";
 import { Experience } from "./collections/Experience";
 import { Homepage } from "./globals/Homepage";
 import { MainNav } from "./globals/MainNav";
+import { seoPlugin } from "@payloadcms/plugin-seo";
 import { s3Storage } from "@payloadcms/storage-s3";
+import { generateDescription, generateImage, generateTitle, generateURL } from "./seo";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -26,7 +28,7 @@ export default buildConfig({
     },
     collections: [Users, Projects, Experience, Media],
     globals: [MainNav, Homepage],
-    editor: lexicalEditor({}),
+    editor: contentRichTextEditor,
     // plugins: [payloadCloud()], // TODO: Re-enable when cloud supports 3.0
     secret: process.env.PAYLOAD_SECRET!,
     typescript: {
@@ -41,6 +43,16 @@ export default buildConfig({
     }),
 
     plugins: [
+        seoPlugin({
+            collections: ["Projects"],
+            globals: ["homepage"],
+            uploadsCollection: "media",
+            tabbedUI: true,
+            generateTitle,
+            generateDescription,
+            generateImage,
+            generateURL,
+        }),
         s3Storage({
             collections: {
                 media: {

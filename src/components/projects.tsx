@@ -20,7 +20,7 @@ export default function Projects({ data }: { data: ProjectWithMedia[] }) {
             id="projects"
         >
             <div className="container">
-                <p className="text-center uppercase tracking-widest text-primary-300">[ Selected Work ]</p>
+                <p className="text-center font-eyebrow uppercase tracking-widest text-primary-300">[ Selected Work ]</p>
                 <SectionHeading alignment="center">
                     Projects <span className="text-stroke-primary">Beyond Pixels</span>
                 </SectionHeading>

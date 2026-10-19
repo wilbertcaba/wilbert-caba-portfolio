@@ -39,3 +39,25 @@ html.dark {
 html[data-theme="dark"] body {
     background-color: inherit !important;
 }
+
+.scrollbar-none {
+    scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+
+.project-sheet-scroll {
+    touch-action: pan-y;
+    user-select: text;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-vaul-drawer],
+    [data-vaul-overlay] {
+        animation: none !important;
+        transition: none !important;
+    }
+}
