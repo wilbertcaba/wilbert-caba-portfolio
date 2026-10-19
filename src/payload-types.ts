@@ -160,6 +160,16 @@ export interface User {
 export interface Project {
   id: number;
   featuredImage: number | Media;
+  featuredBackground?: {
+    type?: ('none' | 'color' | 'image' | 'pattern') | null;
+    /**
+     * Hex color, for example #1c1917.
+     */
+    color?: string | null;
+    image?: (number | null) | Media;
+    pattern?: ('dots' | 'grid' | 'triangles') | null;
+    inset?: ('none' | 'sm' | 'md' | 'lg') | null;
+  };
   title: string;
   eyebrow: string;
   slug: string;
@@ -170,7 +180,34 @@ export interface Project {
     tag?: string | null;
     id?: string | null;
   }[];
-  description: {
+  /**
+   * Each section becomes a heading and a navigation item on the project page.
+   */
+  sections?:
+    | {
+        title: string;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Legacy field. Project content now lives in Sections.
+   */
+  description?: {
     root: {
       type: string;
       children: {
@@ -184,7 +221,7 @@ export interface Project {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   description_html?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -377,6 +414,15 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   featuredImage?: T;
+  featuredBackground?:
+    | T
+    | {
+        type?: T;
+        color?: T;
+        image?: T;
+        pattern?: T;
+        inset?: T;
+      };
   title?: T;
   eyebrow?: T;
   slug?: T;
@@ -387,6 +433,13 @@ export interface ProjectsSelect<T extends boolean = true> {
     | T
     | {
         tag?: T;
+        id?: T;
+      };
+  sections?:
+    | T
+    | {
+        title?: T;
+        content?: T;
         id?: T;
       };
   description?: T;

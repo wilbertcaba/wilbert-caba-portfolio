@@ -1,8 +1,16 @@
 import type { CollectionConfig } from "payload";
 import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from "@payloadcms/richtext-lexical";
 
+const projectRichTextEditor = lexicalEditor({
+    features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
+});
+
+const hexColorPattern = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
+
 export const Projects: CollectionConfig = {
     slug: "Projects",
+    // Matches the current homepage sequence: newest project first.
+    defaultSort: "-createdAt",
 
     access: {
         read: () => true, // Allow read access publicly
@@ -13,6 +21,7 @@ export const Projects: CollectionConfig = {
 
     admin: {
         useAsTitle: "title",
+        defaultColumns: ["title", "slug", "updatedAt"],
     },
 
     fields: [
@@ -22,6 +31,76 @@ export const Projects: CollectionConfig = {
             type: "upload",
             relationTo: "media",
             required: true,
+        },
+        {
+            name: "featuredBackground",
+            label: "Featured Background",
+            type: "group",
+            fields: [
+                {
+                    name: "type",
+                    label: "Type",
+                    type: "select",
+                    defaultValue: "none",
+                    options: [
+                        { label: "None", value: "none" },
+                        { label: "Solid Color", value: "color" },
+                        { label: "Background Image", value: "image" },
+                        { label: "Pattern", value: "pattern" },
+                    ],
+                },
+                {
+                    name: "color",
+                    label: "Color",
+                    type: "text",
+                    admin: {
+                        condition: (_, siblingData) => siblingData?.type === "color",
+                        description: "Hex color, for example #1c1917.",
+                    },
+                    validate: (value: unknown) => {
+                        if (value == null || value === "") return true;
+                        if (typeof value === "string" && hexColorPattern.test(value)) return true;
+                        return "Enter a hex color like #1c1917.";
+                    },
+                },
+                {
+                    name: "image",
+                    label: "Background Image",
+                    type: "upload",
+                    relationTo: "media",
+                    admin: {
+                        condition: (_, siblingData) => siblingData?.type === "image",
+                    },
+                },
+                {
+                    name: "pattern",
+                    label: "Pattern",
+                    type: "select",
+                    options: [
+                        { label: "Dots", value: "dots" },
+                        { label: "Grid", value: "grid" },
+                        { label: "Triangles", value: "triangles" },
+                    ],
+                    admin: {
+                        condition: (_, siblingData) => siblingData?.type === "pattern",
+                    },
+                },
+                {
+                    name: "inset",
+                    label: "Featured Image Spacing",
+                    type: "select",
+                    defaultValue: "md",
+                    options: [
+                        { label: "None", value: "none" },
+                        { label: "Small", value: "sm" },
+                        { label: "Medium", value: "md" },
+                        { label: "Large", value: "lg" },
+                    ],
+                    admin: {
+                        condition: (_, siblingData) => Boolean(siblingData?.type && siblingData.type !== "none"),
+                    },
+                },
+            ],
         },
         {
             name: "title",
@@ -71,18 +150,45 @@ export const Projects: CollectionConfig = {
             required: true,
         },
         {
+            name: "sections",
+            label: "Sections",
+            type: "array",
+            labels: {
+                singular: "Section",
+                plural: "Sections",
+            },
+            admin: {
+                initCollapsed: true,
+                description: "Each section becomes a heading and a navigation item on the project page.",
+                components: {
+                    RowLabel: "/components/payload/SectionRowLabel.tsx#SectionRowLabel",
+                },
+            },
+            fields: [
+                {
+                    name: "title",
+                    label: "Title",
+                    type: "text",
+                    required: true,
+                },
+                {
+                    name: "content",
+                    label: "Content",
+                    type: "richText",
+                    editor: projectRichTextEditor,
+                },
+            ],
+        },
+        {
             name: "description",
             label: "Description",
             type: "richText",
-            editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [
-                    ...defaultFeatures,
-                    // The HTMLConverter Feature is the feature which manages the HTML serializers.
-                    // If you do not pass any arguments to it, it will use the default serializers.
-                    HTMLConverterFeature({}),
-                ],
-            }),
-            required: true,
+            editor: projectRichTextEditor,
+            required: false,
+            admin: {
+                hidden: true,
+                description: "Legacy field. Project content now lives in Sections.",
+            },
         },
         lexicalHTML("description", { name: "description_html", storeInDB: true }),
     ],
