@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { links } from "@/lib/data";
 import Link from "next/link";
 import clsx from "clsx";
+import { cn } from "@/lib/utils";
 import { ActiveSectionContext, useActiveSectionContext } from "@/context/active-section-context";
 import Image from "next/image";
 import type { Media } from "@/payload-types";
@@ -33,7 +34,7 @@ export default function Header({ logo }: { logo: Media }) {
     return (
         <motion.header
             className={clsx(
-                "z-10 sm:fixed mt-2 top-0 right-0 left-0 py-4 sm:p-8 w-full sm:flex items-center justify-between transition-[background-color,backdrop-filter] duration-300",
+                "left-0 right-0 top-0 z-10 mt-2 w-full items-center justify-between py-4 transition-[background-color,backdrop-filter] duration-300 sm:fixed sm:flex sm:p-8",
                 hasBackground && "bg-neutral-900/75 backdrop-blur-2xl",
             )}
         >
@@ -44,21 +45,19 @@ export default function Header({ logo }: { logo: Media }) {
                 height={20}
                 className="logo-image some-other-class w-40 sm:w-auto"
             />
-            <nav className="hidden sm:flex py-2 sm:top-[1.7rem] sm:h-[initial] sm:py-0">
+            <nav className="hidden py-2 sm:top-[1.7rem] sm:flex sm:h-[initial] sm:py-0">
                 <ul className="flex w-[22rem] flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap">
                     {links.map((link) => (
                         <motion.li
-                            className="h-3/4 flex items-center justify-center relative"
+                            className="relative flex h-3/4 items-center justify-center"
                             key={link.hash}
                             initial={{ y: -100, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                         >
                             <Link
-                                className={clsx(
+                                className={cn(
                                     "flex w-full items-center justify-center px-3 py-3 text-gray-300 transition hover:text-gray-100",
-                                    {
-                                        "text-gray-950": activeSection === link.name,
-                                    },
+                                    activeSection === link.name && "text-gray-950 hover:text-gray-950",
                                 )}
                                 href={link.hash}
                                 onClick={() => {
