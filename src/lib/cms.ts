@@ -1,7 +1,9 @@
 import { cache } from "react";
 import config from "@payload-config";
+import type { Metadata } from "next";
 import { getPayload } from "payload";
 import type { Experience, Homepage, Media, Project } from "@/payload-types";
+import { getSiteURL } from "@/seo";
 
 function isMedia(value: number | Media | null | undefined): value is Media {
     return typeof value === "object" && value !== null && "url" in value;
@@ -149,24 +151,26 @@ export async function fetchProjects(): Promise<ProjectCard[]> {
         },
     });
 
-    return docs.flatMap((project) => {
-        if (!isMedia(project.featuredImage) || !project.featuredImage.url) return [];
+    return docs
+        .flatMap((project) => {
+            if (!isMedia(project.featuredImage) || !project.featuredImage.url) return [];
 
-        return [
-            {
-                id: project.id,
-                title: project.title,
-                eyebrow: project.eyebrow,
-                excerpt: project.excerpt,
-                slug: project.slug,
-                tags: project.tags ?? [],
-                featuredImage: project.featuredImage,
-            },
-        ];
-    }).map((project, index) => ({
-        ...project,
-        projectIndex: formatIndex(index),
-    }));
+            return [
+                {
+                    id: project.id,
+                    title: project.title,
+                    eyebrow: project.eyebrow,
+                    excerpt: project.excerpt,
+                    slug: project.slug,
+                    tags: project.tags ?? [],
+                    featuredImage: project.featuredImage,
+                },
+            ];
+        })
+        .map((project, index) => ({
+            ...project,
+            projectIndex: formatIndex(index),
+        }));
 }
 
 export const fetchProjectDetail = cache(async (slug: string): Promise<ProjectDetail | null> => {
@@ -223,16 +227,88 @@ export const fetchProjectDetail = cache(async (slug: string): Promise<ProjectDet
     };
 });
 
-export async function getProjectMetadata(slug: string) {
-    const project = await fetchProjectDetail(slug);
+const defaultHomepageTitle = "Wilbert Caba | Personal Portfolio";
+const defaultHomepageDescription =
+    "Wilbert Caba is a UX Developer with 17 years of combined experience on UX Design and Front-End Development";
 
+function metadataImage(image: Media | null | undefined, alt: string): Metadata["openGraph"] {
+    if (!image?.url) return undefined;
+
+    return {
+        images: [
+            {
+                url: image.url,
+                alt: image.alt?.trim() || alt,
+            },
+        ],
+    };
+}
+
+export async function getProjectMetadata(slug: string): Promise<Metadata> {
+    const payload = await getCms();
+    const result = await payload.find({
+        collection: "Projects",
+        where: {
+            slug: {
+                equals: slug,
+            },
+        },
+        depth: 1,
+        limit: 1,
+        select: {
+            title: true,
+            excerpt: true,
+            slug: true,
+            featuredImage: true,
+            meta: true,
+        },
+    });
+
+    const project = result.docs[0];
     if (!project) {
         return { title: "Project not found | Wilbert Caba" };
     }
 
+    const title = project.meta?.title?.trim() || `${project.title} | Wilbert Caba`;
+    const description = project.meta?.description?.trim() || project.excerpt;
+    const image = isMedia(project.meta?.image)
+        ? project.meta.image
+        : isMedia(project.featuredImage)
+          ? project.featuredImage
+          : null;
+
     return {
-        title: `${project.title} | Wilbert Caba`,
-        description: project.excerpt,
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url: `/projects/${project.slug}`,
+            ...metadataImage(image, title),
+        },
+    };
+}
+
+export async function getHomepageMetadata(): Promise<Metadata> {
+    const payload = await getCms();
+    const homepage = await payload.findGlobal({
+        slug: "homepage",
+        depth: 1,
+    });
+
+    const title = homepage.meta?.title?.trim() || defaultHomepageTitle;
+    const description = homepage.meta?.description?.trim() || defaultHomepageDescription;
+    const image = isMedia(homepage.meta?.image) ? homepage.meta.image : null;
+
+    return {
+        metadataBase: new URL(getSiteURL()),
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            ...metadataImage(image, title),
+        },
     };
 }
 

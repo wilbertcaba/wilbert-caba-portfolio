@@ -11,7 +11,9 @@ import { Media } from "./collections/Media";
 import { Experience } from "./collections/Experience";
 import { Homepage } from "./globals/Homepage";
 import { MainNav } from "./globals/MainNav";
+import { seoPlugin } from "@payloadcms/plugin-seo";
 import { s3Storage } from "@payloadcms/storage-s3";
+import { generateDescription, generateImage, generateTitle, generateURL } from "./seo";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -41,6 +43,16 @@ export default buildConfig({
     }),
 
     plugins: [
+        seoPlugin({
+            collections: ["Projects"],
+            globals: ["homepage"],
+            uploadsCollection: "media",
+            tabbedUI: true,
+            generateTitle,
+            generateDescription,
+            generateImage,
+            generateURL,
+        }),
         s3Storage({
             collections: {
                 media: {

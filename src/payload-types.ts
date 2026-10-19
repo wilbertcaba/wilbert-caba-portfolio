@@ -159,27 +159,9 @@ export interface User {
  */
 export interface Project {
   id: number;
-  featuredImage: number | Media;
-  featuredBackground?: {
-    type?: ('none' | 'color' | 'image' | 'pattern') | null;
-    /**
-     * Hex color, for example #1c1917.
-     */
-    color?: string | null;
-    image?: (number | null) | Media;
-    pattern?: ('dots' | 'grid' | 'triangles') | null;
-    inset?: ('none' | 'sm' | 'md' | 'lg') | null;
-  };
   title: string;
   eyebrow: string;
-  slug: string;
   excerpt: string;
-  projectLink?: string | null;
-  role: string;
-  tags: {
-    tag?: string | null;
-    id?: string | null;
-  }[];
   /**
    * Each section becomes a heading and a navigation item on the project page.
    */
@@ -204,6 +186,32 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  featuredImage: number | Media;
+  featuredBackground?: {
+    type?: ('none' | 'color' | 'image' | 'pattern') | null;
+    /**
+     * Hex color, for example #1c1917.
+     */
+    color?: string | null;
+    image?: (number | null) | Media;
+    pattern?: ('dots' | 'grid' | 'triangles') | null;
+    inset?: ('none' | 'sm' | 'md' | 'lg') | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
+  slug: string;
+  projectLink?: string | null;
+  role: string;
+  tags: {
+    tag?: string | null;
+    id?: string | null;
+  }[];
   /**
    * Legacy field. Project content now lives in Sections.
    */
@@ -413,6 +421,16 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "Projects_select".
  */
 export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  eyebrow?: T;
+  excerpt?: T;
+  sections?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        id?: T;
+      };
   featuredImage?: T;
   featuredBackground?:
     | T
@@ -423,23 +441,20 @@ export interface ProjectsSelect<T extends boolean = true> {
         pattern?: T;
         inset?: T;
       };
-  title?: T;
-  eyebrow?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   slug?: T;
-  excerpt?: T;
   projectLink?: T;
   role?: T;
   tags?:
     | T
     | {
         tag?: T;
-        id?: T;
-      };
-  sections?:
-    | T
-    | {
-        title?: T;
-        content?: T;
         id?: T;
       };
   description?: T;
@@ -596,12 +611,20 @@ export interface Homepage {
     [k: string]: unknown;
   };
   about_html?: string | null;
-  resume?: (number | null) | Media;
   skills: {
     skill: string;
     icon: number | Media;
     id?: string | null;
   }[];
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
+  resume?: (number | null) | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -630,7 +653,6 @@ export interface HomepageSelect<T extends boolean = true> {
   main_value_proposition?: T;
   about?: T;
   about_html?: T;
-  resume?: T;
   skills?:
     | T
     | {
@@ -638,6 +660,14 @@ export interface HomepageSelect<T extends boolean = true> {
         icon?: T;
         id?: T;
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  resume?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

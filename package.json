@@ -19,6 +19,7 @@
         "@faceless-ui/scroll-info": "2.0.0",
         "@payloadcms/db-postgres": "3.91.0",
         "@payloadcms/next": "3.91.0",
+        "@payloadcms/plugin-seo": "3.91.0",
         "@payloadcms/richtext-lexical": "3.91.0",
         "@payloadcms/storage-s3": "3.91.0",
         "@payloadcms/ui": "3.91.0",

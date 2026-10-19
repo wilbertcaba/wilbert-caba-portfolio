@@ -2266,6 +2266,14 @@
     find-node-modules "^2.1.3"
     range-parser "^1.2.1"
 
+"@payloadcms/plugin-seo@3.91.0":
+  version "3.91.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-3.91.0.tgz#859fa017d37cfa7591a345b1153377f856ad26c8"
+  integrity sha512-YHefIJKktJQ7Z4hNS+/HIqVoizXlyAg3BJwYClxwTJRxYzJdSnm8+HQdNiu74BUMlMkaVgKNHABpbFqGr91JbA==
+  dependencies:
+    "@payloadcms/translations" "3.91.0"
+    "@payloadcms/ui" "3.91.0"
+
 "@payloadcms/richtext-lexical@3.91.0":
   version "3.91.0"
   resolved "https://registry.yarnpkg.com/@payloadcms/richtext-lexical/-/richtext-lexical-3.91.0.tgz#bc8d03a0add4f0b00863dbbca14cb39645a16e84"
