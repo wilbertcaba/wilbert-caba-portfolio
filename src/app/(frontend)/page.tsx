@@ -20,7 +20,7 @@ export default async function Home() {
     const homepage = await fetchHomepage();
 
     return (
-        <main className="relative flex flex-col items-center">
+        <main className="relative flex flex-col items-center sm:pt-28">
             <ThemeContextProvider>
                 <ActiveSectionContextProvider>
                     <Header logo={homepage.logo} />

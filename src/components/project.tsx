@@ -38,6 +38,7 @@ export default function Project({
         >
             <Link
                 href={`/projects/${slug}`}
+                scroll={false}
                 className="block dark:bg-gradient-to-tr dark:from-primary dark:to-neutral-800 dark:to-[40%] dark:pb-px dark:pt-px"
             >
                 <div className="relative flex flex-col-reverse border border-black/5 bg-gray-100 transition hover:bg-gray-200 dark:border-0 dark:bg-neutral-950 dark:text-white dark:hover:bg-neutral-900 sm:min-h-[18rem] lg:flex-row lg:items-center lg:justify-between">
