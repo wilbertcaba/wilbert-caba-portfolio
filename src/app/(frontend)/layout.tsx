@@ -1,8 +1,13 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Mono, Inter } from "next/font/google";
 import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
+const ibmPlexMono = IBM_Plex_Mono({
+    subsets: ["latin"],
+    weight: ["400", "500"],
+    variable: "--font-ibm-plex-mono",
+});
 
 export const metadata = {
     title: "Wilbert Caba | Personal Portfolio",
@@ -18,7 +23,7 @@ export default function RootLayout({
     modal: React.ReactNode;
 }) {
     return (
-        <html lang="en" className="!scroll-smooth">
+        <html lang="en" className={`!scroll-smooth ${ibmPlexMono.variable}`}>
             <body
                 className={`${inter.className} relative bg-gray-50 text-gray-950 dark:bg-neutral-950 dark:text-gray-50 dark:text-opacity-90`}
             >

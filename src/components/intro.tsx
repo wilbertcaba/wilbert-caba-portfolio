@@ -44,7 +44,7 @@ export default function Intro({ h1 }: { h1: string }) {
             <div className="relative">
                 <div className="container relative flex flex-col items-center sm:px-8">
                     <motion.p
-                        className="text-sm uppercase tracking-[0.5rem] text-primary md:text-xl"
+                        className="font-eyebrow text-sm uppercase tracking-[0.5rem] text-primary md:text-xl"
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                     >
