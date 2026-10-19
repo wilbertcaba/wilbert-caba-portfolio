@@ -8,7 +8,7 @@ import { useSectionInView } from "@/lib/hooks";
 import type { ExperienceWithMedia } from "@/lib/cms";
 
 export default function Experience({ data }: { data: ExperienceWithMedia[] }) {
-    const { ref, inView } = useSectionInView("Experience", 0.3, true);
+    const { ref, inView } = useSectionInView("experience", 0.3, true);
 
     return (
         <section ref={ref} id="experience" className="scroll-m-28 mb-28 w-full">

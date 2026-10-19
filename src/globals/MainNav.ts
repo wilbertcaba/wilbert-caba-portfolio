@@ -23,6 +23,9 @@ export const MainNav: GlobalConfig = {
                     label: "Link",
                     type: "text",
                     required: true,
+                    admin: {
+                        description: "Hash links such as #projects jump to a page section and set the active state.",
+                    },
                 },
             ],
         },

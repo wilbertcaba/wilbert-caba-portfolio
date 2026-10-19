@@ -7,7 +7,7 @@ import Image from "next/image";
 import type { HomepageSkill } from "@/lib/cms";
 
 export default function About({ about, skills }: { about: string; skills: HomepageSkill[] }) {
-    const { ref } = useSectionInView("About");
+    const { ref } = useSectionInView("about");
 
     return (
         <motion.section
