@@ -1,9 +1,6 @@
 import type { CollectionConfig } from "payload";
-import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from "@payloadcms/richtext-lexical";
-
-const projectRichTextEditor = lexicalEditor({
-    features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
-});
+import { lexicalHTML } from "@payloadcms/richtext-lexical";
+import { contentRichTextEditor } from "@/lib/lexical";
 
 const hexColorPattern = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 
@@ -76,7 +73,7 @@ export const Projects: CollectionConfig = {
                                     name: "content",
                                     label: "Content",
                                     type: "richText",
-                                    editor: projectRichTextEditor,
+                                    editor: contentRichTextEditor,
                                 },
                             ],
                         },
@@ -212,7 +209,7 @@ export const Projects: CollectionConfig = {
             name: "description",
             label: "Description",
             type: "richText",
-            editor: projectRichTextEditor,
+            editor: contentRichTextEditor,
             required: false,
             admin: {
                 hidden: true,

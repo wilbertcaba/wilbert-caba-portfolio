@@ -1,5 +1,6 @@
-import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from "@payloadcms/richtext-lexical";
+import { lexicalHTML } from "@payloadcms/richtext-lexical";
 import { GlobalConfig } from "payload";
+import { contentRichTextEditor } from "@/lib/lexical";
 
 export const Homepage: GlobalConfig = {
     slug: "homepage",
@@ -29,9 +30,7 @@ export const Homepage: GlobalConfig = {
                             label: "About",
                             type: "richText",
                             required: true,
-                            editor: lexicalEditor({
-                                features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
-                            }),
+                            editor: contentRichTextEditor,
                         },
                         lexicalHTML("about", { name: "about_html", storeInDB: true }),
                         {

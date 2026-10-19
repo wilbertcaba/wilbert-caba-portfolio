@@ -1,6 +1,6 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
 // import { payloadCloud } from '@payloadcms/plugin-cloud'
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { contentRichTextEditor } from "./lib/lexical";
 import path from "path";
 import { buildConfig } from "payload";
 import sharp from "sharp";
@@ -28,7 +28,7 @@ export default buildConfig({
     },
     collections: [Users, Projects, Experience, Media],
     globals: [MainNav, Homepage],
-    editor: lexicalEditor({}),
+    editor: contentRichTextEditor,
     // plugins: [payloadCloud()], // TODO: Re-enable when cloud supports 3.0
     secret: process.env.PAYLOAD_SECRET!,
     typescript: {
