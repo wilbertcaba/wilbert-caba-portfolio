@@ -8,7 +8,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
-import { richTextConverters } from "@/components/rich-text/base-converters";
+import { richTextClassName, richTextConverters } from "@/components/rich-text/base-converters";
 
 type AccordionItemField = {
     id?: string | null;
@@ -33,16 +33,16 @@ export function LexicalAccordion({ items }: { items?: AccordionItemField[] | nul
     if (!rows.length) return null;
 
     return (
-        <Accordion type="single" collapsible className="not-prose my-8 w-full">
+        <Accordion type="single" collapsible className="my-8 w-full">
             {rows.map((item) => (
                 <AccordionItem key={item.id} value={item.id} className="border-white/15">
                     <AccordionTrigger className="text-base text-white hover:text-primary hover:no-underline">
                         {item.title}
                     </AccordionTrigger>
-                    <AccordionContent className="text-neutral-300">
+                    <AccordionContent>
                         {item.content ? (
                             <RichText
-                                className="prose prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-primary prose-img:rounded-xl prose-p:mb-4 prose-p:last:mb-0"
+                                className={richTextClassName}
                                 converters={richTextConverters}
                                 data={item.content}
                             />
