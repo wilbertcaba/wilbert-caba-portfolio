@@ -1,9 +1,10 @@
 import type { CSSProperties } from "react";
 import "./triangleGrid.css";
 
-// Grid dimensions
-const WIDTH = 1440;
-const HEIGHT = 850;
+// Painted 1:1 in CSS pixels and clipped by the frame, so triangle size stays
+// constant on wider and narrower viewports. Width covers large screens.
+const WIDTH = 3840;
+const HEIGHT = 1080;
 const SPACING = 110;
 
 const ROW_HEIGHT = (SPACING * Math.sqrt(3)) / 2;
@@ -79,52 +80,49 @@ const GRID = generateGrid();
 
 export default function TriangleGrid() {
     return (
-        <svg
-            className="triangle-grid"
-            viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-            preserveAspectRatio="xMidYMid slice"
-            aria-hidden="true"
-        >
-            <defs>
-                <radialGradient id="triangle-dot-glow">
-                    <stop offset="0%" stopColor="#20e6a0" stopOpacity="0.9" />
-                    <stop offset="25%" stopColor="#20e6a0" stopOpacity="0.45" />
-                    <stop offset="100%" stopColor="#20e6a0" stopOpacity="0" />
-                </radialGradient>
-            </defs>
+        <div className="triangle-grid-frame" style={{ height: HEIGHT }} aria-hidden="true">
+            <svg className="triangle-grid" viewBox={`0 0 ${WIDTH} ${HEIGHT}`} width={WIDTH} height={HEIGHT}>
+                <defs>
+                    <radialGradient id="triangle-dot-glow">
+                        <stop offset="0%" stopColor="#20e6a0" stopOpacity="0.9" />
+                        <stop offset="25%" stopColor="#20e6a0" stopOpacity="0.45" />
+                        <stop offset="100%" stopColor="#20e6a0" stopOpacity="0" />
+                    </radialGradient>
+                </defs>
 
-            {/* Static triangular grid */}
-            <path d={GRID.path} fill="none" stroke="#20cb8c" strokeOpacity="0.10" strokeWidth="0.7" />
+                {/* Static triangular grid */}
+                <path d={GRID.path} fill="none" stroke="#20cb8c" strokeOpacity="0.10" strokeWidth="0.7" />
 
-            {/* Static intersection dots */}
-            <g fill="#20e6a0" opacity="0.25">
-                {GRID.dots.map((dot, index) => (
-                    <circle key={index} cx={dot.x} cy={dot.y} r={DOT_RADIUS} />
-                ))}
-            </g>
+                {/* Static intersection dots */}
+                <g fill="#20e6a0" opacity="0.25">
+                    {GRID.dots.map((dot, index) => (
+                        <circle key={index} cx={dot.x} cy={dot.y} r={DOT_RADIUS} />
+                    ))}
+                </g>
 
-            {/* Animated glowing dots */}
-            <g>
-                {GRID.dots
-                    .filter((dot) => dot.glowing)
-                    .map((dot, index) => {
-                        const animationStyle = {
-                            animationDelay: `${dot.delay}s`,
-                            animationDuration: `${dot.duration}s`,
-                            "--peak": dot.peak,
-                        } as CSSProperties;
+                {/* Animated glowing dots */}
+                <g>
+                    {GRID.dots
+                        .filter((dot) => dot.glowing)
+                        .map((dot, index) => {
+                            const animationStyle = {
+                                animationDelay: `${dot.delay}s`,
+                                animationDuration: `${dot.duration}s`,
+                                "--peak": dot.peak,
+                            } as CSSProperties;
 
-                        return (
-                            <g key={index} className="triangle-glow" style={animationStyle}>
-                                {/* Soft radial glow */}
-                                <circle cx={dot.x} cy={dot.y} r={GLOW_RADIUS} fill="url(#triangle-dot-glow)" />
+                            return (
+                                <g key={index} className="triangle-glow" style={animationStyle}>
+                                    {/* Soft radial glow */}
+                                    <circle cx={dot.x} cy={dot.y} r={GLOW_RADIUS} fill="url(#triangle-dot-glow)" />
 
-                                {/* Bright center */}
-                                <circle cx={dot.x} cy={dot.y} r={DOT_RADIUS * 1.2} fill="#20e6a0" />
-                            </g>
-                        );
-                    })}
-            </g>
-        </svg>
+                                    {/* Bright center */}
+                                    <circle cx={dot.x} cy={dot.y} r={DOT_RADIUS * 1.2} fill="#20e6a0" />
+                                </g>
+                            );
+                        })}
+                </g>
+            </svg>
+        </div>
     );
 }
