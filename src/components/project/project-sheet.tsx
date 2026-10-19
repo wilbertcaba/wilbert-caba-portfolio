@@ -4,6 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHandle, DrawerTitle } from "@/components/ui/drawer";
 import { ProjectScrollProvider } from "@/components/project/project-scroll";
 
+function isZoomDialogOpen() {
+    return document.querySelector("dialog[data-rmiz-modal][open]") !== null;
+}
+
+function interactionBelongsToZoom(event: { target: EventTarget | null; detail?: { originalEvent?: Event } }) {
+    if (isZoomDialogOpen()) return true;
+    const target = event.detail?.originalEvent?.target ?? event.target;
+    return target instanceof Element && target.closest("[data-rmiz-modal], [data-rmiz-portal]") !== null;
+}
+
 export default function ProjectSheet({
     slug,
     title,
@@ -31,7 +41,9 @@ export default function ProjectSheet({
     }, [slug, scrollElement]);
 
     function close() {
-        if (closing.current) return;
+        // The image zoom dialog is portaled outside this sheet. Its dismiss
+        // gestures (escape, backdrop, image click) must not close the case study.
+        if (closing.current || isZoomDialogOpen()) return;
         closing.current = true;
         // Client navigation to "/#projects" is treated as a hash change on the
         // homepage behind the intercept, so the sheet stays mounted.
@@ -41,6 +53,15 @@ export default function ProjectSheet({
     return (
         <Drawer open onOpenChange={(open) => !open && close()} handleOnly dismissible shouldScaleBackground={false} setBackgroundColorOnScale={false}>
             <DrawerContent
+                onEscapeKeyDown={(event) => {
+                    if (isZoomDialogOpen()) event.preventDefault();
+                }}
+                onInteractOutside={(event) => {
+                    if (interactionBelongsToZoom(event)) event.preventDefault();
+                }}
+                onPointerDownOutside={(event) => {
+                    if (interactionBelongsToZoom(event)) event.preventDefault();
+                }}
                 onCloseAutoFocus={(event) => {
                     const link = document.querySelector<HTMLElement>(`a[href="/projects/${slug}"]`);
                     if (!link) return;
