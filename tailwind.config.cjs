@@ -22,6 +22,9 @@ module.exports = {
             fontFamily: {
                 eyebrow: ["var(--font-ibm-plex-mono)", "ui-monospace", "monospace"],
             },
+            letterSpacing: {
+                widest: "0.2em",
+            },
             colors: {
                 primary: "var(--primary-color)",
                 "primary-300": "#42ecab",
