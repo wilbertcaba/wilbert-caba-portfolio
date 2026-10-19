@@ -34,7 +34,7 @@ const DrawerContent = React.forwardRef<
             ref={ref}
             aria-modal="true"
             className={cn(
-                "fixed inset-x-0 bottom-0 z-50 flex h-[calc(100dvh-1.75rem)] flex-col rounded-t-3xl border-t border-primary bg-neutral-950 text-neutral-50 shadow-[0_-24px_80px_rgba(0,0,0,0.45)] outline-none md:h-[calc(100dvh-5.5rem)]",
+                "fixed inset-x-0 bottom-0 z-50 flex h-[calc(100dvh-1.75rem)] flex-col rounded-t-3xl border-t-2 border-primary bg-neutral-950 text-neutral-50 shadow-[0_-24px_80px_rgba(0,0,0,0.45)] outline-none md:h-[calc(100dvh-5.5rem)]",
                 className,
             )}
             {...props}
@@ -76,4 +76,14 @@ const DrawerDescription = React.forwardRef<
 ));
 DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
 
-export { Drawer, DrawerPortal, DrawerOverlay, DrawerTrigger, DrawerClose, DrawerContent, DrawerHandle, DrawerTitle, DrawerDescription };
+export {
+    Drawer,
+    DrawerPortal,
+    DrawerOverlay,
+    DrawerTrigger,
+    DrawerClose,
+    DrawerContent,
+    DrawerHandle,
+    DrawerTitle,
+    DrawerDescription,
+};
