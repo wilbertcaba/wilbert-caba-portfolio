@@ -580,6 +580,9 @@ export interface MainNavigation {
   navigation?:
     | {
         label: string;
+        /**
+         * Hash links such as #projects jump to a page section and set the active state.
+         */
         link: string;
         id?: string | null;
       }[]

@@ -8,7 +8,7 @@ import ActiveSectionContextProvider from "@/context/active-section-context";
 import Header from "@/components/header";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/footer";
-import { fetchExperiences, fetchHomepage, fetchProjects } from "@/lib/cms";
+import { fetchExperiences, fetchHomepage, fetchMainNavigation, fetchProjects } from "@/lib/cms";
 import MobileNav from "@/components/mobile-nav";
 import TriangleGrid from "@/components/triangleGrid/triangleGrid";
 
@@ -16,11 +16,12 @@ export default async function Home() {
     const projects = await fetchProjects();
     const experiences = await fetchExperiences();
     const homepage = await fetchHomepage();
+    const navigation = await fetchMainNavigation();
 
     return (
         <main className="relative flex flex-col items-center sm:pt-28">
             <ActiveSectionContextProvider>
-                <Header logo={homepage.logo} />
+                <Header logo={homepage.logo} navigation={navigation} />
                 <TriangleGrid />
                 <Intro h1={homepage.main_value_proposition} />
                 <Projects data={projects} />
@@ -29,7 +30,7 @@ export default async function Home() {
                 <Contact />
                 <Toaster position="top-center" />
                 <Footer />
-                <MobileNav logo={homepage.logo} />
+                <MobileNav logo={homepage.logo} navigation={navigation} />
             </ActiveSectionContextProvider>
         </main>
     );

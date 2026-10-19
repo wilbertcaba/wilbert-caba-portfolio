@@ -1,17 +1,29 @@
 "use client";
 
-import { useState } from "react";
-import { links } from "@/lib/data";
+import { useState, type ReactNode } from "react";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import Image from "next/image";
 import type { Media } from "@/payload-types";
 import Link from "next/link";
-import { FiMenu, FiBox, FiBriefcase, FiMail } from "react-icons/fi";
+import { FiMenu, FiBox, FiBriefcase, FiHome, FiMail, FiUser } from "react-icons/fi";
+import { HiOutlineBolt } from "react-icons/hi2";
 import { X } from "lucide-react";
+import { useActiveSectionContext } from "@/context/active-section-context";
+import { isSectionName, sectionIdFromHref, type NavLink } from "@/lib/types";
 
-export default function MobileNav({ logo }: { logo: Media }) {
+const iconsByHref: Record<string, ReactNode> = {
+    "#home": <FiHome />,
+    "#projects": <FiBox />,
+    "#about": <FiUser />,
+    "#skills": <HiOutlineBolt />,
+    "#experience": <FiBriefcase />,
+    "#contact": <FiMail />,
+};
+
+export default function MobileNav({ logo, navigation }: { logo: Media; navigation: NavLink[] }) {
     const [isSheetOpen, setSheetOpen] = useState(false);
+    const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
     function toggleSheet() {
         setSheetOpen(!isSheetOpen);
@@ -19,6 +31,13 @@ export default function MobileNav({ logo }: { logo: Media }) {
 
     function closeSheet() {
         setSheetOpen(false);
+    }
+
+    function jumpTo(href: string) {
+        const sectionId = sectionIdFromHref(href);
+        if (!isSectionName(sectionId)) return;
+        setActiveSection(sectionId);
+        setTimeOfLastClick(Date.now());
     }
 
     return (
@@ -50,15 +69,18 @@ export default function MobileNav({ logo }: { logo: Media }) {
                                 </SheetPrimitive.Close>
                             </SheetHeader>
                             <ul>
-                                {links.map((link) => (
-                                    <li key={link.hash}>
+                                {navigation.map((link) => (
+                                    <li key={link.id}>
                                         <Link
-                                            href={link.hash}
-                                            className="text-gray-400 flex gap-4 items-center p-4 border-b border-b-gray-900"
-                                            onClick={closeSheet}
+                                            href={link.href}
+                                            className="flex items-center gap-4 border-b border-b-gray-900 p-4 text-gray-400"
+                                            onClick={() => {
+                                                jumpTo(link.href);
+                                                closeSheet();
+                                            }}
                                         >
-                                            {link.icon.src}
-                                            {link.name}
+                                            {iconsByHref[link.href]}
+                                            {link.label}
                                         </Link>
                                     </li>
                                 ))}
@@ -68,19 +90,19 @@ export default function MobileNav({ logo }: { logo: Media }) {
                 </li>
 
                 <li>
-                    <Link href="#projects" className="flex flex-col items-center gap-2">
+                    <Link href="#projects" className="flex flex-col items-center gap-2" onClick={() => jumpTo("#projects")}>
                         <FiBox />
                         <span className="text-xs">Projects</span>
                     </Link>
                 </li>
                 <li>
-                    <Link href="#experience" className="flex flex-col items-center gap-2">
+                    <Link href="#experience" className="flex flex-col items-center gap-2" onClick={() => jumpTo("#experience")}>
                         <FiBriefcase />
                         <span className="text-xs">Experience</span>
                     </Link>
                 </li>
                 <li>
-                    <Link href="#contact" className="flex flex-col items-center gap-2">
+                    <Link href="#contact" className="flex flex-col items-center gap-2" onClick={() => jumpTo("#contact")}>
                         <FiMail />
                         <span className="text-xs">Contact</span>
                     </Link>

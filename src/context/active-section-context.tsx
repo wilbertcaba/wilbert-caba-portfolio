@@ -1,7 +1,6 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
-import { links } from "@/lib/data";
 import type { SectionName } from "@/lib/types";
 
 type ActiveSectionContextProviderProps = {
@@ -18,7 +17,7 @@ type ActiveSectionContextType = {
 export const ActiveSectionContext = createContext<ActiveSectionContextType | null>(null);
 
 export default function ActiveSectionContextProvider({ children }: ActiveSectionContextProviderProps) {
-    const [activeSection, setActiveSection] = useState<SectionName>("Home");
+    const [activeSection, setActiveSection] = useState<SectionName>("home");
     const [timeOfLastClick, setTimeOfLastClick] = useState<number>(0);
 
     return (

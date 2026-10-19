@@ -36,7 +36,7 @@ const social = [
 ];
 
 export default function Intro({ h1 }: { h1: string }) {
-    const { ref } = useSectionInView("Home", 0.99);
+    const { ref } = useSectionInView("home", 0.99);
     const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
     return (
@@ -73,7 +73,7 @@ export default function Intro({ h1 }: { h1: string }) {
                                 <Link
                                     href="#contact"
                                     className="group min-w-44 gap-2 hover:bg-gray-950"
-                                    onClick={() => (setActiveSection("Projects"), setTimeOfLastClick(Date.now()))}
+                                    onClick={() => (setActiveSection("contact"), setTimeOfLastClick(Date.now()))}
                                 >
                                     Contact Me
                                     <BsArrowRight className="group-hover:translate-x-1" />

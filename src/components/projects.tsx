@@ -7,7 +7,7 @@ import { useSectionInView } from "@/lib/hooks";
 import type { ProjectWithMedia } from "@/lib/cms";
 
 export default function Projects({ data }: { data: ProjectWithMedia[] }) {
-    const { ref } = useSectionInView("Projects", 0.3);
+    const { ref } = useSectionInView("projects", 0.3);
 
     if (!data) {
         return <div>Loading...</div>;

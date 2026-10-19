@@ -3,6 +3,7 @@ import config from "@payload-config";
 import type { Metadata } from "next";
 import { getPayload } from "payload";
 import type { Experience, Homepage, Media, Project } from "@/payload-types";
+import type { NavLink } from "@/lib/types";
 import { getSiteURL } from "@/seo";
 
 function isMedia(value: number | Media | null | undefined): value is Media {
@@ -324,6 +325,28 @@ export async function fetchExperiences(): Promise<ExperienceWithMedia[]> {
         ...experience,
         logo: isMedia(experience.logo) ? experience.logo : null,
     }));
+}
+
+export async function fetchMainNavigation(): Promise<NavLink[]> {
+    const payload = await getCms();
+    const mainNav = await payload.findGlobal({
+        slug: "main-navigation",
+        depth: 0,
+    });
+
+    return (mainNav.navigation ?? []).flatMap((item) => {
+        const label = item.label?.trim();
+        const href = item.link?.trim();
+        if (!label || !href) return [];
+
+        return [
+            {
+                id: item.id ?? href,
+                label,
+                href,
+            },
+        ];
+    });
 }
 
 export async function fetchHomepage(): Promise<HomepageWithMedia> {
