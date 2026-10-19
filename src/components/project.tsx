@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import type { ProjectWithMedia } from "@/lib/cms";
+import Eyebrow from "@/components/eyebrow";
 import Tags from "./tags";
 import { ArrowRightIcon } from "lucide-react";
 
@@ -45,9 +46,7 @@ export default function Project({
                     <div className="flex flex-col gap-4 px-5 py-8 sm:flex-row sm:divide-x sm:divide-neutral-800 sm:p-10 lg:max-w-screen-sm lg:pr-6">
                         <div className="pr-8 text-primary underline underline-offset-8">{projectIndex}</div>
                         <div className="sm:pl-8">
-                            {eyebrow ? (
-                                <p className="mb-2 text-sm uppercase tracking-widest text-neutral-500">{eyebrow}</p>
-                            ) : null}
+                            <Eyebrow>{eyebrow}</Eyebrow>
                             <h3 className="mb-4 text-2xl font-semibold">{title}</h3>
                             <p className="text-neutral-500">{excerpt}</p>
                             <Tags tags={tags} />

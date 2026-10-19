@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { cn } from "@/lib/utils";
+import MetaLabel from "@/components/meta-label";
 import { useProjectScrollElement } from "@/components/project/project-scroll";
 
 export type SectionLink = {
@@ -125,6 +126,7 @@ export default function SectionNav({ sections }: { sections: SectionLink[] }) {
             aria-label="Project sections"
             className="sticky top-14 z-10 bg-neutral-950/95 backdrop-blur-md lg:self-start lg:bg-transparent lg:backdrop-blur-none"
         >
+            <MetaLabel className="hidden px-4 lg:block">On this page</MetaLabel>
             <div
                 ref={tabsRef}
                 className="scrollbar-none flex gap-1 overflow-x-auto border-b border-white/10 px-4 lg:flex-col lg:gap-0 lg:overflow-visible lg:border-0 lg:px-0"
