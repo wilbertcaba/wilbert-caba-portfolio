@@ -22,7 +22,7 @@ export default function MobileNav({ logo }: { logo: Media }) {
     }
 
     return (
-        <nav className="fixed bottom-0 dark:bg-neutral-950 sm:hidden p-4 w-full text-gray-400">
+        <nav className="fixed bottom-0 w-full bg-neutral-950 p-4 text-gray-400 sm:hidden">
             <ul className="flex items-center justify-between">
                 <li>
                     <Sheet open={isSheetOpen}>
@@ -30,7 +30,7 @@ export default function MobileNav({ logo }: { logo: Media }) {
                             <FiMenu />
                             <span className="text-xs">Menu</span>
                         </SheetTrigger>
-                        <SheetContent side="left" className="z-[200] dark:bg-gray-950 p-0 border-none w-[300px]">
+                        <SheetContent side="left" className="z-[200] w-[300px] border-none bg-gray-950 p-0">
                             <SheetHeader>
                                 <SheetTitle>
                                     <span aria-hidden className="sr-only">
@@ -43,7 +43,7 @@ export default function MobileNav({ logo }: { logo: Media }) {
                                 </div>
                                 <SheetPrimitive.Close
                                     onClick={closeSheet}
-                                    className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800"
+                                    className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-slate-950 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-slate-800"
                                 >
                                     <X className="h-4 w-4" />
                                     <span className="sr-only">Close</span>
