@@ -22,7 +22,7 @@ export default function Contact() {
             viewport={{ once: true }}
         >
             <SectionHeading alignment="center">Contact Me</SectionHeading>
-            <p className="text-gray-700 dark:text-white/80">
+            <p className="text-white/80">
                 Please contact me directly at <a href="mailto:hello@wilbertcaba.com">hello@wilbertcaba.com</a>
             </p>
 
@@ -39,7 +39,7 @@ export default function Contact() {
                 }}
             >
                 <input
-                    className="h-14 rounded-lg formFieldStyle p-4 dark:bg-zinc-900"
+                    className="formFieldStyle h-14 rounded-lg bg-zinc-900 p-4"
                     name="senderEmail"
                     type="email"
                     placeholder="Your email"
@@ -47,7 +47,7 @@ export default function Contact() {
                     maxLength={500}
                 />
                 <textarea
-                    className="h-52 formFieldStyle p-4 dark:bg-zinc-900"
+                    className="formFieldStyle h-52 bg-zinc-900 p-4"
                     name="message"
                     placeholder="How can I help you today?"
                     required

@@ -90,7 +90,7 @@ export default function Intro({ h1 }: { h1: string }) {
                         <div className="flex justify-center gap-4 sm:gap-8">
                             {social.map((item, i) => (
                                 <Button asChild variant="secondary" key={i}>
-                                    <a href={item.url} target="_blank" className="h-12 w-12 dark:bg-neutral-800">
+                                    <a href={item.url} target="_blank" className="h-12 w-12 bg-neutral-800">
                                         {item.icon}
                                     </a>
                                 </Button>

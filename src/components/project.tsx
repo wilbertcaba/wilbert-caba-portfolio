@@ -40,9 +40,9 @@ export default function Project({
             <Link
                 href={`/projects/${slug}`}
                 scroll={false}
-                className="block dark:bg-gradient-to-tr dark:from-primary dark:to-neutral-800 dark:to-[40%] dark:pb-px dark:pt-px"
+                className="block bg-gradient-to-tr from-primary to-neutral-800 to-[40%] pb-px pt-px"
             >
-                <div className="relative flex flex-col-reverse border border-black/5 bg-gray-100 transition hover:bg-gray-200 dark:border-0 dark:bg-neutral-950 dark:text-white dark:hover:bg-neutral-900 sm:min-h-[18rem] lg:flex-row lg:items-center lg:justify-between">
+                <div className="relative flex flex-col-reverse border-0 bg-neutral-950 text-white transition hover:bg-neutral-900 sm:min-h-[18rem] lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex flex-col gap-4 px-5 py-8 sm:flex-row sm:divide-x sm:divide-neutral-800 sm:p-10 lg:max-w-screen-sm lg:pr-6">
                         <div className="pr-8 font-eyebrow text-primary underline underline-offset-8">{projectIndex}</div>
                         <div className="sm:pl-8">

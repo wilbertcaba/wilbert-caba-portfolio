@@ -34,7 +34,7 @@ export default function Header({ logo }: { logo: Media }) {
         <motion.header
             className={clsx(
                 "z-10 sm:fixed mt-2 top-0 right-0 left-0 py-4 sm:p-8 w-full sm:flex items-center justify-between transition-[background-color,backdrop-filter] duration-300",
-                hasBackground && "bg-white/75 backdrop-blur-2xl dark:bg-neutral-900/75",
+                hasBackground && "bg-neutral-900/75 backdrop-blur-2xl",
             )}
         >
             <Image
@@ -42,10 +42,7 @@ export default function Header({ logo }: { logo: Media }) {
                 alt={logo.alt || "Wilbert Caba"}
                 width={200}
                 height={20}
-                className={clsx(
-                    "logo-image some-other-class w-40 sm:w-auto transition-[filter] duration-300",
-                    hasBackground && "brightness-0 dark:brightness-100",
-                )}
+                className="logo-image some-other-class w-40 sm:w-auto"
             />
             <nav className="hidden sm:flex py-2 sm:top-[1.7rem] sm:h-[initial] sm:py-0">
                 <ul className="flex w-[22rem] flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap">
@@ -58,9 +55,9 @@ export default function Header({ logo }: { logo: Media }) {
                         >
                             <Link
                                 className={clsx(
-                                    "flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:text-gray-300 dark:hover:text-gray-100",
+                                    "flex w-full items-center justify-center px-3 py-3 text-gray-300 transition hover:text-gray-100",
                                     {
-                                        "text-gray-950 dark:text-gray-950": activeSection === link.name,
+                                        "text-gray-950": activeSection === link.name,
                                     },
                                 )}
                                 href={link.hash}
@@ -73,7 +70,7 @@ export default function Header({ logo }: { logo: Media }) {
 
                                 {link.name == activeSection && (
                                     <motion.span
-                                        className="bg-gray-100 rounded-md absolute inset-0 -z-10 dark:bg-primary"
+                                        className="absolute inset-0 -z-10 rounded-md bg-primary"
                                         layoutId="activeSection"
                                         transition={{
                                             type: "spring",

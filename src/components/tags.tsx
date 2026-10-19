@@ -6,7 +6,7 @@ export default function Tags({ tags, className }: { tags: Project["tags"]; class
         <ul className={cn("mt-4 flex flex-wrap gap-2 sm:mt-auto", className)}>
             {tags.map((tag, index) => (
                 <li
-                    className="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70 dark:border dark:border-neutral-600 dark:bg-neutral-900"
+                    className="rounded-full border border-neutral-600 bg-neutral-900 px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white/70"
                     key={tag.id ?? index}
                 >
                     {tag.tag}
