@@ -6,27 +6,44 @@ import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeli
 import "react-vertical-timeline-component/style.min.css";
 import { useSectionInView } from "@/lib/hooks";
 import type { ExperienceWithMedia } from "@/lib/cms";
+import Eyebrow from "./eyebrow";
 
 export default function Experience({ data }: { data: ExperienceWithMedia[] }) {
-    const { ref, inView } = useSectionInView("experience", 0.3, true);
+    const { ref } = useSectionInView("about", 0.3);
 
     return (
-        <section ref={ref} id="experience" className="scroll-m-28 mb-28 w-full">
-            <SectionHeading alignment="center">My Experience</SectionHeading>
+        <section ref={ref} id="experience" className="mb-28 w-full sm:scroll-m-28">
+            <Eyebrow size="lg" className="text-center text-primary">
+                [ Career Timeline ]
+            </Eyebrow>
+            <SectionHeading alignment="center">
+                Decades in <span className="text-stroke-primary">The Craft</span>
+            </SectionHeading>
             <VerticalTimeline lineColor="">
                 {data
                     ? data.map((experience) => (
                           <VerticalTimelineElement
                               key={experience.id}
                               contentStyle={{
-                                  background: "rgba(255,255,255,0.05)",
-                                  boxShadow: "none",
-                                  border: "1px solid rgba(0, 0, 0, 0.05)",
+                                  background: "rgb(22,22,22)",
                                   textAlign: "left",
-                                  padding: "1.3rem 2rem",
+                                  borderBottom: "2px solid #2fd38e",
+                                  padding: "16px",
+                                  borderRadius: "16px",
+                                  position: "relative",
+                                  backgroundColor: "rgba(0, 0, 0, 0.9)",
+                                  backgroundImage:
+                                      "linear-gradient(127deg, rgb(255 255 255 / 14%), rgba(255, 255, 255, 0.02) )",
+
+                                  backdropFilter: "blur(24px) saturate(180%)",
+                                  WebkitBackdropFilter: "blur(24px) saturate(180%)",
+                                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                                  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.25)",
+                                  willChange: "transform",
+                                  transform: "translateZ(0)",
                               }}
                               contentArrowStyle={{
-                                  borderRight: "0.4rem solid rgba(255,255,255,0.5)",
+                                  borderRight: "0.4rem solid #2fd38e",
                               }}
                               date={experience.date}
                               icon={
@@ -48,13 +65,14 @@ export default function Experience({ data }: { data: ExperienceWithMedia[] }) {
                                   justifyContent: "center",
                                   overflow: "hidden",
                               }}
-                              visible={inView}
                           >
-                              <h3 className="font-semibold capitalize">{experience.company}</h3>
-                              <h4>{experience.title}</h4>
+                              <p className="font-eyebrow !mt-0 text-sm uppercase tracking-widest text-neutral-400 text-primary">
+                                  {experience.title}
+                              </p>
+                              <h3 className="text-2xl font-semibold capitalize">{experience.company}</h3>
                               <h5 className="text-sm">{experience.location}</h5>
                               <div
-                                  className="!font-normal !text-sm text-white/75"
+                                  className="mt-4 border-t border-neutral-700 text-sm"
                                   dangerouslySetInnerHTML={{ __html: experience.description_html ?? "" }}
                               />
                           </VerticalTimelineElement>

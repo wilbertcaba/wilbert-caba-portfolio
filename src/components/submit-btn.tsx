@@ -1,24 +1,21 @@
 import React from "react";
-import { useFormStatus as useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import { FaPaperPlane } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
 
 export default function SubmitButton() {
     const { pending } = useFormStatus();
 
     return (
-        <button
-            className="group flex h-[3rem] w-[8rem] items-center justify-center gap-2 rounded-full bg-white bg-opacity-10 text-white outline-none transition-all hover:bg-gray-950 disabled:bg-opacity-65"
-            type="submit"
-            disabled={pending}
-        >
+        <Button type="submit" disabled={pending} className="group min-w-44 gap-2 self-center">
             {pending ? (
-                <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+                <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-neutral-900" />
             ) : (
                 <>
-                    Sumbit
-                    <FaPaperPlane className="text-xs opacity-70 transition-all group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    Start The Conversation
+                    <FaPaperPlane className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </>
             )}
-        </button>
+        </Button>
     );
 }

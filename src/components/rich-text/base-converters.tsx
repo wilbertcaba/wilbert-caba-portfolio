@@ -1,5 +1,6 @@
 import { ImageZoom } from "@/components/ui/image-zoom";
 import type { JSXConvertersFunction } from "@payloadcms/richtext-lexical/react";
+import { textStateClassName } from "@/lib/text-state";
 
 type UploadedMedia = {
     alt?: string | null;
@@ -15,6 +16,14 @@ export const richTextClassName =
 
 export const richTextConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
     ...defaultConverters,
+    text: (args) => {
+        const convert = defaultConverters.text;
+        const rendered = typeof convert === "function" ? convert(args) : convert;
+        const className = textStateClassName(args.node);
+        if (!className) return rendered;
+
+        return <span className={className}>{rendered}</span>;
+    },
     upload: ({ node }) => {
         const upload = node as {
             fields?: { alt?: string | null };
