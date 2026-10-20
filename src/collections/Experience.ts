@@ -4,12 +4,16 @@ import { contentRichTextEditor } from "@/lib/lexical";
 
 export const Experience: CollectionConfig = {
     slug: "experience",
+    // Drag rows in the admin list. The homepage renders in this order.
+    orderable: true,
+    defaultSort: "_order",
     labels: {
         singular: "Experience",
         plural: "Experience",
     },
     admin: {
         useAsTitle: "company",
+        defaultColumns: ["company", "title", "date"],
     },
 
     fields: [

@@ -287,6 +287,7 @@ export interface Media {
  */
 export interface Experience {
   id: number;
+  _order?: string | null;
   logo: number | Media;
   company: string;
   title: string;
@@ -467,6 +468,7 @@ export interface ProjectsSelect<T extends boolean = true> {
  * via the `definition` "experience_select".
  */
 export interface ExperienceSelect<T extends boolean = true> {
+  _order?: T;
   logo?: T;
   company?: T;
   title?: T;

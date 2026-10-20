@@ -5,6 +5,7 @@ import * as migration_20261017_032135_homepage_skill_icons from './20261017_0321
 import * as migration_20261018_160802_add_project_eyebrow from './20261018_160802_add_project_eyebrow';
 import * as migration_20261018_222822_add_project_sections_and_background from './20261018_222822_add_project_sections_and_background';
 import * as migration_20261019_050722_add_seo_meta from './20261019_050722_add_seo_meta';
+import * as migration_20261020_030600_experience_order from './20261020_030600_experience_order';
 
 export const migrations = [
   {
@@ -41,5 +42,10 @@ export const migrations = [
     up: migration_20261019_050722_add_seo_meta.up,
     down: migration_20261019_050722_add_seo_meta.down,
     name: '20261019_050722_add_seo_meta',
+  },
+  {
+    up: migration_20261020_030600_experience_order.up,
+    down: migration_20261020_030600_experience_order.down,
+    name: '20261020_030600_experience_order',
   },
 ];

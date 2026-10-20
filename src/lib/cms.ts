@@ -319,6 +319,7 @@ export async function fetchExperiences(): Promise<ExperienceWithMedia[]> {
         collection: "experience",
         depth: 1,
         pagination: false,
+        sort: "_order",
     });
 
     return docs.map((experience) => ({
