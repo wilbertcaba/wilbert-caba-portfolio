@@ -7,8 +7,8 @@ import {
 } from "@payloadcms/richtext-lexical";
 import type { SerializedEditorState } from "lexical";
 import { AccordionBlock } from "@/blocks/Accordion";
-import { textSizeFeature } from "@/lib/lexical-text-state";
-import { textSizeClassName } from "@/lib/text-size";
+import { textStateFeature } from "@/lib/lexical-text-state";
+import { textStateClassName } from "@/lib/text-state";
 
 type AccordionHTMLItem = {
     title?: string | null;
@@ -58,7 +58,7 @@ const accordionHTMLConverter: HTMLConverter = {
 export const contentRichTextEditor = lexicalEditor({
     features: ({ defaultFeatures }) => [
         ...defaultFeatures,
-        textSizeFeature,
+        textStateFeature,
         BlocksFeature({
             blocks: [AccordionBlock],
         }),
@@ -66,18 +66,18 @@ export const contentRichTextEditor = lexicalEditor({
             converters: ({ defaultConverters }) => {
                 const defaultTextConverter = defaultConverters.find((converter) => converter.nodeTypes.includes("text"));
 
-                const textSizeHTMLConverter: HTMLConverter = {
+                const textStateHTMLConverter: HTMLConverter = {
                     nodeTypes: ["text"],
                     converter: async (args) => {
                         const html = (await defaultTextConverter?.converter(args)) ?? "";
-                        const className = textSizeClassName(args.node);
+                        const className = textStateClassName(args.node);
                         if (!className) return html;
 
                         return `<span class="${className}">${html}</span>`;
                     },
                 };
 
-                return [...defaultConverters, textSizeHTMLConverter, accordionHTMLConverter];
+                return [...defaultConverters, textStateHTMLConverter, accordionHTMLConverter];
             },
         }),
     ],
