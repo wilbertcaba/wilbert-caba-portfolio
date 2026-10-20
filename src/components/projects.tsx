@@ -17,7 +17,7 @@ export default function Projects({ data }: { data: ProjectWithMedia[] }) {
     return (
         <section
             ref={ref}
-            className="relative mb-28 w-full scroll-mt-28 overflow-x-hidden pt-24 before:absolute before:left-1/2 before:top-10 before:-z-10 before:inline-block before:w-auto before:-translate-x-1/2 before:opacity-15 before:content-[url('/bg-text-projects.svg')] after:absolute after:left-0 after:right-0 after:top-0 after:-z-10 after:bg-gradient-to-t after:from-neutral-950 after:from-40% after:to-transparent md:after:h-96"
+            className="relative mb-28 w-full overflow-x-hidden pt-24 before:absolute before:left-1/2 before:top-10 before:-z-10 before:inline-block before:w-auto before:-translate-x-1/2 before:opacity-15 before:content-[url('/bg-text-projects.svg')] after:absolute after:left-0 after:right-0 after:top-0 after:-z-10 after:bg-gradient-to-t after:from-neutral-950 after:from-40% after:to-transparent sm:scroll-mt-28 md:after:h-96"
             id="projects"
         >
             <div className="container">

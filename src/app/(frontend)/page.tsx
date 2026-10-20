@@ -30,7 +30,7 @@ export default async function Home() {
                 <Contact />
                 <Toaster position="top-center" />
                 <Footer />
-                <MobileNav logo={homepage.logo} navigation={navigation} />
+                <MobileNav navigation={navigation} />
             </ActiveSectionContextProvider>
         </main>
     );

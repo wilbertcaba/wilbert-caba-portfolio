@@ -9,10 +9,10 @@ import type { ExperienceWithMedia } from "@/lib/cms";
 import Eyebrow from "./eyebrow";
 
 export default function Experience({ data }: { data: ExperienceWithMedia[] }) {
-    const { ref } = useSectionInView("experience", 0.3);
+    const { ref } = useSectionInView("about", 0.3);
 
     return (
-        <section ref={ref} id="experience" className="mb-28 w-full scroll-m-28">
+        <section ref={ref} id="experience" className="mb-28 w-full sm:scroll-m-28">
             <Eyebrow size="lg" className="text-center text-primary">
                 [ Career Timeline ]
             </Eyebrow>

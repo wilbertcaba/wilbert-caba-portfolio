@@ -40,7 +40,7 @@ export default function Intro({ h1 }: { h1: string }) {
     const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
     return (
-        <section ref={ref} className="relative w-full scroll-mt-[10rem] py-10 text-center" id="home">
+        <section ref={ref} className="relative w-full py-10 text-center sm:scroll-mt-[10rem]" id="home">
             <div className="relative">
                 <div className="container relative flex flex-col items-center sm:px-8">
                     <motion.p
@@ -72,7 +72,7 @@ export default function Intro({ h1 }: { h1: string }) {
                             <Button asChild>
                                 <Link
                                     href="#contact"
-                                    className="group min-w-44 gap-2 hover:bg-gray-950"
+                                    className="group min-w-44 gap-2"
                                     onClick={() => (setActiveSection("contact"), setTimeOfLastClick(Date.now()))}
                                 >
                                     Contact Me

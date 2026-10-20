@@ -8,12 +8,12 @@ import type { HomepageSkill } from "@/lib/cms";
 import Eyebrow from "./eyebrow";
 
 export default function About({ about, skills }: { about: string; skills: HomepageSkill[] }) {
-    const { ref } = useSectionInView("about");
+    const { ref } = useSectionInView("about", 0.15);
 
     return (
         <motion.section
             ref={ref}
-            className="relative mb-28 w-full scroll-mt-28 overflow-hidden pt-8 leading-8 after:absolute after:left-0 after:top-0 after:-z-40 after:content-[url('/pattern-triangles-2.svg')] sm:mb-40 xl:pt-36"
+            className="relative mb-28 w-full overflow-hidden pt-8 leading-8 after:absolute after:left-0 after:top-0 after:-z-40 after:content-[url('/pattern-triangles-2.svg')] sm:mb-40 sm:scroll-mt-28 xl:pt-36"
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.175 }}
