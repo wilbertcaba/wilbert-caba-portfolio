@@ -19,7 +19,7 @@ export default async function Home() {
     const navigation = await fetchMainNavigation();
 
     return (
-        <main className="relative flex flex-col items-center sm:pt-28">
+        <main className="relative flex flex-col items-center after:absolute after:bottom-0 after:right-0 after:-z-40 after:rotate-180 after:content-[url('/pattern-triangles-2.svg')] sm:pt-28">
             <ActiveSectionContextProvider>
                 <Header logo={homepage.logo} navigation={navigation} />
                 <TriangleGrid />
