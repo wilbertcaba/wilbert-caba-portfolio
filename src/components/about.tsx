@@ -15,8 +15,9 @@ export default function About({ about, skills }: { about: string; skills: Homepa
             ref={ref}
             className="relative mb-28 w-full scroll-mt-28 overflow-hidden pt-8 leading-8 after:absolute after:left-0 after:top-0 after:-z-40 after:content-[url('/pattern-triangles-2.svg')] sm:mb-40 xl:pt-36"
             initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            whileInView={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.175 }}
+            viewport={{ once: true }}
             id="about"
         >
             <div className="container relative before:absolute before:-top-36 before:right-0 before:-z-40 before:inline-block before:w-auto before:opacity-15 before:content-[url('/bg-text-about.svg')]">
