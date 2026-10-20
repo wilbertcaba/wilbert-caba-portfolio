@@ -6,13 +6,19 @@ import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeli
 import "react-vertical-timeline-component/style.min.css";
 import { useSectionInView } from "@/lib/hooks";
 import type { ExperienceWithMedia } from "@/lib/cms";
+import Eyebrow from "./eyebrow";
 
 export default function Experience({ data }: { data: ExperienceWithMedia[] }) {
     const { ref, inView } = useSectionInView("experience", 0.3, true);
 
     return (
-        <section ref={ref} id="experience" className="scroll-m-28 mb-28 w-full">
-            <SectionHeading alignment="center">My Experience</SectionHeading>
+        <section ref={ref} id="experience" className="mb-28 w-full scroll-m-28">
+            <Eyebrow size="lg" className="text-center text-primary">
+                [ Career Timeline ]
+            </Eyebrow>
+            <SectionHeading alignment="center">
+                Decades in <span className="text-stroke-primary">The Craft</span>
+            </SectionHeading>
             <VerticalTimeline lineColor="">
                 {data
                     ? data.map((experience) => (
