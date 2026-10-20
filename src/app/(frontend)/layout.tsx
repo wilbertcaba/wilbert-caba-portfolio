@@ -16,11 +16,9 @@ export async function generateMetadata() {
 export default function RootLayout({ children, modal }: { children: React.ReactNode; modal: React.ReactNode }) {
     return (
         <html lang="en" className={`!scroll-smooth ${ibmPlexMono.variable}`}>
-            <body
-                className={`${inter.className} relative bg-neutral-950 text-gray-50 text-opacity-90`}
-            >
+            <body className={`${inter.className} relative bg-neutral-950 text-gray-50 text-opacity-90`}>
                 <div className="fixed top-0 z-30 h-2 w-full bg-primary"></div>
-                <div className="absolute top-0 -z-30 w-full -translate-y-[12%] bg-radial-gradient sm:-top-24 sm:h-[1080px]"></div>
+                <div className="bg-radial-gradient absolute top-0 -z-30 h-[480px] w-full -translate-y-[12%] sm:-top-24 sm:h-[1080px]"></div>
                 {children}
                 {modal}
             </body>
