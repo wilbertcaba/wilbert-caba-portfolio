@@ -1,8 +1,9 @@
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import type { Block } from "payload";
+import { textSizeFeature } from "@/lib/lexical-text-state";
 
 const accordionItemEditor = lexicalEditor({
-    features: ({ defaultFeatures }) => defaultFeatures,
+    features: ({ defaultFeatures }) => [...defaultFeatures, textSizeFeature],
 });
 
 export const AccordionBlock: Block = {
