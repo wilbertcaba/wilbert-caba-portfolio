@@ -47,6 +47,16 @@ html {
     -webkit-overflow-scrolling: touch;
 }
 
+.vertical-timeline::before {
+    background: var(--primary-color) !important;
+    border-radius: 0.5rem;
+}
+
+.vertical-timeline-element-date {
+    color: var(--primary-color) !important;
+    opacity: 1 !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
     [data-vaul-drawer],
     [data-vaul-overlay] {
