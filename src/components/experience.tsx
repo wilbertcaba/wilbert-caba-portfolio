@@ -9,7 +9,7 @@ import type { ExperienceWithMedia } from "@/lib/cms";
 import Eyebrow from "./eyebrow";
 
 export default function Experience({ data }: { data: ExperienceWithMedia[] }) {
-    const { ref, inView } = useSectionInView("experience", 0.3, true);
+    const { ref } = useSectionInView("experience", 0.3);
 
     return (
         <section ref={ref} id="experience" className="mb-28 w-full scroll-m-28">
@@ -65,7 +65,6 @@ export default function Experience({ data }: { data: ExperienceWithMedia[] }) {
                                   justifyContent: "center",
                                   overflow: "hidden",
                               }}
-                              visible={inView}
                           >
                               <p className="font-eyebrow !mt-0 text-sm uppercase tracking-widest text-neutral-400 text-primary">
                                   {experience.title}
