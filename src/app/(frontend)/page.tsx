@@ -13,10 +13,12 @@ import MobileNav from "@/components/mobile-nav";
 import TriangleGrid from "@/components/triangleGrid/triangleGrid";
 
 export default async function Home() {
-    const projects = await fetchProjects();
-    const experiences = await fetchExperiences();
-    const homepage = await fetchHomepage();
-    const navigation = await fetchMainNavigation();
+    const [projects, experiences, homepage, navigation] = await Promise.all([
+        fetchProjects(),
+        fetchExperiences(),
+        fetchHomepage(),
+        fetchMainNavigation(),
+    ]);
 
     return (
         <main className="relative flex flex-col items-center after:absolute after:bottom-0 after:right-0 after:-z-40 after:rotate-180 after:content-[url('/pattern-triangles-2.svg')] sm:pt-28">

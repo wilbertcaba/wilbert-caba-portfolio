@@ -291,11 +291,7 @@ export async function getProjectMetadata(slug: string): Promise<Metadata> {
 }
 
 export async function getHomepageMetadata(): Promise<Metadata> {
-    const payload = await getCms();
-    const homepage = await payload.findGlobal({
-        slug: "homepage",
-        depth: 1,
-    });
+    const homepage = await fetchHomepage();
 
     const title = homepage.meta?.title?.trim() || defaultHomepageTitle;
     const description = homepage.meta?.description?.trim() || defaultHomepageDescription;
@@ -350,7 +346,7 @@ export async function fetchMainNavigation(): Promise<NavLink[]> {
     });
 }
 
-export async function fetchHomepage(): Promise<HomepageWithMedia> {
+export const fetchHomepage = cache(async (): Promise<HomepageWithMedia> => {
     const payload = await getCms();
     const homepage = await payload.findGlobal({
         slug: "homepage",
@@ -369,4 +365,4 @@ export async function fetchHomepage(): Promise<HomepageWithMedia> {
             isMedia(skill.icon) && skill.icon.url ? [{ id: skill.id, skill: skill.skill, icon: skill.icon }] : [],
         ),
     };
-}
+});
