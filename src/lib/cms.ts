@@ -232,16 +232,53 @@ const defaultHomepageTitle = "Wilbert Caba | Personal Portfolio";
 const defaultHomepageDescription =
     "Wilbert Caba is a UX Developer with 17 years of combined experience on UX Design and Front-End Development";
 
-function metadataImage(image: Media | null | undefined, alt: string): Metadata["openGraph"] {
+type SeoMeta = {
+    title?: string | null;
+    description?: string | null;
+    image?: number | Media | null;
+    openGraph?: {
+        title?: string | null;
+        description?: string | null;
+        image?: number | Media | null;
+    } | null;
+} | null | undefined;
+
+function imageSize(value: number | string | null | undefined) {
+    const size = typeof value === "number" ? value : typeof value === "string" ? Number(value) : Number.NaN;
+    return Number.isFinite(size) && size > 0 ? size : undefined;
+}
+
+function socialImage(image: Media | null | undefined, alt: string): NonNullable<Metadata["openGraph"]>["images"] {
     if (!image?.url) return undefined;
 
+    return [
+        {
+            url: image.url,
+            alt: image.alt?.trim() || alt,
+            width: imageSize(image.width),
+            height: imageSize(image.height),
+        },
+    ];
+}
+
+function mediaWithUrl(value: number | Media | null | undefined) {
+    return isMedia(value) && value.url ? value : null;
+}
+
+function resolveSocialMeta(
+    meta: SeoMeta,
+    fallback: { title: string; description: string; image?: Media | null },
+) {
+    const title = meta?.title?.trim() || fallback.title;
+    const description = meta?.description?.trim() || fallback.description;
+    const image = mediaWithUrl(meta?.openGraph?.image) ?? mediaWithUrl(meta?.image) ?? fallback.image ?? null;
+
     return {
-        images: [
-            {
-                url: image.url,
-                alt: image.alt?.trim() || alt,
-            },
-        ],
+        title,
+        description,
+        openGraphTitle: meta?.openGraph?.title?.trim() || title,
+        openGraphDescription: meta?.openGraph?.description?.trim() || description,
+        image,
     };
 }
 
@@ -270,22 +307,28 @@ export async function getProjectMetadata(slug: string): Promise<Metadata> {
         return { title: "Project not found | Wilbert Caba" };
     }
 
-    const title = project.meta?.title?.trim() || `${project.title} | Wilbert Caba`;
-    const description = project.meta?.description?.trim() || project.excerpt;
-    const image = isMedia(project.meta?.image)
-        ? project.meta.image
-        : isMedia(project.featuredImage)
-          ? project.featuredImage
-          : null;
+    const social = resolveSocialMeta(project.meta, {
+        title: `${project.title} | Wilbert Caba`,
+        description: project.excerpt,
+        image: isMedia(project.featuredImage) ? project.featuredImage : null,
+    });
+    const images = socialImage(social.image, social.openGraphTitle);
 
     return {
-        title,
-        description,
+        title: social.title,
+        description: social.description,
         openGraph: {
-            title,
-            description,
+            title: social.openGraphTitle,
+            description: social.openGraphDescription,
             url: `/projects/${project.slug}`,
-            ...metadataImage(image, title),
+            type: "article",
+            images,
+        },
+        twitter: {
+            card: images ? "summary_large_image" : "summary",
+            title: social.openGraphTitle,
+            description: social.openGraphDescription,
+            images,
         },
     };
 }
@@ -293,18 +336,28 @@ export async function getProjectMetadata(slug: string): Promise<Metadata> {
 export async function getHomepageMetadata(): Promise<Metadata> {
     const homepage = await fetchHomepage();
 
-    const title = homepage.meta?.title?.trim() || defaultHomepageTitle;
-    const description = homepage.meta?.description?.trim() || defaultHomepageDescription;
-    const image = isMedia(homepage.meta?.image) ? homepage.meta.image : null;
+    const social = resolveSocialMeta(homepage.meta, {
+        title: defaultHomepageTitle,
+        description: defaultHomepageDescription,
+    });
+    const images = socialImage(social.image, social.openGraphTitle);
 
     return {
         metadataBase: new URL(getSiteURL()),
-        title,
-        description,
+        title: social.title,
+        description: social.description,
         openGraph: {
-            title,
-            description,
-            ...metadataImage(image, title),
+            title: social.openGraphTitle,
+            description: social.openGraphDescription,
+            url: "/",
+            type: "website",
+            images,
+        },
+        twitter: {
+            card: images ? "summary_large_image" : "summary",
+            title: social.openGraphTitle,
+            description: social.openGraphDescription,
+            images,
         },
     };
 }
