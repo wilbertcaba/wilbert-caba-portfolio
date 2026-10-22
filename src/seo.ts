@@ -11,13 +11,38 @@ type SeoDocument = {
     logo?: MediaReference;
 };
 
-export function getSiteURL() {
-    const configured = process.env.BASE_URL?.trim() || "localhost:3000";
+function withProtocol(hostOrUrl: string) {
+    const configured = hostOrUrl.trim();
     if (/^https?:\/\//i.test(configured)) return configured.replace(/\/$/, "");
 
     const host = configured.replace(/\/$/, "");
     const protocol = host.startsWith("localhost") || host.startsWith("127.0.0.1") ? "http" : "https";
     return `${protocol}://${host}`;
+}
+
+/** Preview deployment hosts look like `project-git-branch-team.vercel.app`. */
+function isVercelPreviewHost(hostname: string) {
+    return hostname.endsWith(".vercel.app") && hostname.includes("-git-");
+}
+
+export function getSiteURL() {
+    const configured = process.env.BASE_URL?.trim();
+    if (configured) {
+        const url = withProtocol(configured);
+        try {
+            if (!isVercelPreviewHost(new URL(url).hostname)) return url;
+        } catch {
+            // Ignore a malformed BASE_URL and use the deployment host below.
+        }
+    }
+
+    const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+    if (process.env.VERCEL_ENV === "production" && productionHost) return withProtocol(productionHost);
+
+    const deploymentHost = process.env.VERCEL_URL?.trim();
+    if (deploymentHost) return withProtocol(deploymentHost);
+
+    return "http://localhost:3000";
 }
 
 function mediaId(value: MediaReference | undefined) {
