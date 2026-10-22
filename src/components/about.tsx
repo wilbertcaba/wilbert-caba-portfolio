@@ -33,7 +33,7 @@ export default function About({ about, skills }: { about: string; skills: Homepa
                     </div>
                     <div className="order-1 col-span-12 md:col-span-4 lg:order-2">
                         <Image
-                            src="/img-wilbert-caba-profile-image.jpeg"
+                            src="/img-wilbert-caba-creative-anatomy-sm.webp"
                             alt="Wilbert Caba image"
                             width="408"
                             height="408"
