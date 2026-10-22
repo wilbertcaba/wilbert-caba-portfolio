@@ -25,7 +25,7 @@ export default async function Home() {
             <ActiveSectionContextProvider>
                 <Header logo={homepage.logo} navigation={navigation} />
                 <TriangleGrid />
-                <Intro h1={homepage.main_value_proposition} />
+                <Intro h1={homepage.main_value_proposition} resume={homepage.resume?.url} />
                 <Projects data={projects} />
                 <About about={homepage.about_html ?? ""} skills={homepage.skills} />
                 <Experience data={experiences} />
