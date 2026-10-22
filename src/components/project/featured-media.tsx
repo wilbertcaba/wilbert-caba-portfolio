@@ -50,11 +50,11 @@ export default function FeaturedMedia({ project }: { project: ProjectDetail }) {
                     <Image
                         src={project.featuredImage.url || ""}
                         alt={project.featuredImage.alt || project.title}
-                        width={project.featuredImage.width || 1600}
-                        height={project.featuredImage.height || 900}
+                        width={project.featuredImage.width || 1500}
+                        height={project.featuredImage.height || 1000}
                         priority
                         sizes="(min-width: 1280px) 1024px, 100vw"
-                        className="aspect-video h-auto w-full bg-neutral-900 object-contain"
+                        className="aspect-[3/2] h-auto w-full rounded-[32px] bg-transparent object-contain shadow-2xl"
                     />
                 </div>
             </div>

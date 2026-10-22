@@ -61,10 +61,10 @@ export default function Project({
                             src={featuredImage.url || ""}
                             alt={featuredImage.alt || title}
                             quality={90}
-                            width={1600}
-                            height={900}
+                            width={1500}
+                            height={1000}
                             sizes="(min-width: 1024px) 540px, 100vw"
-                            className="aspect-video h-auto w-full object-contain shadow-2xl"
+                            className="aspect-[3/2] h-auto w-full rounded-[16px] object-contain shadow-2xl"
                         />
                     </div>
                 </div>
