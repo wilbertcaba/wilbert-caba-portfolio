@@ -201,9 +201,20 @@ export interface Project {
     title?: string | null;
     description?: string | null;
     /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     * Search and sharing fallback. Link previews use the Open Graph image when that field is set. Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
+    /**
+     * Link preview title, description, and image. Empty fields fall back to the meta title, description, and image above.
+     */
+    openGraph?: {
+      title?: string | null;
+      description?: string | null;
+      /**
+       * Shown on the link card. Use 1200×630 and keep it under 500KB.
+       */
+      image?: (number | null) | Media;
+    };
   };
   slug: string;
   projectLink?: string | null;
@@ -448,6 +459,13 @@ export interface ProjectsSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        openGraph?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
       };
   slug?: T;
   projectLink?: T;
@@ -625,9 +643,20 @@ export interface Homepage {
     title?: string | null;
     description?: string | null;
     /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     * Search and sharing fallback. Link previews use the Open Graph image when that field is set. Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
+    /**
+     * Link preview title, description, and image. Empty fields fall back to the meta title, description, and image above.
+     */
+    openGraph?: {
+      title?: string | null;
+      description?: string | null;
+      /**
+       * Shown on the link card. Use 1200×630 and keep it under 500KB.
+       */
+      image?: (number | null) | Media;
+    };
   };
   resume?: (number | null) | Media;
   updatedAt?: string | null;
@@ -671,6 +700,13 @@ export interface HomepageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        openGraph?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
       };
   resume?: T;
   updatedAt?: T;

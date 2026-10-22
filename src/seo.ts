@@ -1,4 +1,5 @@
-import type { GenerateDescription, GenerateImage, GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
+import type { GenerateDescription, GenerateImage, GenerateTitle, GenerateURL, SEOPluginConfig } from "@payloadcms/plugin-seo/types";
+import type { Field } from "payload";
 
 type MediaReference = number | string | { id?: number | string | null } | null;
 
@@ -44,6 +45,59 @@ export function getSiteURL() {
 
     return "http://localhost:3000";
 }
+
+const openGraphFields: Field[] = [
+    {
+        name: "openGraph",
+        type: "group",
+        label: "Open Graph",
+        admin: {
+            description:
+                "Link preview title, description, and image. Empty fields fall back to the meta title, description, and image above.",
+        },
+        fields: [
+            {
+                name: "title",
+                type: "text",
+                label: "Title",
+            },
+            {
+                name: "description",
+                type: "textarea",
+                label: "Description",
+            },
+            {
+                name: "image",
+                type: "upload",
+                relationTo: "media",
+                label: "Image",
+                admin: {
+                    description: "Shown on the link card. Use 1200×630 and keep it under 500KB.",
+                },
+            },
+        ],
+    },
+];
+
+export const seoFields: NonNullable<SEOPluginConfig["fields"]> = ({ defaultFields }) => {
+    const fields: Field[] = defaultFields.map((field) => {
+        if (!("name" in field) || field.name !== "image" || field.type !== "upload") return field;
+
+        return {
+            ...field,
+            admin: {
+                ...field.admin,
+                description:
+                    "Search and sharing fallback. Link previews use the Open Graph image when that field is set. Maximum upload file size: 12MB. Recommended file size for images is <500KB.",
+            },
+        } as Field;
+    });
+
+    const previewIndex = fields.findIndex((field) => "name" in field && field.name === "preview");
+    if (previewIndex === -1) return [...fields, ...openGraphFields];
+
+    return [...fields.slice(0, previewIndex), ...openGraphFields, ...fields.slice(previewIndex)];
+};
 
 function mediaId(value: MediaReference | undefined) {
     if (typeof value === "number" || typeof value === "string") return value;
