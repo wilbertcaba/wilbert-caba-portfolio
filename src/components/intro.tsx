@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { BsArrowRight, BsLinkedin } from "react-icons/bs";
@@ -35,7 +34,7 @@ const social = [
     },
 ];
 
-export default function Intro({ h1 }: { h1: string }) {
+export default function Intro({ h1, resume }: { h1: string; resume?: string | null }) {
     const { ref } = useSectionInView("home", 0.99);
     const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
@@ -80,12 +79,14 @@ export default function Intro({ h1 }: { h1: string }) {
                                 </Link>
                             </Button>
 
-                            <Button asChild variant="outline">
-                                <a href="/resume.pdf" download className="group min-w-44 gap-2">
-                                    Download CV
-                                    <HiDownload className="group-hover:translate-y-1" />
-                                </a>
-                            </Button>
+                            {resume ? (
+                                <Button asChild variant="outline">
+                                    <a href={resume} download className="group min-w-44 gap-2">
+                                        Download CV
+                                        <HiDownload className="group-hover:translate-y-1" />
+                                    </a>
+                                </Button>
+                            ) : null}
                         </div>
                         <div className="flex justify-center gap-4 sm:gap-8">
                             {social.map((item, i) => (
