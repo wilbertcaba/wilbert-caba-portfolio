@@ -1,0 +1,31 @@
+import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
+
+export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
+  await db.execute(sql`
+   ALTER TABLE "projects" ADD COLUMN "meta_open_graph_title" varchar;
+  ALTER TABLE "projects" ADD COLUMN "meta_open_graph_description" varchar;
+  ALTER TABLE "projects" ADD COLUMN "meta_open_graph_image_id" integer;
+  ALTER TABLE "homepage" ADD COLUMN "meta_open_graph_title" varchar;
+  ALTER TABLE "homepage" ADD COLUMN "meta_open_graph_description" varchar;
+  ALTER TABLE "homepage" ADD COLUMN "meta_open_graph_image_id" integer;
+  ALTER TABLE "projects" ADD CONSTRAINT "projects_meta_open_graph_image_id_media_id_fk" FOREIGN KEY ("meta_open_graph_image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "homepage" ADD CONSTRAINT "homepage_meta_open_graph_image_id_media_id_fk" FOREIGN KEY ("meta_open_graph_image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
+  CREATE INDEX "projects_meta_open_graph_meta_open_graph_image_idx" ON "projects" USING btree ("meta_open_graph_image_id");
+  CREATE INDEX "homepage_meta_open_graph_meta_open_graph_image_idx" ON "homepage" USING btree ("meta_open_graph_image_id");`)
+}
+
+export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
+  await db.execute(sql`
+   ALTER TABLE "projects" DROP CONSTRAINT "projects_meta_open_graph_image_id_media_id_fk";
+  
+  ALTER TABLE "homepage" DROP CONSTRAINT "homepage_meta_open_graph_image_id_media_id_fk";
+  
+  DROP INDEX "projects_meta_open_graph_meta_open_graph_image_idx";
+  DROP INDEX "homepage_meta_open_graph_meta_open_graph_image_idx";
+  ALTER TABLE "projects" DROP COLUMN "meta_open_graph_title";
+  ALTER TABLE "projects" DROP COLUMN "meta_open_graph_description";
+  ALTER TABLE "projects" DROP COLUMN "meta_open_graph_image_id";
+  ALTER TABLE "homepage" DROP COLUMN "meta_open_graph_title";
+  ALTER TABLE "homepage" DROP COLUMN "meta_open_graph_description";
+  ALTER TABLE "homepage" DROP COLUMN "meta_open_graph_image_id";`)
+}

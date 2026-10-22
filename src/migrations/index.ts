@@ -6,6 +6,7 @@ import * as migration_20261018_160802_add_project_eyebrow from './20261018_16080
 import * as migration_20261018_222822_add_project_sections_and_background from './20261018_222822_add_project_sections_and_background';
 import * as migration_20261019_050722_add_seo_meta from './20261019_050722_add_seo_meta';
 import * as migration_20261020_030600_experience_order from './20261020_030600_experience_order';
+import * as migration_20261021_180215_add_open_graph_meta from './20261021_180215_add_open_graph_meta';
 
 export const migrations = [
   {
@@ -36,7 +37,7 @@ export const migrations = [
   {
     up: migration_20261018_222822_add_project_sections_and_background.up,
     down: migration_20261018_222822_add_project_sections_and_background.down,
-    name: '20261018_222822_add_project_sections_and_background'
+    name: '20261018_222822_add_project_sections_and_background',
   },
   {
     up: migration_20261019_050722_add_seo_meta.up,
@@ -47,5 +48,10 @@ export const migrations = [
     up: migration_20261020_030600_experience_order.up,
     down: migration_20261020_030600_experience_order.down,
     name: '20261020_030600_experience_order',
+  },
+  {
+    up: migration_20261021_180215_add_open_graph_meta.up,
+    down: migration_20261021_180215_add_open_graph_meta.down,
+    name: '20261021_180215_add_open_graph_meta'
   },
 ];

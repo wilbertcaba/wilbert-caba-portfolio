@@ -13,7 +13,7 @@ import { Homepage } from "./globals/Homepage";
 import { MainNav } from "./globals/MainNav";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import { s3Storage } from "@payloadcms/storage-s3";
-import { generateDescription, generateImage, generateTitle, generateURL } from "./seo";
+import { generateDescription, generateImage, generateTitle, generateURL, seoFields } from "./seo";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -52,6 +52,7 @@ export default buildConfig({
             generateDescription,
             generateImage,
             generateURL,
+            fields: seoFields,
         }),
         s3Storage({
             collections: {
