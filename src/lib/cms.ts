@@ -10,8 +10,8 @@ function isMedia(value: number | Media | null | undefined): value is Media {
     return typeof value === "object" && value !== null && "url" in value;
 }
 
-/** Newest project first. This matches the current homepage sequence. */
-export const projectSort = "-createdAt";
+/** Admin drag order. Existing projects keep their previous newest-first sequence until they are moved. */
+export const projectSort = "_order";
 
 export type ProjectCard = {
     id: number;

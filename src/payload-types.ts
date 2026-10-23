@@ -159,6 +159,7 @@ export interface User {
  */
 export interface Project {
   id: number;
+  _order?: string | null;
   title: string;
   eyebrow: string;
   excerpt: string;
@@ -433,6 +434,7 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "Projects_select".
  */
 export interface ProjectsSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   eyebrow?: T;
   excerpt?: T;

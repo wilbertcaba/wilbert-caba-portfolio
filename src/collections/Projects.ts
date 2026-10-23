@@ -6,8 +6,9 @@ const hexColorPattern = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 
 export const Projects: CollectionConfig = {
     slug: "Projects",
-    // Matches the current homepage sequence: newest project first.
-    defaultSort: "-createdAt",
+    // Drag rows in the admin list. The homepage renders in this order.
+    orderable: true,
+    defaultSort: "_order",
 
     access: {
         read: () => true, // Allow read access publicly
