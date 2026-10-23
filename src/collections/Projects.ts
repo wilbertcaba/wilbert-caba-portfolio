@@ -204,6 +204,9 @@ export const Projects: CollectionConfig = {
             required: true,
             admin: {
                 position: "sidebar",
+                components: {
+                    RowLabel: "/components/payload/TagRowLabel.tsx#TagRowLabel",
+                },
             },
         },
         {
