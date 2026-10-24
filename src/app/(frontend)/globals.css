@@ -47,6 +47,16 @@ html {
     -webkit-overflow-scrolling: touch;
 }
 
+.lexical-table-container {
+    margin-block: 2rem;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.lexical-table-cell p {
+    margin: 0;
+}
+
 .vertical-timeline::before {
     background: var(--primary-color) !important;
     border-radius: 0.5rem;

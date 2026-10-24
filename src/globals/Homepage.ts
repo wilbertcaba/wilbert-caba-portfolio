@@ -1,6 +1,6 @@
 import { lexicalHTML } from "@payloadcms/richtext-lexical";
 import { GlobalConfig } from "payload";
-import { contentRichTextEditor } from "@/lib/lexical";
+import { defaultRichTextEditor } from "@/lib/lexical";
 
 export const Homepage: GlobalConfig = {
     slug: "homepage",
@@ -30,7 +30,7 @@ export const Homepage: GlobalConfig = {
                             label: "About",
                             type: "richText",
                             required: true,
-                            editor: contentRichTextEditor,
+                            editor: defaultRichTextEditor,
                         },
                         lexicalHTML("about", { name: "about_html", storeInDB: true }),
                         {

@@ -1,6 +1,6 @@
 import { lexicalHTML } from "@payloadcms/richtext-lexical";
 import { CollectionConfig } from "payload";
-import { contentRichTextEditor } from "@/lib/lexical";
+import { defaultRichTextEditor } from "@/lib/lexical";
 
 export const Experience: CollectionConfig = {
     slug: "experience",
@@ -52,7 +52,7 @@ export const Experience: CollectionConfig = {
             name: "description",
             label: "description",
             type: "richText",
-            editor: contentRichTextEditor,
+            editor: defaultRichTextEditor,
             required: true,
         },
         lexicalHTML("description", { name: "description_html", storeInDB: true }),

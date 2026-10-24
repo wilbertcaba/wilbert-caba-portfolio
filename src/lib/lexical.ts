@@ -1,8 +1,10 @@
 import {
     BlocksFeature,
+    EXPERIMENTAL_TableFeature,
     HTMLConverterFeature,
     convertLexicalToHTML,
     lexicalEditor,
+    type FeatureProviderServer,
     type HTMLConverter,
 } from "@payloadcms/richtext-lexical";
 import type { SerializedEditorState } from "lexical";
@@ -55,30 +57,40 @@ const accordionHTMLConverter: HTMLConverter = {
     },
 };
 
+const defaultRichTextFeatures = ({
+    defaultFeatures,
+}: {
+    defaultFeatures: FeatureProviderServer<any, any, any>[];
+}) => [
+    ...defaultFeatures,
+    textStateFeature,
+    BlocksFeature({
+        blocks: [AccordionBlock],
+    }),
+    HTMLConverterFeature({
+        converters: ({ defaultConverters }) => {
+            const defaultTextConverter = defaultConverters.find((converter) => converter.nodeTypes.includes("text"));
+
+            const textStateHTMLConverter: HTMLConverter = {
+                nodeTypes: ["text"],
+                converter: async (args) => {
+                    const html = (await defaultTextConverter?.converter(args)) ?? "";
+                    const className = textStateClassName(args.node);
+                    if (!className) return html;
+
+                    return `<span class="${className}">${html}</span>`;
+                },
+            };
+
+            return [...defaultConverters, textStateHTMLConverter, accordionHTMLConverter];
+        },
+    }),
+];
+
+export const defaultRichTextEditor = lexicalEditor({
+    features: defaultRichTextFeatures,
+});
+
 export const contentRichTextEditor = lexicalEditor({
-    features: ({ defaultFeatures }) => [
-        ...defaultFeatures,
-        textStateFeature,
-        BlocksFeature({
-            blocks: [AccordionBlock],
-        }),
-        HTMLConverterFeature({
-            converters: ({ defaultConverters }) => {
-                const defaultTextConverter = defaultConverters.find((converter) => converter.nodeTypes.includes("text"));
-
-                const textStateHTMLConverter: HTMLConverter = {
-                    nodeTypes: ["text"],
-                    converter: async (args) => {
-                        const html = (await defaultTextConverter?.converter(args)) ?? "";
-                        const className = textStateClassName(args.node);
-                        if (!className) return html;
-
-                        return `<span class="${className}">${html}</span>`;
-                    },
-                };
-
-                return [...defaultConverters, textStateHTMLConverter, accordionHTMLConverter];
-            },
-        }),
-    ],
+    features: (args) => [...defaultRichTextFeatures(args), EXPERIMENTAL_TableFeature()],
 });
