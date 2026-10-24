@@ -8,6 +8,7 @@ import * as migration_20261019_050722_add_seo_meta from './20261019_050722_add_s
 import * as migration_20261020_030600_experience_order from './20261020_030600_experience_order';
 import * as migration_20261021_180215_add_open_graph_meta from './20261021_180215_add_open_graph_meta';
 import * as migration_20261023_014700_projects_order from './20261023_014700_projects_order';
+import * as migration_20261024_165011_add_project_drafts from './20261024_165011_add_project_drafts';
 
 export const migrations = [
   {
@@ -53,11 +54,16 @@ export const migrations = [
   {
     up: migration_20261021_180215_add_open_graph_meta.up,
     down: migration_20261021_180215_add_open_graph_meta.down,
-    name: '20261021_180215_add_open_graph_meta'
+    name: '20261021_180215_add_open_graph_meta',
   },
   {
     up: migration_20261023_014700_projects_order.up,
     down: migration_20261023_014700_projects_order.down,
     name: '20261023_014700_projects_order',
+  },
+  {
+    up: migration_20261024_165011_add_project_drafts.up,
+    down: migration_20261024_165011_add_project_drafts.down,
+    name: '20261024_165011_add_project_drafts'
   },
 ];

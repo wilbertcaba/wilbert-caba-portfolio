@@ -13,6 +13,18 @@ function isMedia(value: number | Media | null | undefined): value is Media {
 /** Admin drag order. Existing projects keep their previous newest-first sequence until they are moved. */
 export const projectSort = "_order";
 
+/** The public site reads the published row. Draft edits stay in the versions table until publish. */
+const publishedProjects = {
+    _status: {
+        equals: "published" as const,
+    },
+};
+
+function text(value: string | null | undefined) {
+    const trimmed = value?.trim();
+    return trimmed ? trimmed : null;
+}
+
 export type ProjectCard = {
     id: number;
     title: string;
@@ -142,6 +154,7 @@ export async function fetchProjects(): Promise<ProjectCard[]> {
         depth: 1,
         pagination: false,
         sort: projectSort,
+        where: publishedProjects,
         select: {
             title: true,
             eyebrow: true,
@@ -154,15 +167,20 @@ export async function fetchProjects(): Promise<ProjectCard[]> {
 
     return docs
         .flatMap((project) => {
+            const title = text(project.title);
+            const eyebrow = text(project.eyebrow);
+            const excerpt = text(project.excerpt);
+            const slug = text(project.slug);
+            if (!title || !eyebrow || !excerpt || !slug) return [];
             if (!isMedia(project.featuredImage) || !project.featuredImage.url) return [];
 
             return [
                 {
                     id: project.id,
-                    title: project.title,
-                    eyebrow: project.eyebrow,
-                    excerpt: project.excerpt,
-                    slug: project.slug,
+                    title,
+                    eyebrow,
+                    excerpt,
+                    slug,
                     tags: project.tags ?? [],
                     featuredImage: project.featuredImage,
                 },
@@ -180,9 +198,14 @@ export const fetchProjectDetail = cache(async (slug: string): Promise<ProjectDet
         payload.find({
             collection: "Projects",
             where: {
-                slug: {
-                    equals: slug,
-                },
+                and: [
+                    publishedProjects,
+                    {
+                        slug: {
+                            equals: slug,
+                        },
+                    },
+                ],
             },
             depth: 2,
             limit: 1,
@@ -192,6 +215,7 @@ export const fetchProjectDetail = cache(async (slug: string): Promise<ProjectDet
             depth: 0,
             pagination: false,
             sort: projectSort,
+            where: publishedProjects,
             select: {
                 slug: true,
                 title: true,
@@ -200,9 +224,20 @@ export const fetchProjectDetail = cache(async (slug: string): Promise<ProjectDet
     ]);
 
     const project = result.docs[0];
-    if (!project || !isMedia(project.featuredImage) || !project.featuredImage.url) return null;
+    const title = text(project?.title);
+    const eyebrow = text(project?.eyebrow);
+    const excerpt = text(project?.excerpt);
+    const projectSlug = text(project?.slug);
+    const role = text(project?.role);
+    if (!project || !title || !eyebrow || !excerpt || !projectSlug || !role) return null;
+    if (!isMedia(project.featuredImage) || !project.featuredImage.url) return null;
 
-    const items = indexResult.docs;
+    const items = indexResult.docs.flatMap((item) => {
+        const itemSlug = text(item.slug);
+        const itemTitle = text(item.title);
+        if (!itemSlug || !itemTitle) return [];
+        return [{ slug: itemSlug, title: itemTitle }];
+    });
     const currentIndex = items.findIndex((item) => item.slug === slug);
     if (currentIndex === -1) return null;
 
@@ -211,11 +246,11 @@ export const fetchProjectDetail = cache(async (slug: string): Promise<ProjectDet
 
     return {
         id: project.id,
-        title: project.title,
-        eyebrow: project.eyebrow,
-        excerpt: project.excerpt,
-        slug: project.slug,
-        role: project.role,
+        title,
+        eyebrow,
+        excerpt,
+        slug: projectSlug,
+        role,
         projectLink: project.projectLink?.trim() || null,
         tags: project.tags ?? [],
         featuredImage: project.featuredImage,
@@ -287,9 +322,14 @@ export async function getProjectMetadata(slug: string): Promise<Metadata> {
     const result = await payload.find({
         collection: "Projects",
         where: {
-            slug: {
-                equals: slug,
-            },
+            and: [
+                publishedProjects,
+                {
+                    slug: {
+                        equals: slug,
+                    },
+                },
+            ],
         },
         depth: 1,
         limit: 1,
@@ -303,13 +343,16 @@ export async function getProjectMetadata(slug: string): Promise<Metadata> {
     });
 
     const project = result.docs[0];
-    if (!project) {
+    const title = text(project?.title);
+    const excerpt = text(project?.excerpt);
+    const projectSlug = text(project?.slug);
+    if (!project || !title || !projectSlug) {
         return { title: "Project not found | Wilbert Caba" };
     }
 
     const social = resolveSocialMeta(project.meta, {
-        title: `${project.title} | Wilbert Caba`,
-        description: project.excerpt,
+        title: `${title} | Wilbert Caba`,
+        description: excerpt ?? "",
         image: isMedia(project.featuredImage) ? project.featuredImage : null,
     });
     const images = socialImage(social.image, social.openGraphTitle);
@@ -320,7 +363,7 @@ export async function getProjectMetadata(slug: string): Promise<Metadata> {
         openGraph: {
             title: social.openGraphTitle,
             description: social.openGraphDescription,
-            url: `/projects/${project.slug}`,
+            url: `/projects/${projectSlug}`,
             type: "article",
             images,
         },

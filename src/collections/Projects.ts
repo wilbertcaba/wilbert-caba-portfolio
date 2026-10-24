@@ -11,15 +11,30 @@ export const Projects: CollectionConfig = {
     defaultSort: "_order",
 
     access: {
-        read: () => true, // Allow read access publicly
-        // create: () => false, // Only logged-in users can create
-        // update: () => false, // Only logged-in users can update
-        // delete: () => false, // Only logged-in users can delete
+        // Drafts stay in the admin. Public reads, including ?draft=true, only receive published projects.
+        read: ({ req }) => {
+            if (req.user) return true;
+
+            return {
+                _status: {
+                    equals: "published",
+                },
+            };
+        },
+    },
+
+    // Save Draft skips required fields. Publish is the only action that validates.
+    versions: {
+        drafts: {
+            validate: false,
+        },
     },
 
     admin: {
         useAsTitle: "title",
-        defaultColumns: ["title", "slug", "updatedAt"],
+        defaultColumns: ["title", "_status", "slug", "updatedAt"],
+        description:
+            "Save Draft keeps a project private and does not require every field. Publish checks required fields and makes the project public. Unpublish turns a live project back into a draft.",
     },
 
     fields: [

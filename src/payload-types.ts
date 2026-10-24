@@ -154,6 +154,8 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Save Draft keeps a project private and does not require every field. Publish checks required fields and makes the project public. Unpublish turns a live project back into a draft.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "Projects".
  */
@@ -245,6 +247,7 @@ export interface Project {
   description_html?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -482,6 +485,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   description_html?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
