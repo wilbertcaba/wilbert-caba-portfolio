@@ -34,7 +34,7 @@ export default function Header({ logo, navigation }: { logo: Media; navigation: 
     return (
         <motion.header
             className={clsx(
-                "left-0 right-0 top-0 z-10 mt-2 flex w-full items-center justify-center py-4 transition-[background-color,backdrop-filter] duration-300 sm:fixed sm:justify-between sm:p-8",
+                "left-0 right-0 top-0 z-10 mt-2 flex w-full items-center justify-center pb-4 pt-10 transition-[background-color,backdrop-filter] duration-300 sm:fixed sm:justify-between sm:p-8",
                 hasBackground && "bg-neutral-900/75 backdrop-blur-2xl",
             )}
         >
