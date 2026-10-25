@@ -91,7 +91,8 @@ export default function Intro({ h1, resume }: { h1: string; resume?: string | nu
                         <div className="flex justify-center gap-4 sm:gap-8">
                             {social.map((item, i) => (
                                 <Button asChild variant="secondary" className="h-12 w-12 bg-neutral-800" key={i}>
-                                    <a href={item.url} target="_blank">
+                                    <a href={item.url} target="_blank" aria-label={`Follow me on ${item.name}`}>
+                                        <span className="sr-only">{item.name}</span>
                                         {item.icon}
                                     </a>
                                 </Button>
