@@ -22,7 +22,16 @@ export default function RootLayout({ children, modal }: { children: React.ReactN
                 <div className="absolute top-0 -z-30 h-[480px] w-full -translate-y-[12%] bg-radial-gradient sm:-top-24 sm:h-[1080px]"></div>
                 {children}
                 {modal}
-                <Analytics />
+                <Analytics
+                    beforeSend={(event) => {
+                        if (localStorage.getItem("va-disable")) {
+                            // Disable analytics if the user has disabled it
+                            // Use localStorage.setItem("va-disable", "true"); to disable analytics on every browser
+                            return null;
+                        }
+                        return event;
+                    }}
+                />
             </body>
         </html>
     );
