@@ -17,6 +17,7 @@
     "dependencies": {
         "@faceless-ui/modal": "3.0.0",
         "@faceless-ui/scroll-info": "2.0.0",
+        "@next/third-parties": "15.4.11",
         "@payloadcms/db-postgres": "3.91.0",
         "@payloadcms/next": "3.91.0",
         "@payloadcms/plugin-seo": "3.91.0",
