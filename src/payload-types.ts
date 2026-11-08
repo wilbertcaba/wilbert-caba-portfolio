@@ -762,6 +762,27 @@ export interface AccordionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IframeBlock".
+ */
+export interface IframeBlock {
+  /**
+   * Embed URL (YouTube, Figma, CodePen, etc.). Must be HTTPS.
+   */
+  url: string;
+  /**
+   * Accessible label announced by screen readers.
+   */
+  title: string;
+  /**
+   * Iframe height in pixels. Width is always full content width.
+   */
+  height: number;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'iframe';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

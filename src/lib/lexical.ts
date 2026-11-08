@@ -9,6 +9,7 @@ import {
 } from "@payloadcms/richtext-lexical";
 import type { SerializedEditorState } from "lexical";
 import { AccordionBlock } from "@/blocks/Accordion";
+import { IframeBlock } from "@/blocks/Iframe";
 import { textStateFeature } from "@/lib/lexical-text-state";
 import { textStateClassName } from "@/lib/text-state";
 
@@ -17,12 +18,28 @@ type AccordionHTMLItem = {
     content?: SerializedEditorState | null;
 };
 
+type IframeHTMLFields = {
+    blockType?: string;
+    url?: string | null;
+    title?: string | null;
+    height?: number | null;
+};
+
 function escapeHtml(value: string) {
-    return value
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;");
+    return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+}
+
+function toHttpsEmbedUrl(value: string | null | undefined) {
+    const trimmed = value?.trim();
+    if (!trimmed) return null;
+
+    try {
+        const url = new URL(trimmed);
+        if (url.protocol !== "https:") return null;
+        return url.toString();
+    } catch {
+        return null;
+    }
 }
 
 const accordionHTMLConverter: HTMLConverter = {
@@ -57,15 +74,27 @@ const accordionHTMLConverter: HTMLConverter = {
     },
 };
 
-const defaultRichTextFeatures = ({
-    defaultFeatures,
-}: {
-    defaultFeatures: FeatureProviderServer<any, any, any>[];
-}) => [
+const iframeHTMLConverter: HTMLConverter = {
+    nodeTypes: ["block"],
+    converter: async ({ node }) => {
+        const fields = (node as { fields?: IframeHTMLFields }).fields;
+        if (fields?.blockType !== "iframe") return "";
+
+        const src = toHttpsEmbedUrl(fields.url);
+        if (!src) return "";
+
+        const title = escapeHtml(fields.title?.trim() || "Embedded content");
+        const height = fields.height && fields.height > 0 ? fields.height : 400;
+
+        return `<iframe class="my-6 w-full rounded-xl border-0" src="${escapeHtml(src)}" title="${title}" height="${height}" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" allowfullscreen></iframe>`;
+    },
+};
+
+const defaultRichTextFeatures = ({ defaultFeatures }: { defaultFeatures: FeatureProviderServer<any, any, any>[] }) => [
     ...defaultFeatures,
     textStateFeature,
     BlocksFeature({
-        blocks: [AccordionBlock],
+        blocks: [AccordionBlock, IframeBlock],
     }),
     HTMLConverterFeature({
         converters: ({ defaultConverters }) => {
@@ -82,7 +111,7 @@ const defaultRichTextFeatures = ({
                 },
             };
 
-            return [...defaultConverters, textStateHTMLConverter, accordionHTMLConverter];
+            return [...defaultConverters, textStateHTMLConverter, accordionHTMLConverter, iframeHTMLConverter];
         },
     }),
 ];
