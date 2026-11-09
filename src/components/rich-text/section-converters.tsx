@@ -2,6 +2,7 @@ import type { JSXConvertersFunction } from "@payloadcms/richtext-lexical/react";
 import type { SerializedEditorState } from "lexical";
 import { richTextConverters } from "@/components/rich-text/base-converters";
 import { LexicalAccordion } from "@/components/rich-text/lexical-accordion";
+import { LexicalGallery, type LexicalGalleryImage } from "@/components/rich-text/lexical-gallery";
 import { LexicalIframe } from "@/components/rich-text/lexical-iframe";
 
 type AccordionFields = {
@@ -20,6 +21,10 @@ type IframeFields = {
     height?: number | null;
 };
 
+type GalleryFields = {
+    images?: LexicalGalleryImage[] | null;
+};
+
 export const sectionConverters: JSXConvertersFunction = (args) => ({
     ...richTextConverters(args),
     blocks: {
@@ -27,5 +32,6 @@ export const sectionConverters: JSXConvertersFunction = (args) => ({
         iframe: ({ node }: { node: { fields: IframeFields } }) => (
             <LexicalIframe height={node.fields.height} title={node.fields.title} url={node.fields.url} />
         ),
+        gallery: ({ node }: { node: { fields: GalleryFields } }) => <LexicalGallery images={node.fields.images} />,
     },
 });
