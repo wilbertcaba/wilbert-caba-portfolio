@@ -25,7 +25,7 @@ function ProjectMeta({ project, className }: { project: ProjectDetail; className
             ) : null}
             {tags.length ? (
                 <div className="mb-6">
-                    <MetaLabel>Technologies</MetaLabel>
+                    <MetaLabel>Tech & Skills</MetaLabel>
                     <Tags tags={tags} className="mt-0 sm:mt-0" />
                 </div>
             ) : null}

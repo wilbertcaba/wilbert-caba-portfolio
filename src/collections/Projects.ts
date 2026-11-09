@@ -208,7 +208,7 @@ export const Projects: CollectionConfig = {
         },
         {
             name: "tags",
-            label: "Tags",
+            label: "Tech & Skills",
             type: "array",
             fields: [
                 {
