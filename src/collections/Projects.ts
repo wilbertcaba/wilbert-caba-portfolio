@@ -198,6 +198,16 @@ export const Projects: CollectionConfig = {
             },
         },
         {
+            name: "projectLinkLabel",
+            label: "Project Link Label",
+            type: "text",
+            admin: {
+                position: "sidebar",
+                placeholder: "Visit live site",
+                description: 'Button text for the project link. Leave blank to use "Visit live site".',
+            },
+        },
+        {
             name: "role",
             label: "Role",
             type: "text",

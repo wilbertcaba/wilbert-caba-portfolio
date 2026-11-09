@@ -221,6 +221,10 @@ export interface Project {
   };
   slug: string;
   projectLink?: string | null;
+  /**
+   * Button text for the project link. Leave blank to use "Visit live site".
+   */
+  projectLinkLabel?: string | null;
   role: string;
   tags: {
     tag?: string | null;
@@ -474,6 +478,7 @@ export interface ProjectsSelect<T extends boolean = true> {
       };
   slug?: T;
   projectLink?: T;
+  projectLinkLabel?: T;
   role?: T;
   tags?:
     | T

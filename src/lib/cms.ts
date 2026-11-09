@@ -66,6 +66,7 @@ export type ProjectDetail = {
     slug: string;
     role: string;
     projectLink: string | null;
+    projectLinkLabel: string;
     tags: Project["tags"];
     featuredImage: Media;
     featuredBackground: FeaturedBackground;
@@ -252,6 +253,7 @@ export const fetchProjectDetail = cache(async (slug: string): Promise<ProjectDet
         slug: projectSlug,
         role,
         projectLink: project.projectLink?.trim() || null,
+        projectLinkLabel: text(project.projectLinkLabel) ?? "Visit live site",
         tags: project.tags ?? [],
         featuredImage: project.featuredImage,
         featuredBackground: toFeaturedBackground(project),

@@ -32,7 +32,7 @@ function ProjectMeta({ project, className }: { project: ProjectDetail; className
             {project.projectLink ? (
                 <Button asChild className="rounded-full">
                     <a href={project.projectLink} target="_blank" rel="noopener noreferrer">
-                        Visit live site
+                        {project.projectLinkLabel}
                         <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                 </Button>
