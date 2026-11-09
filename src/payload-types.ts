@@ -783,6 +783,26 @@ export interface IframeBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  /**
+   * Shown one at a time. The thumbnail strip uses each image’s thumbnail size.
+   */
+  images: {
+    image: number | Media;
+    /**
+     * Overrides the media alt text for this slide. Leave blank to use the media alt text.
+     */
+    alt?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

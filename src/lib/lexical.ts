@@ -9,6 +9,7 @@ import {
 } from "@payloadcms/richtext-lexical";
 import type { SerializedEditorState } from "lexical";
 import { AccordionBlock } from "@/blocks/Accordion";
+import { GalleryBlock } from "@/blocks/Gallery";
 import { IframeBlock } from "@/blocks/Iframe";
 import { textStateFeature } from "@/lib/lexical-text-state";
 import { textStateClassName } from "@/lib/text-state";
@@ -23,6 +24,17 @@ type IframeHTMLFields = {
     url?: string | null;
     title?: string | null;
     height?: number | null;
+};
+
+type GalleryHTMLMedia = {
+    alt?: string | null;
+    mimeType?: string | null;
+    url?: string | null;
+};
+
+type GalleryHTMLItem = {
+    alt?: string | null;
+    image?: number | string | GalleryHTMLMedia | null;
 };
 
 function escapeHtml(value: string) {
@@ -74,6 +86,50 @@ const accordionHTMLConverter: HTMLConverter = {
     },
 };
 
+function isGalleryMedia(value: unknown): value is GalleryHTMLMedia {
+    return typeof value === "object" && value !== null && "url" in value;
+}
+
+const galleryHTMLConverter: HTMLConverter = {
+    nodeTypes: ["block"],
+    converter: async ({ node, overrideAccess, req }) => {
+        const fields = (node as { fields?: { blockType?: string; images?: GalleryHTMLItem[] | null } }).fields;
+        if (fields?.blockType !== "gallery") return "";
+
+        const rendered = await Promise.all(
+            (fields.images ?? []).map(async (item, index) => {
+                let media = isGalleryMedia(item.image) ? item.image : null;
+                const imageId = typeof item.image === "number" || typeof item.image === "string" ? item.image : null;
+
+                if (!media && imageId != null && req) {
+                    try {
+                        const doc = await req.payload.findByID({
+                            collection: "media",
+                            id: imageId,
+                            depth: 0,
+                            overrideAccess,
+                            req,
+                        });
+                        if (isGalleryMedia(doc)) media = doc;
+                    } catch {
+                        media = null;
+                    }
+                }
+
+                if (!media?.url || !media.mimeType?.startsWith("image")) return "";
+
+                const alt = escapeHtml(item.alt?.trim() || media.alt?.trim() || `Image ${index + 1}`);
+                return `<img alt="${alt}" src="${escapeHtml(media.url)}" />`;
+            }),
+        );
+
+        const images = rendered.filter(Boolean);
+        if (!images.length) return "";
+
+        return `<div class="gallery">${images.join("")}</div>`;
+    },
+};
+
 const iframeHTMLConverter: HTMLConverter = {
     nodeTypes: ["block"],
     converter: async ({ node }) => {
@@ -90,36 +146,51 @@ const iframeHTMLConverter: HTMLConverter = {
     },
 };
 
-const defaultRichTextFeatures = ({ defaultFeatures }: { defaultFeatures: FeatureProviderServer<any, any, any>[] }) => [
-    ...defaultFeatures,
-    textStateFeature,
-    BlocksFeature({
-        blocks: [AccordionBlock, IframeBlock],
-    }),
-    HTMLConverterFeature({
-        converters: ({ defaultConverters }) => {
-            const defaultTextConverter = defaultConverters.find((converter) => converter.nodeTypes.includes("text"));
+function richTextFeatures(
+    { defaultFeatures }: { defaultFeatures: FeatureProviderServer<any, any, any>[] },
+    options?: { gallery?: boolean },
+) {
+    const gallery = options?.gallery ?? false;
 
-            const textStateHTMLConverter: HTMLConverter = {
-                nodeTypes: ["text"],
-                converter: async (args) => {
-                    const html = (await defaultTextConverter?.converter(args)) ?? "";
-                    const className = textStateClassName(args.node);
-                    if (!className) return html;
+    return [
+        ...defaultFeatures,
+        textStateFeature,
+        BlocksFeature({
+            blocks: gallery ? [AccordionBlock, IframeBlock, GalleryBlock] : [AccordionBlock, IframeBlock],
+        }),
+        HTMLConverterFeature({
+            converters: ({ defaultConverters }) => {
+                const defaultTextConverter = defaultConverters.find((converter) => converter.nodeTypes.includes("text"));
 
-                    return `<span class="${className}">${html}</span>`;
-                },
-            };
+                const textStateHTMLConverter: HTMLConverter = {
+                    nodeTypes: ["text"],
+                    converter: async (args) => {
+                        const html = (await defaultTextConverter?.converter(args)) ?? "";
+                        const className = textStateClassName(args.node);
+                        if (!className) return html;
 
-            return [...defaultConverters, textStateHTMLConverter, accordionHTMLConverter, iframeHTMLConverter];
-        },
-    }),
-];
+                        return `<span class="${className}">${html}</span>`;
+                    },
+                };
+
+                const converters = [
+                    ...defaultConverters,
+                    textStateHTMLConverter,
+                    accordionHTMLConverter,
+                    iframeHTMLConverter,
+                ];
+                if (gallery) converters.push(galleryHTMLConverter);
+
+                return converters;
+            },
+        }),
+    ];
+}
 
 export const defaultRichTextEditor = lexicalEditor({
-    features: defaultRichTextFeatures,
+    features: (args) => richTextFeatures(args),
 });
 
 export const contentRichTextEditor = lexicalEditor({
-    features: (args) => [...defaultRichTextFeatures(args), EXPERIMENTAL_TableFeature()],
+    features: (args) => [...richTextFeatures(args, { gallery: true }), EXPERIMENTAL_TableFeature()],
 });
